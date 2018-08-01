@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.ss;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.ss";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+
+
+   //==============nc && gs && ss 自己调用
+    Enum2LoginReceivingChannel = 7000;
+    Enum2LoginReceivingChannelRsp = 7001;
+
+
+
+    //==============nc
+    Enum2LoginSendingChannel = 7003;
+    Enum2LoginSendingChannelRsp = 7004;
+
+    //===========sc=========
+    Enum2NotifyStreamSendingStart = 7005;
+    Enum2NotifyStreamSendingStartRsp = 7006;
+    Enum2NotifyStreamSendingStop = 7007;
+    Enum2NotifyStreamSendingStopRsp = 7008;
+
+
+    Enum2Logout = 7009;
+    Enum2LogoutRsp = 7010;
+
+}
+
+
+message LoginReceivingChannel{
+    string stream_id = 1;
+    string stream_subscribe_token = 2;
+    string client_token = 3;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 4;
+}
+
+message Logout{
+
+}
+
+message LogoutRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message LoginReceivingChannelRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+//==NC1向SS1登录发送通道
+message LoginSendingChannel{
+    string stream_id = 1;
+    string stream_publish_token = 2;
+    string client_token = 3;
+}
+
+message LoginSendingChannelRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    string client_id = 2;
+}
+
+message NotifyStreamSendingStart{
+    string recv_client_id = 1;
+    string stream_id = 2;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+message NotifyStreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    //com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 2;
+}
+
+message NotifyStreamSendingStop{
+    string stream_id = 1;
+    string recv_client_id = 2;
+}
+
+message NotifyStreamSendingStopRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+

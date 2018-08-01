@@ -1,0 +1,244 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.cp;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.cp";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+    //====nc
+    Enum2Login = 2000;
+    Enum2LoginRsp = 2001;
+    Enum2Logout = 2002;
+    Enum2LogoutRsp = 2003;
+    Enum2PublishStream = 2004;
+    Enum2PublishStreamRsp = 2005;
+    Enum2UnPublishStream = 2006;
+    Enum2UnPublishStreamRsp = 2007;
+    Enum2GetStreamServers = 2008;
+    Enum2GetStreamServersRsp = 2009;
+    Enum2StreamSendingStart = 2010;
+    Enum2StreamSendingStartRsp = 2011;
+    Enum2JoinGroup = 2012;
+    Enum2JoinGroupRsp = 2013;
+    Enum2QuitGroup = 2014;
+    Enum2QuitGroupRsp = 2015;
+    Enum2GetStream = 2016;
+    Enum2GetStreamRsp = 2017;
+    Enum2NotifyStreamPublished = 2018;
+    Enum2NotifyStreamPublishedRsp = 2019;
+
+    //===========sc========
+    Enum2SelectStreamServer = 2020;
+    Enum2SelectStreamServerRsp = 2021;
+
+    Enum2NotifyStreamSendingStart = 2022;
+    Enum2NotifyStreamSendingStartRsp = 2023;
+    Enum2NotifyStreamSendingStop = 2024;
+    Enum2NotifyStreamSendingStopRsp = 2025;
+
+//==============gc
+    Enum2NotifyPublishStream = 2026;
+    Enum2NotifyPublishStreamRsp = 2027;
+
+
+
+
+
+}
+
+
+//===========nc
+
+message Login{
+    string client_token = 1;
+}
+
+
+message LoginRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message Logout{
+    string client_token = 1;
+}
+
+
+message LogoutRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message PublishStream{
+    string stream_id = 1;
+    string stream_publish_token = 2;
+
+}
+
+// PublishStream 的响应协议
+message PublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message UnPublishStream{
+    string stream_id = 1;
+    string client_id = 2;
+}
+
+
+message UnPublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message GetStreamServers{
+    string stream_id = 1;
+    string stream_subscribe_token = 2;
+    repeated string exception_servers = 3;
+}
+
+message GetStreamServersRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated com.fsmeeting.fsp.proto.common.StreamServer streamServers = 2;
+}
+
+message StreamSendingStart{
+    string stream_id = 1;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 2;
+}
+
+message StreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message JoinGroup{
+    string group_id = 1;
+    string user_id = 2;
+    string group_token = 3;
+    string group_check_code = 4;
+}
+
+
+message JoinGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message QuitGroup{
+    string group_id = 1;
+    string user_id = 2;
+}
+
+
+message QuitGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+message GetStream{
+    string group_id = 1;
+    string user_id = 2;
+    string media_id = 3;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 4;
+}
+
+
+message GetStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated com.fsmeeting.fsp.proto.common.Stream stream = 2;
+}
+
+message NotifyStreamPublished{
+    string stream_id = 1;
+}
+
+
+message NotifyStreamPublishedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse  response = 1;
+}
+
+//=============sc调用
+message SelectStreamServer{
+    string client_id = 1;
+    string stream_id = 2;
+    repeated com.fsmeeting.fsp.proto.common.StreamServer stream_server = 3;
+}
+
+
+message SelectStreamServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyStreamSendingStart{
+    string recv_client_id = 1;
+    string stream_id = 2;
+    string client_id = 3;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 4;
+}
+
+message NotifyStreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyStreamSendingStop{
+    string stream_id = 1;
+    string recv_client_id = 2;
+    string client_id = 3;
+}
+
+message NotifyStreamSendingStopRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+
+
+
+//=============gc==============
+message NotifyPublishStream{
+    string client_id = 1;
+    string stream_id = 2;
+    string stream_publish_token = 3;
+    string group_id = 4;
+    string user_id = 5;
+    string media_id = 6;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 7;
+}
+
+message NotifyPublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

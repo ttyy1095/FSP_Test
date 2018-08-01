@@ -1,0 +1,147 @@
+[root@localhost Producer]# /bin/python /usr/lib/python2.7/site-packages/Producer/test_consumer.py
+qqqqq
+###########################################
+lizzietest -> gc_group_01 : Enum2CreateGroup
+(1, 1, 21, 10, 'lizzietest', 3000, '\n\x011\x1a\x0595475')
+{
+  "roomId": "95475",
+  "appId": "1"
+}
+###########################################
+gc_instance_02 -> lizzietest : Enum2CreateGroupRsp
+(1, 2, 21, 14, 'gc_instance_02', 3001, '\n\x15\x12\x13CreateGroup succeed\x120\n&{2c194118-7bca-48eb-be8c-522dec92b5d2}\x1a\x044195 \x02')
+{
+  "group": {
+    "groupCheckCode": "4195",
+    "serverType": "EnumGroupServer",
+    "groupId": "{2c194118-7bca-48eb-be8c-522dec92b5d2}"
+  },
+  "response": {
+    "responseMsg": "CreateGroup succeed"
+  }
+}
+###########################################
+lizzietest -> gc_group_01 : Enum2GetGroupServers
+(1, 1, 22, 10, 'lizzietest', 3004, '\n&{2c194118-7bca-48eb-be8c-522dec92b5d2}\x12\x0c192.168.6.65')
+{
+  "clientIp": "192.168.6.65",
+  "groupId": "{2c194118-7bca-48eb-be8c-522dec92b5d2}"
+}
+###########################################
+gc_instance_03 -> rule_group_01 : Enum2GetMediaServer
+(1, 1, 10, 14, 'gc_instance_03', 9000, '\n\x0c192.168.6.65\x12\x02gs')
+{
+  "clientIp": "192.168.6.65",
+  "serverType": "gs"
+}
+###########################################
+rule_instance_01 -> gc_instance_03 : Enum2GetMediaServerRsp
+(1, 2, 10, 16, 'rule_instance_01', 9001, '\n\x00\x12\x03gs2')
+{
+  "mediaServers": [
+    "gs2"
+  ],
+  "response": {}
+}
+###########################################
+gc_instance_03 -> lizzietest : Enum2GetGroupServersRsp
+(1, 2, 22, 14, 'gc_instance_03', 3005, '\n\x10\x12\x0eUnknown result\x12M\n\x03gs2\x12\r192.168.7.105\x1a\x0550003"0TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;')
+{
+  "response": {
+    "responseMsg": "Unknown result"
+  },
+  "groupServers": [
+    {
+      "port": "50003",
+      "connectStr": "TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;",
+      "id": "gs2",
+      "addr": "192.168.7.105"
+    }
+  ]
+}
+###########################################
+gs2 -> gc_group_01 : Enum2JoinGroup
+(1, 1, 13, 3, 'gs2', 3006, '\n&{2c194118-7bca-48eb-be8c-522dec92b5d2}\x12\x071423011\x1a\x044195".{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011*\x03gs22,\n&{d12986fe-fabe-8c63-a32c-5a3a619b219e}\x12\x02DF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{d12986fe-fabe-8c63-a32c-5a3a619b219e}",
+    "invokeOrder": "DF"
+  },
+  "groupToken": "4195",
+  "userId": "1423011",
+  "clientId": "{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011",
+  "groupId": "{2c194118-7bca-48eb-be8c-522dec92b5d2}",
+  "serviceInstanceId": "gs2"
+}
+###########################################
+gs2 -> sc_group_01 : Enum2ClientConnected
+(1, 1, 14, 3, 'gs2', 6004, '\n.{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011\x12\x03gs2\x1a\x011"\x03gs2*-\n&{d12986fe-fabe-8c63-a32c-5a3a619b219e}\x12\x03DFD')
+{
+  "clientName": "gs2",
+  "commonInvokeInfo": {
+    "traceId": "{d12986fe-fabe-8c63-a32c-5a3a619b219e}",
+    "invokeOrder": "DFD"
+  },
+  "serviceInstanceId": "gs2",
+  "clientId": "{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011",
+  "appId": "1"
+}
+###########################################
+sc_instance_02 -> gs2 : Enum2ClientConnectedRsp
+(1, 2, 14, 14, 'sc_instance_02', 6005, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gc_instance_02 -> gs2 : Enum2JoinGroupRsp
+(1, 2, 13, 14, 'gc_instance_02', 3007, '\n\x13\x12\x11JoinGroup succeed')
+{
+  "response": {
+    "responseMsg": "JoinGroup succeed"
+  }
+}
+###########################################
+gs2 -> sc_group_01 : Enum2ClientDisconnected
+(1, 1, 16, 3, 'gs2', 6006, '\n.{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011\x12\x03gs2\x1a\x011')
+{
+  "serviceInstanceId": "gs2",
+  "clientId": "{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011",
+  "appId": "1"
+}
+###########################################
+gs2 -> gc_group_01 : Enum2QuitGroup
+(1, 1, 15, 3, 'gs2', 3008, '\n&{2c194118-7bca-48eb-be8c-522dec92b5d2}\x12\x071423011\x1a.{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011"\x03gs2')
+{
+  "serviceInstanceId": "gs2",
+  "userId": "1423011",
+  "groupId": "{2c194118-7bca-48eb-be8c-522dec92b5d2}",
+  "clientId": "{2c194118-7bca-48eb-be8c-522dec92b5d2};1423011"
+}
+###########################################
+sc_instance_01 -> gs2 : Enum2ClientDisconnectedRsp
+(1, 2, 16, 14, 'sc_instance_01', 6007, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+lizzietest -> gc_group_01 : Enum2DestroyGroup
+(1, 1, 23, 10, 'lizzietest', 3002, '\x12&{2c194118-7bca-48eb-be8c-522dec92b5d2}')
+{
+  "groupId": "{2c194118-7bca-48eb-be8c-522dec92b5d2}"
+}
+###########################################
+gc_instance_01 -> gs2 : Enum2QuitGroupRsp
+(1, 2, 15, 14, 'gc_instance_01', 3009, '\n\x13\x12\x11QuitGroup succeed')
+{
+  "response": {
+    "responseMsg": "QuitGroup succeed"
+  }
+}
+###########################################
+gc_instance_01 -> lizzietest : Enum2DestroyGroupRsp
+(1, 2, 23, 14, 'gc_instance_01', 3003, '\n\x16\x12\x14DestroyGroup succeed')
+{
+  "response": {
+    "responseMsg": "DestroyGroup succeed"
+  }
+}

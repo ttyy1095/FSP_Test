@@ -1,0 +1,170 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.common;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.common";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+    Enum2Proxy = 1002;
+    Enum2Stream = 1003;
+    Enum2StreamServer = 1004;
+    Enum2Group = 1005;
+    Enum2GroupServer = 1006;
+    Enum2StreamData = 1007;
+	Enum2NotifyStreamDestroied = 1008;
+    Enum2NotifyStreamDestroiedRsp = 1009;
+	Enum2StreamSourceChanged = 1010;
+	Enum2StreamSourceChangedRsp = 1011;
+}
+
+
+
+
+//===============================================================系统枚举================
+
+enum ResponseCode{
+    EnumSuccess = 0;
+    EnumError = 1;
+    EnumUnknow = 2;
+    EnumMediaNodesOverThreeError = 3;
+	EnumIceException=4;
+	EnumIceDataError=5;
+}
+
+enum ServerType{
+    EnumClientProxy = 0;
+    EnumStreamServer = 1;
+    EnumGroupServer = 2;
+}
+
+enum ProxyType{
+    EnumServer = 0;
+    EnumClient = 1;
+}
+
+enum StreamType{
+    EnumVideoStream = 0;
+    EnumAudioStream = 1;
+    EnumDeskTopStream = 2;
+}
+
+enum MediaType{
+    EnumVNC = 0;
+    EnumAudio = 1;
+    EnumVideo = 2;
+}
+
+enum StreamProperty{
+    EnumReliable = 0;
+    EnumUnreliable = 1;
+}
+
+enum DataType{
+    EnumQOSData = 0;
+    EnumMediaData = 1;
+}
+
+enum ServiceType{
+     EnumAVService = 0;
+     EnumVNCService = 1;
+     EnumDataSyncService = 2;
+}
+
+enum DataDirection{
+    Sending = 0;
+    Receiving = 1;
+}
+
+enum ChannelType{
+	EnumC2G = 0;
+	EnumS2G = 1;
+	EnumC2S = 2;
+	EnumG2S = 3;
+	EnumS2S = 4;
+}
+
+//=====================================================实体类型=========================================================
+
+
+
+message Proxy{
+    string id = 1;
+    ProxyType proxy_type = 2;
+    string addr = 3;
+    int32 port = 4;
+
+}
+
+message Stream{
+    string stream_id = 1;
+    StreamType stream_type = 2;
+    StreamProperty stream_property = 3;
+    string stream_publish_token = 4;
+    string stream_subscribe_token = 5;
+}
+
+
+message StreamServer{
+    string id = 1;
+    string addr = 2;
+    string port = 3;
+    string connect_str = 4;
+}
+
+message Group{
+    string group_id = 1;
+    string group_token = 2;
+    string group_check_code = 3;
+    ServerType server_type = 4;
+}
+
+message GroupServer{
+    string id = 1;
+    string addr = 2;
+    string port = 3;
+    string connect_str = 4;
+}
+
+message StreamData{
+    DataType data_type = 1;
+    int32 length = 2;
+    bytes data = 3;
+}
+
+//===========================================请求响应接口===========================================================
+
+//通用请求响应协议，请求接口响应时候都会带上该协议，如果响应码错误就无需解析其他字段
+message CommonResponse{
+    ResponseCode response_code = 1;
+    string response_msg = 2;
+}
+
+message NotifyStreamDestroied{
+    string stream_id = 1;
+}
+
+message NotifyStreamDestroiedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message StreamSourceChanged{
+    string stream_id = 1;
+	string source_instance = 2;
+}
+
+message StreamSourceChangedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+//============================================调用链公共字段===========================================================
+message CommonInvokeInfo{
+	string trace_id = 1;
+	string invoke_order = 2;
+}
+

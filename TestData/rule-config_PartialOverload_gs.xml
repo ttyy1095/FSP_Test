@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+接入优化实例组配置规则
+        1.	指定IP
+        2.	指定IP段
+        3.	指定运营商
+        4.	默认运营商
+        5.	指定国家
+        6.	指定大洲
+        7.	指定省
+        8.	默认地域规则
+        9.	指定省+运营商
+        10. 默认规则
+规则优先级
+        国内用户：1->2->9->7->3->(4)-> 10
+        国外用户：1->2->5->6->8-> 10
+-->
+<Root> 
+    <!-- 这个组配置所有的媒体节点的基本信息-->
+    <FundamentalServerInfo>
+        <!--
+        <InstanceInfo>
+            <InstanceName>ss_tran_1</InstanceName>
+            cpu使用率超过80%表示过载
+            <CPUOverloadPoint>1.8</CPUOverloadPoint>
+            内存过载点 超过80%
+            <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
+            带宽过载点 超过80%
+            <BandWidthPoint>1.8</BandWidthPoint>
+            多线机房配置为"多线" 其他的运营商配置为具体的名字, 专线和国外部署的节点配置为"其他"
+            (这个是节点本身的属性, 与后面我们配置的中心节点和边缘节点为两个不同概念)
+            <ISP>多线</ISP>
+            在中国内的全部配置为中国, 其他地方的除了香港, 全部配置为大洲的名字
+            <Region>中国</Region>
+        </InstanceInfo>
+        -->
+
+        <InstanceInfo>
+            <InstanceName>gs1</InstanceName>
+            <ServerType>gs</ServerType>
+            <CPUOverloadPoint>0.01</CPUOverloadPoint>
+            <MemoryOverloadPoint>0.01</MemoryOverloadPoint>
+            <BandWidthPoint>0.01</BandWidthPoint>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
+        </InstanceInfo>
+        
+        <InstanceInfo>
+            <InstanceName>gs2</InstanceName>
+            <ServerType>gs</ServerType>
+            <CPUOverloadPoint>1.8</CPUOverloadPoint>
+            <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
+            <BandWidthPoint>1.8</BandWidthPoint>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
+        </InstanceInfo>
+        
+        <InstanceInfo>
+            <InstanceName>gs3</InstanceName>
+            <ServerType>gs</ServerType>
+            <CPUOverloadPoint>1.8</CPUOverloadPoint>
+            <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
+            <BandWidthPoint>1.8</BandWidthPoint>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
+        </InstanceInfo>        
+    </FundamentalServerInfo>
+
+    <!--///////////////////////////////////////////////////////-->
+    <!-- 选择级联SS的配置项 -->
+    <CascadeConfig>
+        <!-- 当所有的节点均过载的时候, 使用负载信息和Topo距离的值加权比较 -->
+        <WeightForTopo>0.5</WeightForTopo>
+        <!-- 不同运营商之间计算的距离值(用于国内) -->
+        <WeightForISP>500</WeightForISP>
+        <!-- 不同地域之间计算的距离值(用于国外) -->
+        <WeightForRegion>10</WeightForRegion>
+    </CascadeConfig>
+
+
+    <!-- 针对含有专线的跨国通信方案配置 -->
+    <TransnationalConfig>
+        <!-- ping距离的阈值, 如果超过, 则使用专线的跨国通信方案 -->
+        <ValueOfUseSpecialLineConfig>500</ValueOfUseSpecialLineConfig>
+        <!-- 专线组集合 -->
+        <SpecialLine>
+            <LineInfo>
+                <InstanceGroup>ss_USA</InstanceGroup>
+                <InstanceGroup>ss_ShangHai</InstanceGroup>
+            </LineInfo>
+            <LineInfo>
+                <InstanceGroup>ss_Europe</InstanceGroup>
+                <InstanceGroup>ss_ShangHai</InstanceGroup>
+            </LineInfo>
+        </SpecialLine>
+        <!-- 专线组成员, 专线组成员禁止配置到中心节点集合(KernelStreamServer)中-->
+        <SpecialLineGroup>
+            <InstanceGroup GroupName="ss_USA">
+                <Region>美洲</Region>
+                <InstanceName>ss_server_y10</InstanceName>
+                <InstanceName>ss_server_y2</InstanceName>
+            </InstanceGroup>
+            <InstanceGroup GroupName="ss_Europe">
+                <Region>欧洲</Region>
+                <InstanceName>ss_server_y1</InstanceName>
+                <InstanceName>ss_server_y20</InstanceName>
+            </InstanceGroup>
+        </SpecialLineGroup>
+    </TransnationalConfig>
+
+    <!--下面的KernelStreamServer节点专门用于fsp中数据的中转节点,
+        请勿将下面所配置的节点再配置到后面的InstanceGroupSet分组中, 这些节点禁止nc登录
+        专线机房不涉及国内通信, 所以配置在这个中心节点集合中-->
+    <KernelStreamServer>
+        <InstanceName>ss_tran_1</InstanceName>
+        <InstanceName>ss_tran_2</InstanceName>
+    </KernelStreamServer>
+
+
+
+  <!--服务实例组配置,同一个groupName 下的实例必须是相同的，不能把gs和ss配在一起，否则配置无效 TODO在代码中进行判断-->  
+  <InstanceGroupSet> 
+    <InstanceGroup GroupName="group1"> 
+          <InstanceName>gs1</InstanceName>  
+    </InstanceGroup>  
+    
+    <InstanceGroup GroupName="group2"> 
+          <InstanceName>gs2</InstanceName>  
+    </InstanceGroup>  
+    
+    <InstanceGroup GroupName="group3"> 
+          <InstanceName>gs3</InstanceName>  
+    </InstanceGroup>  
+    
+    <InstanceGroup GroupName="group4"> 
+        <InstanceName>gs1</InstanceName>
+        <InstanceName>gs2</InstanceName>
+    </InstanceGroup>  
+    
+    <InstanceGroup GroupName="group5"> 
+          <InstanceName>gs1</InstanceName> 
+    </InstanceGroup> 
+  </InstanceGroupSet>  
+  <!--接入规则配置-->  
+  <AccessRuleSet> 
+    <!--1.IP规则，可同时配置多个IP地址到一个实例组-->  
+    <IPRuleSet> 
+      <IPRule serverType="gs"> 
+        <IP>23.33.184.5</IP>  
+        <GroupName>group1</GroupName> 
+      </IPRule> 
+    </IPRuleSet>  
+    <!--2.IP段规则-->  
+    <IPRangeRuleSet> 
+      <IPRule serverType="gs"> 
+        <StartIP>23.33.184.1</StartIP>  
+        <EndIP>23.33.184.100</EndIP>  
+        <GroupName>group2</GroupName> 
+      </IPRule> 
+    </IPRangeRuleSet>  
+    <!--9.省份+运营商规则-->  
+    <ProvinceAndISPRuleSet> 
+      <ProvinceAndISPRule serverType="gs"> 
+        <ProvinceName>福建</ProvinceName>  
+        <ISPName>电信</ISPName>  
+        <GroupName>group2</GroupName> 
+      </ProvinceAndISPRule>  
+      <ProvinceAndISPRule serverType="ss"> 
+        <ProvinceName>浙江</ProvinceName>  
+        <ISPName>联通</ISPName>  
+        <GroupName>group3</GroupName> 
+      </ProvinceAndISPRule> 
+    </ProvinceAndISPRuleSet>  
+    <!--7.省份则，可同时配置多个省份到一个实例组-->  
+    <ProvinceRuleSet> 
+      <ProvinceRule serverType="ss"> 
+        <ProvinceName>广东</ProvinceName>  
+        <GroupName>group3</GroupName> 
+      </ProvinceRule>  
+      <ProvinceRule serverType="gs"> 
+        <ProvinceName>湖北</ProvinceName>  
+        <GroupName>group1</GroupName> 
+      </ProvinceRule> 
+    </ProvinceRuleSet>  
+    <!--3.运营商规则 serverType 代表是ss服务还是gs服务 -->  
+    <ISPRuleSet> 
+      <ISPRule serverType="ss"> 
+        <ISPName>联通</ISPName>  
+        <GroupName>group3</GroupName> 
+      </ISPRule>  
+      <!--4.配置默认运营商规则-->  
+      <ISPRule serverType="gs"> 
+        <ISPName/>  
+        <GroupName>group2</GroupName> 
+      </ISPRule> 
+    </ISPRuleSet>  
+    <!--5.国家规则 -->  
+    <CountryRuleSet> 
+      <CountryRule serverType="gs"> 
+        <CountryName>美国</CountryName>  
+        <GroupName>group3</GroupName> 
+      </CountryRule> 
+    </CountryRuleSet>  
+    <!--6.大洲规则，可同时配置多个大洲到一个实例组-->  
+    <ContinentRuleSet> 
+      <ContinentRule serverType="gs"> 
+        <ContinentName>北美洲</ContinentName>  
+        <GroupName>group3</GroupName> 
+      </ContinentRule> 
+    </ContinentRuleSet>  
+    <!--8.地域规则（国外），配置默认地域规则-->  
+    <RegionRuleSet> 
+      <RegionRule serverType="gs"> 
+        <RegionName/>  
+        <GroupName>group4</GroupName> 
+      </RegionRule> 
+    </RegionRuleSet>  
+    <!--10.默认规则-->  
+    <DefaultRuleSet> 
+      <DefaultRule serverType="gs"> 
+        <GroupName>group5</GroupName> 
+      </DefaultRule> 
+    </DefaultRuleSet> 
+  </AccessRuleSet> 
+</Root>

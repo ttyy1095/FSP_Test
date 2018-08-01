@@ -1,0 +1,525 @@
+/usr/bin/python2.7 /lib/python2.7/site-packages/Producer/test_consumer.py
+qqqqq
+###########################################
+gs2 -> gc_group_01 : Enum2GetStream
+(1, 1, 14, 3, 'gs2', 3010, '\n&{2f467316-4899-4a34-bc78-483df2a2500c}\x12\x071433003 \x01*,\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x02DF2\x010')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DF"
+  }, 
+  "userId": "1433003", 
+  "groupId": "{2f467316-4899-4a34-bc78-483df2a2500c}", 
+  "mediaId2": "0", 
+  "mediaType": "EnumAudio"
+}
+###########################################
+gs2 -> gc_group_01 : Enum2GetStream
+(1, 1, 15, 3, 'gs2', 3010, '\n&{2f467316-4899-4a34-bc78-483df2a2500c}\x12\x071433003 \x02*,\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x02DF2\x010')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DF"
+  }, 
+  "userId": "1433003", 
+  "groupId": "{2f467316-4899-4a34-bc78-483df2a2500c}", 
+  "mediaId2": "0", 
+  "mediaType": "EnumVideo"
+}
+###########################################
+gc_instance_02 -> sc_group_01 : Enum2CreateStream
+(1, 1, 41, 14, 'gc_instance_02', 6000, '\n\x011\x18\x01"-\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x03DFF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFF"
+  }, 
+  "streamProperty": "EnumUnreliable", 
+  "appId": "1"
+}
+###########################################
+gc_instance_02 -> sc_group_01 : Enum2CreateStream
+(1, 1, 40, 14, 'gc_instance_02', 6000, '\n\x011\x10\x01\x18\x01"-\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x03DFF')
+{
+  "streamType": "EnumAudioStream", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFF"
+  }, 
+  "streamProperty": "EnumUnreliable", 
+  "appId": "1"
+}
+###########################################
+sc_instance_03 -> gc_instance_02 : Enum2CreateStreamRsp
+(1, 2, 41, 14, 'sc_instance_03', 6001, '\n\x00\x12T\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x18\x01"\x1449cbd9a368234e658416*\x147f01706a08244af08e99\x1a-\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x03DFF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFF"
+  }, 
+  "response": {}, 
+  "stream": {
+    "streamPublishToken": "49cbd9a368234e658416", 
+    "streamSubscribeToken": "7f01706a08244af08e99", 
+    "streamProperty": "EnumUnreliable", 
+    "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+  }
+}
+###########################################
+sc_instance_02 -> gc_instance_02 : Enum2CreateStreamRsp
+(1, 2, 40, 14, 'sc_instance_02', 6001, '\n\x00\x12V\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x10\x01\x18\x01"\x149086c46b7f1b4cc08a6d*\x142aa7849b9f444c8b88d9\x1a-\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x03DFF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFF"
+  }, 
+  "response": {}, 
+  "stream": {
+    "streamType": "EnumAudioStream", 
+    "streamSubscribeToken": "2aa7849b9f444c8b88d9", 
+    "streamPublishToken": "9086c46b7f1b4cc08a6d", 
+    "streamProperty": "EnumUnreliable", 
+    "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+  }
+}
+###########################################
+gc_instance_02 -> gs1 : Enum2NotifyPublishStream
+(1, 1, 42, 14, 'gc_instance_02', 4000, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x1449cbd9a368234e658416\x1a&{2f467316-4899-4a34-bc78-483df2a2500c}"\x0714330030\x02:.\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x04DFFDB\x010')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFFD"
+  }, 
+  "userId": "1433003", 
+  "mediaType": "EnumVideo", 
+  "mediaId2": "0", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be", 
+  "streamPublishToken": "49cbd9a368234e658416", 
+  "groupId": "{2f467316-4899-4a34-bc78-483df2a2500c}"
+}
+###########################################
+gs1 -> sc_group_01 : Enum2PublishStream
+(1, 1, 3, 3, 'gs1', 6014, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x12.{2f467316-4899-4a34-bc78-483df2a2500c};1433003\x1a\r192.168.5.168"/\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x05DFFDF')
+{
+  "clientIp": "192.168.5.168", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFFDF"
+  }, 
+  "clientId": "{2f467316-4899-4a34-bc78-483df2a2500c};1433003", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+gs1 -> sc_group_01 : Enum2PublishStream
+(1, 1, 2, 3, 'gs1', 6014, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12.{2f467316-4899-4a34-bc78-483df2a2500c};1433003\x1a\r192.168.5.168"/\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x05DFFDF')
+{
+  "clientIp": "192.168.5.168", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFFDF"
+  }, 
+  "clientId": "{2f467316-4899-4a34-bc78-483df2a2500c};1433003", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_03 -> gs1 : Enum2PublishStreamRsp
+(1, 2, 2, 14, 'sc_instance_03', 6015, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gs1 -> sc_group_01 : Enum2SetStreamSourceServer
+(1, 1, 4, 3, 'gs1', 6018, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x03gs1\x1a0\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x06DFFDFD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFFDFD"
+  }, 
+  "serviceInstanceId": "gs1", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_01 -> gs1 : Enum2PublishStreamRsp
+(1, 2, 3, 14, 'sc_instance_01', 6015, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+sc_instance_02 -> gs1 : Enum2SetStreamSourceServerRsp
+(1, 2, 5, 14, 'sc_instance_02', 6019, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gc_instance_02 -> gs2 : Enum2GetStreamRsp
+(1, 2, 15, 14, 'gc_instance_02', 3012, '\n\x13\x12\x11GetStream succeed\x12T\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x18\x01"\x1449cbd9a368234e658416*\x147f01706a08244af08e99')
+{
+  "response": {
+    "responseMsg": "GetStream succeed"
+  }, 
+  "stream": {
+    "streamPublishToken": "49cbd9a368234e658416", 
+    "streamSubscribeToken": "7f01706a08244af08e99", 
+    "streamProperty": "EnumUnreliable", 
+    "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+  }
+}
+###########################################
+gs1 -> sc_group_01 : Enum2SetStreamSourceServer
+(1, 1, 5, 3, 'gs1', 6018, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x12\x03gs1\x1a0\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x06DFFDFD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFFDFD"
+  }, 
+  "serviceInstanceId": "gs1", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+gs1 -> gc_group_01 : Enum2NotifyStreamPublished
+(1, 1, 6, 3, 'gs1', 3013, '\n\x050;gs1\x12$0a8ac409-918e-48ba-883e-716d2e1e64be\x1a&{2f467316-4899-4a34-bc78-483df2a2500c}"\x0714330030\x02:\x010')
+{
+  "userId": "1433003", 
+  "mediaType": "EnumVideo", 
+  "clientId": "0;gs1", 
+  "mediaId2": "0", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be", 
+  "groupId": "{2f467316-4899-4a34-bc78-483df2a2500c}"
+}
+###########################################
+gs1 -> gc_group_01 : Enum2NotifyStreamPublished
+(1, 1, 7, 3, 'gs1', 3013, '\n\x050;gs1\x12$1db34dbe-2483-4763-bc2c-c9096d611ed0\x1a&{2f467316-4899-4a34-bc78-483df2a2500c}"\x0714330030\x01:\x010')
+{
+  "userId": "1433003", 
+  "mediaType": "EnumAudio", 
+  "clientId": "0;gs1", 
+  "mediaId2": "0", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0", 
+  "groupId": "{2f467316-4899-4a34-bc78-483df2a2500c}"
+}
+###########################################
+gs2 -> sc_group_01 : Enum2GetSuperiorStreamServer
+(1, 1, 16, 3, 'gs2', 6020, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x03gs2\x1a-\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x03DFD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFD"
+  }, 
+  "serviceInstanceId": "gs2", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+gc_instance_02 -> gs1 : Enum2NotifyStreamPublishedRsp
+(1, 2, 7, 14, 'gc_instance_02', 3014, '\n\x12\x08\x02\x12\x0eUnknown result')
+{
+  "response": {
+    "responseMsg": "Unknown result", 
+    "responseCode": "EnumUnknow"
+  }
+}
+###########################################
+gc_instance_02 -> gs2 : Enum2GetStreamRsp
+(1, 2, 14, 14, 'gc_instance_02', 3012, '\n\x13\x12\x11GetStream succeed\x12V\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x10\x01\x18\x01"\x149086c46b7f1b4cc08a6d*\x142aa7849b9f444c8b88d9')
+{
+  "response": {
+    "responseMsg": "GetStream succeed"
+  }, 
+  "stream": {
+    "streamType": "EnumAudioStream", 
+    "streamSubscribeToken": "2aa7849b9f444c8b88d9", 
+    "streamPublishToken": "9086c46b7f1b4cc08a6d", 
+    "streamProperty": "EnumUnreliable", 
+    "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+  }
+}
+###########################################
+gs2 -> sc_group_01 : Enum2GetSuperiorStreamServer
+(1, 1, 17, 3, 'gs2', 6020, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x12\x03gs2\x1a-\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x03DFD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFD"
+  }, 
+  "serviceInstanceId": "gs2", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+sc_instance_01 -> gs2 : Enum2GetSuperiorStreamServerRsp
+(1, 2, 17, 14, 'sc_instance_01', 6021, '\n\x00\x12M\n\x03ss2\x12\r192.168.7.153\x1a\x0550003"0TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;\x1a.\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x04DFDD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDD"
+  }, 
+  "response": {}, 
+  "streamServer": {
+    "port": "50003", 
+    "connectStr": "TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;", 
+    "id": "ss2", 
+    "addr": "192.168.7.153"
+  }
+}
+###########################################
+sc_instance_01 -> gs2 : Enum2GetSuperiorStreamServerRsp
+(1, 2, 16, 14, 'sc_instance_01', 6021, '\n\x00\x12M\n\x03ss2\x12\r192.168.7.153\x1a\x0550003"0TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;\x1a.\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x04DFDD')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDD"
+  }, 
+  "response": {}, 
+  "streamServer": {
+    "port": "50003", 
+    "connectStr": "TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;", 
+    "id": "ss2", 
+    "addr": "192.168.7.153"
+  }
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetStreamType
+(1, 1, 1, 3, 'ss2', 6031, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be')
+{
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetStreamType
+(1, 1, 0, 3, 'ss2', 6031, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0')
+{
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+sc_instance_03 -> ss2 : Enum2GetStreamTypeRsp
+(1, 2, 1, 14, 'sc_instance_03', 6032, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+ss2 -> sc_group_01 : Enum2ChannelConnected
+(1, 1, 2, 3, 'ss2', 6023, '\n\x03gs2\x12\x03ss2\x1a$0a8ac409-918e-48ba-883e-716d2e1e64be \x01*/\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x05DFDDF')
+{
+  "direction": "Receiving", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDF"
+  }, 
+  "serviceInstanceId": "ss2", 
+  "clientId": "gs2", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_01 -> ss2 : Enum2GetStreamTypeRsp
+(1, 2, 0, 14, 'sc_instance_01', 6032, '\n\x00\x10\x01')
+{
+  "streamType": "EnumAudioStream", 
+  "response": {}
+}
+###########################################
+ss2 -> sc_group_01 : Enum2ChannelConnected
+(1, 1, 3, 3, 'ss2', 6023, '\n\x03gs2\x12\x03ss2\x1a$1db34dbe-2483-4763-bc2c-c9096d611ed0 \x01*/\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x05DFDDF')
+{
+  "direction": "Receiving", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDDF"
+  }, 
+  "serviceInstanceId": "ss2", 
+  "clientId": "gs2", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+gs2 -> sc_group_01 : Enum2StreamSendingStart
+(1, 1, 18, 3, 'gs2', 6010, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x03gs2\x1a/\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x05DFDDD')
+{
+  "recvClientId": "gs2", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDD"
+  }, 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_02 -> ss2 : Enum2ChannelConnectedRsp
+(1, 2, 2, 14, 'sc_instance_02', 6024, '\n\x00\x10\x03')
+{
+  "channelType": "EnumG2S", 
+  "response": {}
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetStreamType
+(1, 1, 4, 3, 'ss2', 6031, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be')
+{
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_03 -> ss2 : Enum2NotifyStreamSendingStart
+(1, 1, 1, 14, 'sc_instance_03', 7005, '\n\x03gs2\x12$1db34dbe-2483-4763-bc2c-c9096d611ed0\x1a0\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x06DFDDDF')
+{
+  "recvClientId": "gs2", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDDDF"
+  }, 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetStreamType
+(1, 1, 5, 3, 'ss2', 6031, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0')
+{
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetSuperiorStreamServer
+(1, 1, 6, 3, 'ss2', 6020, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x03ss2\x1a1\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\x07DFDDDFF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDDFF"
+  }, 
+  "serviceInstanceId": "ss2", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetSuperiorStreamServer
+(1, 1, 8, 3, 'ss2', 6020, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x12\x03ss2\x1a1\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\x07DFDDDFF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDDDFF"
+  }, 
+  "serviceInstanceId": "ss2", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetStreamProperty
+(1, 1, 7, 3, 'ss2', 6033, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be')
+{
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_02 -> ss2 : Enum2GetStreamTypeRsp
+(1, 2, 4, 14, 'sc_instance_02', 6032, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gs1 -> sc_group_01 : Enum2ChannelConnected
+(1, 1, 8, 3, 'gs1', 6023, '\n\x03ss2\x12\x03gs1\x1a$0a8ac409-918e-48ba-883e-716d2e1e64be \x01*3\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\tDFDDDFFDF')
+{
+  "direction": "Receiving", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDDFFDF"
+  }, 
+  "serviceInstanceId": "gs1", 
+  "clientId": "ss2", 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+sc_instance_01 -> ss2 : Enum2GetStreamPropertyRsp
+(1, 2, 9, 14, 'sc_instance_01', 6034, '\n\x00\x10\x01')
+{
+  "response": {}, 
+  "streamProperty": "EnumUnreliable"
+}
+###########################################
+sc_instance_03 -> gs1 : Enum2ChannelConnectedRsp
+(1, 2, 8, 14, 'sc_instance_03', 6024, '\n\x00\x10\x01')
+{
+  "channelType": "EnumS2G", 
+  "response": {}
+}
+###########################################
+ss2 -> sc_group_01 : Enum2StreamSendingStart
+(1, 1, 10, 3, 'ss2', 6010, '\n$0a8ac409-918e-48ba-883e-716d2e1e64be\x12\x03ss2\x1a3\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\tDFDDDFFDD')
+{
+  "recvClientId": "ss2", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDDFFDD"
+  }, 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+gs1 -> sc_group_01 : Enum2ChannelConnected
+(1, 1, 9, 3, 'gs1', 6023, '\n\x03ss2\x12\x03gs1\x1a$1db34dbe-2483-4763-bc2c-c9096d611ed0 \x01*3\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\tDFDDDFFDF')
+{
+  "direction": "Receiving", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDDDFFDF"
+  }, 
+  "serviceInstanceId": "gs1", 
+  "clientId": "ss2", 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+sc_instance_02 -> gs1 : Enum2NotifyStreamSendingStart
+(1, 1, 0, 14, 'sc_instance_02', 4002, '\n\x03ss2\x12$0a8ac409-918e-48ba-883e-716d2e1e64be\x1a4\n&{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}\x12\nDFDDDFFDDF')
+{
+  "recvClientId": "ss2", 
+  "commonInvokeInfo": {
+    "traceId": "{ef722ebe-62b8-fa2b-9e3c-5333a61648c1}", 
+    "invokeOrder": "DFDDDFFDDF"
+  }, 
+  "streamId": "0a8ac409-918e-48ba-883e-716d2e1e64be"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2StreamSendingStart
+(1, 1, 11, 3, 'ss2', 6010, '\n$1db34dbe-2483-4763-bc2c-c9096d611ed0\x12\x03ss2\x1a3\n&{47340d5c-54b3-b048-ee89-8dffceb99d8f}\x12\tDFDDDFFDD')
+{
+  "recvClientId": "ss2", 
+  "commonInvokeInfo": {
+    "traceId": "{47340d5c-54b3-b048-ee89-8dffceb99d8f}", 
+    "invokeOrder": "DFDDDFFDD"
+  }, 
+  "streamId": "1db34dbe-2483-4763-bc2c-c9096d611ed0"
+}
+###########################################
+sc_instance_02 -> ss2 : Enum2StreamSendingStartRsp
+(1, 2, 10, 14, 'sc_instance_02', 6011, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gs1 -> sc_instance_02 : Enum2NotifyStreamSendingStartRsp
+(1, 2, 0, 3, 'gs1', 4003, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+sc_instance_01 -> ss2 : Enum2StreamSendingStartRsp
+(1, 2, 11, 14, 'sc_instance_01', 6011, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gs1 -> sc_instance_01 : Enum2NotifyStreamSendingStartRsp
+(1, 2, 2, 3, 'gs1', 4003, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+sc_instance_03 -> gs2 : Enum2StreamSendingStartRsp
+(1, 2, 18, 14, 'sc_instance_03', 6011, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+ss2 -> sc_instance_03 : Enum2NotifyStreamSendingStartRsp
+(1, 2, 0, 3, 'ss2', 7006, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+ss2 -> sc_instance_03 : Enum2NotifyStreamSendingStartRsp
+(1, 2, 1, 3, 'ss2', 7006, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+sc_instance_03 -> gs2 : Enum2StreamSendingStartRsp
+(1, 2, 19, 14, 'sc_instance_03', 6011, '\n\x00')
+{
+  "response": {}
+}
+

@@ -1,0 +1,9 @@
+[
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-1.1.8.5-gs1]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-1.1.8.6-gs2]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-1.3.0.5-gs3]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-221.183.18.212-gs1]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-1.1.0.5-gs2]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_NotOverload_internal_gs.xml-1.2.8.5-gs3]", 
+  "test_gc.py::Test_GC::()::test_getGroupServers[rule-config_SuperiorOverload_internal_gs.xml-1.1.8.5-gs3]"
+]

@@ -1,0 +1,292 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.sc;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.sc";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+
+
+//=================sp 和gc调用
+    Enum2CreateStream = 6000;
+    Enum2CreateStreamRsp = 6001;
+    Enum2DestroyStream = 6002;
+    Enum2DestroyStreamRsp = 6003;
+
+
+//===================cp
+    Enum2ClientConnected = 6004;
+    Enum2ClientConnectedRsp = 6005;
+    Enum2ClientDisconnected = 6006;
+    Enum2ClientDisconnectedRsp = 6007;
+
+    Enum2GetStreamServers = 6008;
+    Enum2GetStreamServersRsp = 6009;
+
+//=========cp && gs
+    Enum2StreamSendingStart = 6010;
+    Enum2StreamSendingStartRsp = 6011;
+    Enum2StreamSendingStop = 6012;
+    Enum2StreamSendingStopRsp = 6013;
+
+
+//=====================gs && cp =============
+    Enum2PublishStream = 6014;
+    Enum2PublishStreamRsp = 6015;
+    Enum2UnpublishStream = 6016;
+    Enum2UnpublishStreamRsp = 6017;
+
+
+//===========gs===
+    Enum2SetStreamSourceServer = 6018;
+    Enum2SetStreamSourceServerRsp = 6019;
+
+    Enum2GetSuperiorStreamServer = 6020;
+    Enum2GetSuperiorStreamServerRsp = 6021;
+
+
+
+//======gs &&　ss ===========
+    Enum2ChannelConnected = 6023;
+    Enum2ChannelConnectedRsp = 6024;
+    Enum2ChannelDisconnected = 6025;
+    Enum2ChannelDisconnectedRsp = 6026;
+
+//===========ss  && cp ===
+    Enum2CheckStreamPublishToken = 6027;
+    Enum2CheckStreamPublishTokenRsp = 6028;
+    Enum2CheckStreamSubscribeToken = 6029;
+    Enum2CheckStreamSubscribeTokenRsp = 6030;
+
+// ======== new ========
+    Enum2GetStreamType = 6031;
+    Enum2GetStreamTypeRsp = 6032;
+    Enum2GetStreamProperty = 6033;
+    Enum2GetStreamPropertyRsp = 6034;
+
+    Enum2NotifyStreamSendingStart = 6035;
+    Enum2NotifyStreamSendingStartRsp = 6036;
+
+//========= ss ============
+	Enum2CleanStreamSourceServer = 6037;
+    Enum2CleanStreamSourceServerRsp = 6038;
+}
+
+
+//====================================sp=====================
+
+message CreateStream{
+    string app_id = 1;
+    com.fsmeeting.fsp.proto.common.StreamType stream_type = 2;
+    com.fsmeeting.fsp.proto.common.StreamProperty stream_property = 3;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 4;
+}
+
+
+message CreateStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.Stream stream = 2;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+
+message DestroyStream{
+    string stream_id = 1;
+    string app_token = 2;
+}
+
+
+message DestroyStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+
+
+
+//=================cp
+
+message ClientConnected {
+    string client_id = 1;
+    string service_instance_id = 2;
+    string app_id = 3;
+    string client_name = 4;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 5;
+}
+
+
+message ClientConnectedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+message ClientDisconnected {
+    string client_id = 1;
+    string service_instance_id = 2;
+    string app_id = 3;
+}
+
+
+message ClientDisconnectedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+message PublishStream{
+    string stream_id = 1;
+    string client_id = 2;
+    string client_ip = 3;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 4;
+}
+
+message PublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message UnpublishStream{
+    string stream_id = 1;
+    string  client_id = 2;
+}
+
+message UnpublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+message GetStreamServers{
+    string stream_id = 1;
+    string client_id = 2;
+    string client_ip = 3;
+    repeated string exception_stream_servers = 4;
+}
+
+message GetStreamServersRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated com.fsmeeting.fsp.proto.common.StreamServer streamServers = 2;
+}
+
+message StreamSendingStart{
+    string stream_id = 1;
+    string recv_client_id = 2;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+message StreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    //com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 2;
+}
+
+
+message StreamSendingStop{
+    string stream_id = 1;
+    string recv_client_id = 2;
+}
+
+message StreamSendingStopRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message CheckStreamPublishToken{
+    string stream_id = 1;
+    string stream_publish_token = 2;
+}
+
+
+message CheckStreamPublishTokenRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    bool valid = 2;
+}
+
+message CheckStreamSubscribeToken{
+    string stream_id = 1;
+    string stream_subscribe_token = 2;
+}
+
+
+message CheckStreamSubscribeTokenRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    bool valid = 2;
+}
+
+//==============gs===
+
+message SetStreamSourceServer{
+    string stream_id = 1;
+    string service_instance_id = 2;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+message SetStreamSourceServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message CleanStreamSourceServer{
+    string stream_id = 1;
+    string service_instance_id = 2;
+}
+
+message GetSuperiorStreamServer{
+    string stream_id = 1;
+    string service_instance_id = 2;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+
+message GetSuperiorStreamServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.StreamServer stream_server = 2;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+
+message ChannelConnected{
+    string client_id = 1;
+    string service_instance_id = 2;
+    string stream_id = 3;
+    com.fsmeeting.fsp.proto.common.DataDirection direction = 4;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 5;
+}
+
+//ChannelConnected 的响应协议
+message ChannelConnectedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.ChannelType channel_type = 2;
+}
+
+message ChannelDisconnected{
+    string client_id = 1;
+    string service_instance_id = 2;
+    string stream_id = 3;
+}
+
+message ChannelDisconnectedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message GetStreamType {
+    string stream_id = 1;
+    //com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 2;
+}
+
+message GetStreamTypeRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.StreamType stream_type = 2;
+}
+
+message GetStreamProperty {
+    string stream_id = 1;
+    //com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 2;
+}
+
+message GetStreamPropertyRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.StreamProperty stream_property = 2;
+}

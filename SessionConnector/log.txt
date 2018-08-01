@@ -1,0 +1,11 @@
+SessionConnectorImpl::SessionConnectorImpl
+SessionConnectorImpl::CreateSession
+TCP:192.168.7.105:50003;
+SESSION_EVENT_CREATED
+SessionConnectorImpl::SendSessionMsg
+Send msg to session: 1, content : <cmd id="8701"><Guid val="{0add0d33-ece9-4975-b186-afad3365bc02}" /><CheckCode val="5219" /><FrontUserID val="1422200" /></cmd>
+SESSION_EVENT_DATA
+SessionConnectorImpl::ProcessSessionMsg
+SessionConnectorImpl::RecvSessionMsg
+actual string size: 144
+actual buffer content: [<cmd id="8702"><Guid val="{0add0d33-ece9-4975-b186-afad3365bc02}" /><FrontUserID val="1422200" /><MixerUserID val="0" /><Result val="0" /></cmd>]

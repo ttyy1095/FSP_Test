@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.gs;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.gs";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+
+enum ProtoDictionary{
+     Enum2UnknownInterface = 0;
+
+    //=====gc 调用===========
+    Enum2NotifyPublishStream = 4000;
+    Enum2NotifyPublishStreamRsp = 4001;
+
+    //==========sc ===
+    Enum2NotifyStreamSendingStart = 4002;
+    Enum2NotifyStreamSendingStartRsp = 4003;
+    Enum2NotifyStreamSendingStop = 4004;
+    Enum2NotifyStreamSendingStopRsp = 4005;
+	Enum2NotifySelectStreamServer = 4006;
+	Enum2NotifySelectStreamServerRsp = 4007;
+	Enum2NotifyCleanStreamSourceServer = 4008;
+	Enum2NotifyCleanStreamSourceServerRsp = 4009;
+}
+
+
+
+
+
+//=============================gc==
+message NotifyPublishStream{
+    string stream_id = 1;
+    string stream_publish_token = 2;
+    string group_id = 3;
+    string user_id = 4;
+    int32 media_id = 5;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 6;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 7;
+	string media_id2 = 8;
+}
+
+message NotifyPublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+//=====sc=============
+message NotifyStreamSendingStart{
+    string recv_client_id = 1;
+    string stream_id = 2;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 3;
+}
+
+message NotifyStreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyStreamSendingStop{
+    string stream_id = 1;
+    string recv_client_id = 2;
+}
+
+message NotifyStreamSendingStopRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifySelectStreamServer{
+    string stream_id = 1;
+    string connect_str = 2;
+    string pub_token = 3;
+    string group_id = 4;
+	string user_id = 5;
+	com.fsmeeting.fsp.proto.common.MediaType media_type = 6;
+	string media_id = 7;
+}
+
+message NotifySelectStreamServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyCleanStreamSourceServer{
+	string stream_id = 1;
+	string group_id = 2;
+	string user_id = 3;
+	com.fsmeeting.fsp.proto.common.MediaType media_type = 4;
+	string media_id = 5;
+}
+
+message NotifyCleanStreamSourceServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}

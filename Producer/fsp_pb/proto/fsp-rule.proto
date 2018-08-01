@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.rule;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.rule";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+    Enum2GetMediaServer = 9000;
+    Enum2GetMediaServerRsp = 9001;
+    Enum2RuleSelection = 9002;
+    Enum2RuleSelectionRsp = 9003;
+}
+
+message GetMediaServer{
+    string client_ip = 1;
+	string server_type = 2;
+}
+
+
+message GetMediaServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated string mediaServers = 2;
+}
+
+message RuleSelect{
+    string stream_id = 1;
+    string sourceInstance = 2;
+    string instance = 3;
+	string type = 4;
+}
+
+message RuleSelectRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    string instance = 2;
+}
