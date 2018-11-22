@@ -1,0 +1,147 @@
+{
+  "uid" : "7846c7f127859194",
+  "name" : "test_oc_nc_not_cascade",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_oc_nc_not_cascade",
+  "historyId" : "21767ec05b88d398689a2fc8ee7f7ef7",
+  "time" : {
+    "start" : 1542871736366,
+    "stop" : 1542871848548,
+    "duration" : 112182
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542871615663,
+      "stop" : 1542871616108,
+      "duration" : 445
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "验证音视频功能,NC->OC",
+      "time" : {
+        "start" : 1542871738371,
+        "stop" : 1542871793446,
+        "duration" : 55075
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "验证音视频功能,OC->NC",
+      "time" : {
+        "start" : 1542871793446,
+        "stop" : 1542871848548,
+        "duration" : 55102
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "11ffc6b0f271a937",
+      "name" : "log",
+      "source" : "11ffc6b0f271a937.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "563a5cfa0b0d67ff",
+      "name" : "stdout",
+      "source" : "563a5cfa0b0d67ff.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "fa0657ebcd139e5e",
+      "name" : "stderr",
+      "source" : "fa0657ebcd139e5e.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542872599563,
+      "stop" : 1542872599565,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1706:NC&OC单个gs收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26684-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "7846c7f127859194.json",
+  "parameterValues" : [ ]
+}

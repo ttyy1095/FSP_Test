@@ -1,0 +1,1 @@
+sftp.py                    158 INFO     [chan 0] sftp session closed.

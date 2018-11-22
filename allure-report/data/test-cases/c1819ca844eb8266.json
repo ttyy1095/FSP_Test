@@ -1,0 +1,132 @@
+{
+  "uid" : "c1819ca844eb8266",
+  "name" : "test_oc_transnational_not_specialline",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_oc_transnational_not_specialline",
+  "historyId" : "3322bd6c3b8fab756d0e46b705c1149f",
+  "time" : {
+    "start" : 1542872021147,
+    "stop" : 1542872078155,
+    "duration" : 57008
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542871615663,
+      "stop" : 1542871616108,
+      "duration" : 445
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "验证音视频功能",
+      "time" : {
+        "start" : 1542872023173,
+        "stop" : 1542872078155,
+        "duration" : 54982
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "dc108c4e785af8f7",
+      "name" : "log",
+      "source" : "dc108c4e785af8f7.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "e87b0fdcf5c0347d",
+      "name" : "stdout",
+      "source" : "e87b0fdcf5c0347d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "9780866d7268df3d",
+      "name" : "stderr",
+      "source" : "9780866d7268df3d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542872599563,
+      "stop" : 1542872599565,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1710:OC跨国不走专线收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26684-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c1819ca844eb8266.json",
+  "parameterValues" : [ ]
+}

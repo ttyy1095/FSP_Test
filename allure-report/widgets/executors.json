@@ -1,0 +1,10 @@
+[ {
+  "name" : "Jenkins",
+  "type" : "jenkins",
+  "url" : "http://192.168.6.65:8080/jenkins/",
+  "buildOrder" : 17,
+  "buildName" : "fsp #17",
+  "buildUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/17/",
+  "reportName" : "AllureReport",
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/17/allure"
+} ]

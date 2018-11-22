@@ -1,0 +1,24 @@
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 INFO     Authentication (publickey) failed.
+transport.py              1746 INFO     Authentication (password) successful!

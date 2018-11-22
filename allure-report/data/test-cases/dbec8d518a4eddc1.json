@@ -1,0 +1,132 @@
+{
+  "uid" : "dbec8d518a4eddc1",
+  "name" : "test_oc_cascade",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_oc_cascade",
+  "historyId" : "6b0f4d7cf293f27ea09703000411bd13",
+  "time" : {
+    "start" : 1542803090657,
+    "stop" : 1542803157658,
+    "duration" : 67001
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542802855419,
+      "stop" : 1542802856290,
+      "duration" : 871
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "验证音视频功能",
+      "time" : {
+        "start" : 1542803092673,
+        "stop" : 1542803157658,
+        "duration" : 64985
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "2316b0f8c0a9de31",
+      "name" : "log",
+      "source" : "2316b0f8c0a9de31.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "ff60f64e01d5345",
+      "name" : "stdout",
+      "source" : "ff60f64e01d5345.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "b3f1651c97e927fe",
+      "name" : "stderr",
+      "source" : "b3f1651c97e927fe.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542803957050,
+      "stop" : 1542803957052,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1707:OC级联gs收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "28496-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "dbec8d518a4eddc1.json",
+  "parameterValues" : [ ]
+}

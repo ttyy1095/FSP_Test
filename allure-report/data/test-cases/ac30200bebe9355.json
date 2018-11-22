@@ -1,0 +1,208 @@
+{
+  "uid" : "ac30200bebe9355",
+  "name" : "test_nc_oc_transnational_not_specialline",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_nc_oc_transnational_not_specialline",
+  "historyId" : "bcf9437edc2d7db67d50c98e10fb4852",
+  "time" : {
+    "start" : 1542874544112,
+    "stop" : 1542874655440,
+    "duration" : 111328
+  },
+  "status" : "passed",
+  "flaky" : true,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542873922418,
+      "stop" : 1542873922989,
+      "duration" : 571
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "验证音视频功能:NC->OC",
+      "time" : {
+        "start" : 1542874546118,
+        "stop" : 1542874600802,
+        "duration" : 54684
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "验证音视频功能:OC->NC",
+      "time" : {
+        "start" : 1542874600802,
+        "stop" : 1542874655440,
+        "duration" : 54638
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "2e3953508bb72436",
+      "name" : "log",
+      "source" : "2e3953508bb72436.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "57718b3e13178c0d",
+      "name" : "stdout",
+      "source" : "57718b3e13178c0d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "df0f3a1035eed4a9",
+      "name" : "stderr",
+      "source" : "df0f3a1035eed4a9.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542875113361,
+      "stop" : 1542875113366,
+      "duration" : 5
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1712:OC&NC跨国不走专线收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "29072-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "f0eb8903a9eb09f7",
+      "status" : "broken",
+      "statusDetails" : "IndexError: list index out of range",
+      "time" : {
+        "start" : 1542872135248,
+        "stop" : 1542872193137,
+        "duration" : 57889
+      }
+    }, {
+      "uid" : "baa148e2cec970b2",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: assert False",
+      "time" : {
+        "start" : 1542803385680,
+        "stop" : 1542803497637,
+        "duration" : 111957
+      }
+    } ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 2,
+        "broken" : 1,
+        "skipped" : 0,
+        "passed" : 1,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "6f1cb63a5fd30714",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure/#testresult/6f1cb63a5fd30714",
+        "status" : "broken",
+        "statusDetails" : "IndexError: list index out of range",
+        "time" : {
+          "start" : 1542872135248,
+          "stop" : 1542872193137,
+          "duration" : 57889
+        }
+      }, {
+        "uid" : "1e15d8a750741073",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure/#testresult/1e15d8a750741073",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert False",
+        "time" : {
+          "start" : 1542803385680,
+          "stop" : 1542803497637,
+          "duration" : 111957
+        }
+      }, {
+        "uid" : "5cf12f88fa1eb6e6",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure/#testresult/5cf12f88fa1eb6e6",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert False",
+        "time" : {
+          "start" : 1542803385680,
+          "stop" : 1542803497637,
+          "duration" : 111957
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "ac30200bebe9355.json",
+  "parameterValues" : [ ]
+}

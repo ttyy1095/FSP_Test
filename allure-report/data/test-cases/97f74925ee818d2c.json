@@ -1,0 +1,148 @@
+{
+  "uid" : "97f74925ee818d2c",
+  "name" : "test_rule_group",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_rule_group",
+  "historyId" : "5d59b318f7faf7bcba0ef7d7ef75080f",
+  "time" : {
+    "start" : 1542802768576,
+    "stop" : 1542802768576,
+    "duration" : 0
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 1 != 1",
+  "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x05024BB0>\n\n    @allure.story(\"Platform-fsp_sss-1695:两台rule有一台处理业务时崩溃不重启，对其他服务无影响\")\n    def test_rule_group(self):\n        logger = logging.getLogger('Platform-fsp_sss-1695')\n        ids = config.services[\"rule\"][\"servers\"].keys()\n        if len(ids) < 2:\n            logger.error(\"must have more than 2 rule\")\n>           assert 1 != 1\nE           assert 1 != 1\n\nTestCase\\test_checklist.py:249: AssertionError",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 1 != 1",
+    "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x05024BB0>\n\n    @allure.story(\"Platform-fsp_sss-1695:两台rule有一台处理业务时崩溃不重启，对其他服务无影响\")\n    def test_rule_group(self):\n        logger = logging.getLogger('Platform-fsp_sss-1695')\n        ids = config.services[\"rule\"][\"servers\"].keys()\n        if len(ids) < 2:\n            logger.error(\"must have more than 2 rule\")\n>           assert 1 != 1\nE           assert 1 != 1\n\nTestCase\\test_checklist.py:249: AssertionError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "c69442d170175ff0",
+      "name" : "log",
+      "source" : "c69442d170175ff0.txt",
+      "type" : "text/plain",
+      "size" : 66
+    }, {
+      "uid" : "59a47c0b1247b729",
+      "name" : "stdout",
+      "source" : "59a47c0b1247b729.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "550fed9d0994044d",
+      "name" : "stderr",
+      "source" : "550fed9d0994044d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1695:两台rule有一台处理业务时崩溃不重启，对其他服务无影响"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "28496-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "4ed2da3baf0d88eb",
+      "status" : "skipped",
+      "statusDetails" : "Skipped: no way of currently testing this",
+      "time" : { }
+    }, {
+      "uid" : "a84e98e69a60f22c",
+      "status" : "skipped",
+      "statusDetails" : "Skipped: no way of currently testing this",
+      "time" : { }
+    } ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 4,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "798cfb3570fd8703",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure/#testresult/798cfb3570fd8703",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 1 != 1",
+        "time" : {
+          "start" : 1542802768576,
+          "stop" : 1542802768576,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b42ceaddfdd13e4c",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure/#testresult/b42ceaddfdd13e4c",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 1 != 1",
+        "time" : {
+          "start" : 1542802768576,
+          "stop" : 1542802768576,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "8292707bafd1b60a",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure/#testresult/8292707bafd1b60a",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 1 != 1",
+        "time" : {
+          "start" : 1542802768576,
+          "stop" : 1542802768576,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "97f74925ee818d2c.json",
+  "parameterValues" : [ ]
+}

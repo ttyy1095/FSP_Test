@@ -1,0 +1,81 @@
+[ {
+  "buildOrder" : 16,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Product defects" : 3,
+    "Test defects" : 6
+  }
+}, {
+  "buildOrder" : 15,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Product defects" : 9,
+    "Test defects" : 2
+  }
+}, {
+  "buildOrder" : 14,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Product defects" : 9,
+    "Test defects" : 2
+  }
+}, {
+  "buildOrder" : 13,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/13/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 12,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/12/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Test defects" : 1
+  }
+}, {
+  "buildOrder" : 11,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/11/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Test defects" : 1
+  }
+}, {
+  "buildOrder" : 10,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/10/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 9,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/9/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 8,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/8/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 7,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/7/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 6,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/6/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "Test defects" : 1
+  }
+}, {
+  "buildOrder" : 5,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/5/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+}, {
+  "buildOrder" : 4,
+  "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/4/allure",
+  "reportName" : "AllureReport",
+  "data" : { }
+} ]

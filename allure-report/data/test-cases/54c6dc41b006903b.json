@@ -1,0 +1,93 @@
+{
+  "uid" : "54c6dc41b006903b",
+  "name" : "test_paas_single_ss",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_paas_single_ss",
+  "historyId" : "3ebf9714fbf3409bd34f0445bfdae0df",
+  "time" : { },
+  "status" : "skipped",
+  "statusMessage" : "Skipped: no way of currently testing this",
+  "statusTrace" : "('TestCase\\\\test_checklist.py', 593, u'Skipped: no way of currently testing this')",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "skipped",
+    "statusMessage" : "Skipped: no way of currently testing this",
+    "statusTrace" : "('TestCase\\\\test_checklist.py', 593, u'Skipped: no way of currently testing this')",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "6d93ac8b8575166a",
+      "name" : "log",
+      "source" : "6d93ac8b8575166a.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "6cbd7ea47517c94",
+      "name" : "stdout",
+      "source" : "6cbd7ea47517c94.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "36defe967c2e52f4",
+      "name" : "stderr",
+      "source" : "36defe967c2e52f4.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1716:paas用户单个ss收发音视频"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.skip(reason='no way of currently testing this')"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.skip(reason='no way of currently testing this')"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26684-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ "@pytest.mark.skip(reason='no way of currently testing this')" ]
+  },
+  "source" : "54c6dc41b006903b.json",
+  "parameterValues" : [ ]
+}

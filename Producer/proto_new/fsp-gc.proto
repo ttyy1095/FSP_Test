@@ -1,0 +1,177 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.gc;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.gc";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+
+//==========sp====
+    Enum2CreateGroup = 3000;
+    Enum2CreateGroupRsp = 3001;
+    Enum2DestroyGroup = 3002;
+    Enum2DestroyGroupRsp = 3003;
+    Enum2GetGroupServers = 3004;
+    Enum2GetGroupServersRsp = 3005;
+
+//======gs && cp 调用
+    Enum2JoinGroup = 3006;
+    Enum2JoinGroupRsp = 3007;
+    Enum2QuitGroup = 3008;
+    Enum2QuitGroupRsp = 3009;
+
+
+//==========cp===
+    Enum2GetStream = 3010;
+    Enum2GetStreamRsp = 3012;
+
+ //======cp & gs
+    Enum2NotifyStreamPublished = 3013;
+    Enum2NotifyStreamPublishedRsp = 3014;
+
+ //======cp & gs
+    Enum2NotifyStartBroadcastMedia = 3015;
+    Enum2NotifyStartBroadcastMediaRsp = 3016;
+
+ //======cp & gs
+    Enum2NotifyStopBroadcastMedia = 3017;
+    Enum2NotifyStopBroadcastMediaRsp = 3018;
+
+//=======as & sp
+    Enum2GetVNCGroupServers = 3019;
+    Enum2GetVNCGroupServersRsp = 3020;
+}
+
+//====================================sp
+message CreateGroup{
+    string app_id = 1;
+    com.fsmeeting.fsp.proto.common.ServiceType service_type = 2;
+    string room_id = 3;
+    string company_id = 4;
+}
+
+message CreateGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.Group group = 2;
+}
+
+message DestroyGroup{
+    string app_id = 1;
+    string group_id = 2;
+}
+
+message DestroyGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message GetGroupServers{
+    string group_id = 1;
+    string client_ip = 2;
+    string user_id = 3;
+    string app_id = 4;
+    string company_id = 5;
+    string room_id = 6;
+    int32 type = 7;
+}
+
+message GetGroupServersRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated com.fsmeeting.fsp.proto.common.GroupServer group_servers = 2;
+}
+
+message GetVNCGroupServers{
+    string group_id = 1;
+    string client_ip = 2;
+    string user_id = 3;
+    string app_id = 4;
+    string company_id = 5;
+    string room_id = 6;
+}
+
+message GetVNCGroupServersRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    repeated com.fsmeeting.fsp.proto.common.VNCGroupServer vnc_group_servers = 2;
+}
+
+//==================cp && gs====
+message JoinGroup{
+    string group_id = 1;
+    string user_id = 2;
+    string group_token = 3;
+    string client_id = 4;
+    string service_instance_id = 5;
+    com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 6;
+}
+
+message JoinGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    string room_id = 2;
+    string company_id = 3;
+}
+
+message QuitGroup{
+    string group_id = 1;
+    string user_id = 2;
+    string client_id = 3;
+    string service_instance_id = 4;
+    com.fsmeeting.fsp.proto.common.ServerType service_type = 5;
+
+}
+
+// QuitGroup 的响应协议
+message QuitGroupRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+//================== gs && cp =====================
+
+message NotifyStreamPublished{
+    string client_id = 1;
+    string stream_id = 2;
+    string group_id = 3;
+    string user_id = 4;
+    int32 media_id = 5;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 6;
+    string media_id2 = 7;
+}
+
+message NotifyStreamPublishedRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+//===========gs  && cp ==========================
+message GetStream{
+    string group_id = 1;
+    string user_id = 2;
+    int32 media_id = 3;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 4;
+	com.fsmeeting.fsp.proto.common.CommonInvokeInfo commonInvokeInfo = 5;
+	string media_id2 = 6;
+}
+
+
+message GetStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+    com.fsmeeting.fsp.proto.common.Stream stream = 2;
+}
+
+//====================================cp
+message BroadcastMediaInfo{
+    string group_id = 1;
+    string user_id = 2;
+	int32 media_type = 3;
+	string media_id = 4;
+}
+
+message BroadcastMediaInfoRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}

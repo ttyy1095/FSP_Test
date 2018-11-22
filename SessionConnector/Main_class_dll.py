@@ -5,8 +5,9 @@ import time
 import struct
 import platform
 from ctypes import *
-import Producer.fsp_pb.fsp_ss_pb2 as pb_ss
-import Producer.fsp_pb.fsp_common_pb2 as pb_common
+sys.path.append("../Producer/fsp_pb")
+import fsp_ss_pb2 as pb_ss
+import fsp_common_pb2 as pb_common
 '''
 bool Init();
 int  CreateSession(char* ip, char* port, unsigned int appid);
@@ -25,10 +26,9 @@ else:
 
 class Main_class_dll():
 
-    dllName = "libSessionConnector.so"
     dllABSPath = os.path.dirname(
         os.path.abspath(__file__)) + os.path.sep + dllName
-
+    print dllABSPath
     dll = cdll.LoadLibrary(dllABSPath)
 
     dllhandle = dll._handle
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     a = Main_class_dll()
     
     a.int_create_()
-    session_id = a.connect("192.168.7.105", "50003", 1)
+    session_id = a.connect("192.168.7.72", "50003", 1)
     print session_id
     time.sleep(0.010)
     # buf = a.LoginRecevingChannel("05d56423-5d80-43ad-95e1-bc66f10732c1","","gs2","{ca784686-3cbe-d70f-e7cc-ae9b4ddd7ed7}")

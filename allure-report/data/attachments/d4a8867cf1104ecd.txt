@@ -1,0 +1,23 @@
+transport.py              1746 DEBUG    starting thread (client mode): 0x48b6c90L
+transport.py              1746 DEBUG    Local version/idstring: SSH-2.0-paramiko_2.4.2
+transport.py              1746 DEBUG    Remote version/idstring: SSH-2.0-OpenSSH_6.6.1
+transport.py              1746 INFO     Connected (version 2.0, client OpenSSH_6.6.1)
+transport.py              1746 DEBUG    kex algos:[u'curve25519-sha256@libssh.org', u'ecdh-sha2-nistp256', u'ecdh-sha2-nistp384', u'ecdh-sha2-nistp521', u'diffie-hellman-group-exchange-sha256', u'diffie-hellman-group-exchange-sha1', u'diffie-hellman-group14-sha1', u'diffie-hellman-group1-sha1'] server key:[u'ssh-rsa', u'ecdsa-sha2-nistp256', u'ssh-ed25519'] client encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'arcfour256', u'arcfour128', u'aes128-gcm@openssh.com', u'aes256-gcm@openssh.com', u'chacha20-poly1305@openssh.com', u'aes128-cbc', u'3des-cbc', u'blowfish-cbc', u'cast128-cbc', u'aes192-cbc', u'aes256-cbc', u'arcfour', u'rijndael-cbc@lysator.liu.se'] server encrypt:[u'aes128-ctr', u'aes192-ctr', u'aes256-ctr', u'arcfour256', u'arcfour128', u'aes128-gcm@openssh.com', u'aes256-gcm@openssh.com', u'chacha20-poly1305@openssh.com', u'aes128-cbc', u'3des-cbc', u'blowfish-cbc', u'cast128-cbc', u'aes192-cbc', u'aes256-cbc', u'arcfour', u'rijndael-cbc@lysator.liu.se'] client mac:[u'hmac-md5-etm@openssh.com', u'hmac-sha1-etm@openssh.com', u'umac-64-etm@openssh.com', u'umac-128-etm@openssh.com', u'hmac-sha2-256-etm@openssh.com', u'hmac-sha2-512-etm@openssh.com', u'hmac-ripemd160-etm@openssh.com', u'hmac-sha1-96-etm@openssh.com', u'hmac-md5-96-etm@openssh.com', u'hmac-md5', u'hmac-sha1', u'umac-64@openssh.com', u'umac-128@openssh.com', u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-ripemd160', u'hmac-ripemd160@openssh.com', u'hmac-sha1-96', u'hmac-md5-96'] server mac:[u'hmac-md5-etm@openssh.com', u'hmac-sha1-etm@openssh.com', u'umac-64-etm@openssh.com', u'umac-128-etm@openssh.com', u'hmac-sha2-256-etm@openssh.com', u'hmac-sha2-512-etm@openssh.com', u'hmac-ripemd160-etm@openssh.com', u'hmac-sha1-96-etm@openssh.com', u'hmac-md5-96-etm@openssh.com', u'hmac-md5', u'hmac-sha1', u'umac-64@openssh.com', u'umac-128@openssh.com', u'hmac-sha2-256', u'hmac-sha2-512', u'hmac-ripemd160', u'hmac-ripemd160@openssh.com', u'hmac-sha1-96', u'hmac-md5-96'] client compress:[u'none', u'zlib@openssh.com'] server compress:[u'none', u'zlib@openssh.com'] client lang:[u''] server lang:[u''] kex follows?False
+transport.py              1746 DEBUG    Kex agreed: ecdh-sha2-nistp256
+transport.py              1746 DEBUG    HostKey agreed: ssh-ed25519
+transport.py              1746 DEBUG    Cipher agreed: aes128-ctr
+transport.py              1746 DEBUG    MAC agreed: hmac-sha2-256
+transport.py              1746 DEBUG    Compression agreed: none
+transport.py              1746 DEBUG    kex engine KexNistp256 specified hash_algo <built-in function openssl_sha256>
+transport.py              1746 DEBUG    Switch to new keys ...
+transport.py              1746 DEBUG    Attempting password auth...
+transport.py              1746 DEBUG    userauth is OK
+transport.py              1746 INFO     Authentication (password) successful!
+channel.py                1194 DEBUG    [chan 0] Max packet in: 32768 bytes
+channel.py                1194 DEBUG    [chan 0] Max packet out: 32768 bytes
+transport.py              1746 DEBUG    Secsh channel 0 opened.
+channel.py                1194 DEBUG    [chan 0] Sesch channel 0 request ok
+sftp.py                    158 INFO     [chan 0] Opened sftp connection (server version 3)
+sftp.py                    158 INFO     [chan 0] sftp session closed.
+channel.py                1194 DEBUG    [chan 0] EOF sent (0)
+transport.py              1746 DEBUG    EOF in transport thread

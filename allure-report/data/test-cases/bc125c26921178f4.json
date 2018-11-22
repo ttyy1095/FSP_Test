@@ -1,0 +1,188 @@
+{
+  "uid" : "bc125c26921178f4",
+  "name" : "test_oc_cascade",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_oc_cascade",
+  "historyId" : "6b0f4d7cf293f27ea09703000411bd13",
+  "time" : {
+    "start" : 1542874200331,
+    "stop" : 1542874262803,
+    "duration" : 62472
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542873922418,
+      "stop" : 1542873922989,
+      "duration" : 571
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "验证音视频功能",
+      "time" : {
+        "start" : 1542874202342,
+        "stop" : 1542874262803,
+        "duration" : 60461
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "afcaa0c97a58c211",
+      "name" : "log",
+      "source" : "afcaa0c97a58c211.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "45ab7ece95cb8fe4",
+      "name" : "stdout",
+      "source" : "45ab7ece95cb8fe4.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "fe4ee4569002f334",
+      "name" : "stderr",
+      "source" : "fe4ee4569002f334.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542875113361,
+      "stop" : 1542875113366,
+      "duration" : 5
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1707:OC级联gs收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "29072-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "1455f7e5d6c7b9f3",
+      "status" : "passed",
+      "time" : {
+        "start" : 1542871848583,
+        "stop" : 1542871905779,
+        "duration" : 57196
+      }
+    }, {
+      "uid" : "dbec8d518a4eddc1",
+      "status" : "passed",
+      "time" : {
+        "start" : 1542803090657,
+        "stop" : 1542803157658,
+        "duration" : 67001
+      }
+    } ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 4,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "ba23f1a9cde86938",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure/#testresult/ba23f1a9cde86938",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542871848583,
+          "stop" : 1542871905779,
+          "duration" : 57196
+        }
+      }, {
+        "uid" : "5fe54f8dcbbc3b44",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure/#testresult/5fe54f8dcbbc3b44",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542803090657,
+          "stop" : 1542803157658,
+          "duration" : 67001
+        }
+      }, {
+        "uid" : "81246addfd24b810",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure/#testresult/81246addfd24b810",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542803090657,
+          "stop" : 1542803157658,
+          "duration" : 67001
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "bc125c26921178f4.json",
+  "parameterValues" : [ ]
+}

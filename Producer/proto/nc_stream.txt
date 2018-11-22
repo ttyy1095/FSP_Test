@@ -1,0 +1,251 @@
+###########################################
+gs2 -> gc_group_01 : Enum2GetStream
+(1, 1, 104, 3, 'gs2', 3010, '\n&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}\x12\x071431371 \x02*\x03\x12\x01F2\x012')
+{
+  "mediaId2": "2",
+  "commonInvokeInfo": {
+    "invokeOrder": "F"
+  },
+  "userId": "1431371",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}",
+  "mediaType": "EnumVideo"
+}
+###########################################
+gc3 -> sc_group_01 : Enum2CreateStream
+(1, 1, 244, 3, 'gc3', 6000, '\n\x011\x18\x01"\x04\x12\x02FF')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "FF"
+  },
+  "streamProperty": "EnumUnreliable",
+  "appId": "1"
+}
+###########################################
+sc3 -> gc3 : Enum2CreateStreamRsp
+(1, 2, 244, 3, 'sc3', 6001, '\n\x00\x12T\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x18\x01"\x140be46b9bd4944aec9bc7*\x140c9008d3c09d434da63b\x1a\x04\x12\x02FF')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "FF"
+  },
+  "response": {},
+  "stream": {
+    "streamPublishToken": "0be46b9bd4944aec9bc7",
+    "streamSubscribeToken": "0c9008d3c09d434da63b",
+    "streamProperty": "EnumUnreliable",
+    "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+  }
+}
+###########################################
+gc3 -> gs2 : Enum2NotifyPublishStream
+(1, 1, 245, 3, 'gc3', 4000, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12\x140be46b9bd4944aec9bc7\x1a&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"\x071431371(\x020\x02:\x05\x12\x03FFDB\x012')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "FFD"
+  },
+  "mediaId": 2,
+  "userId": "1431371",
+  "mediaType": "EnumVideo",
+  "mediaId2": "2",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2",
+  "streamPublishToken": "0be46b9bd4944aec9bc7",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+gs2 -> sc_group_01 : Enum2PublishStream
+(1, 1, 105, 3, 'gs2', 6014, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12.{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431371\x1a\x0c192.168.6.65"\x06\x12\x04FFDF')
+{
+  "clientIp": "192.168.6.65",
+  "commonInvokeInfo": {
+    "invokeOrder": "FFDF"
+  },
+  "clientId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431371",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+}
+###########################################
+sc3 -> gs2 : Enum2PublishStreamRsp
+(1, 2, 105, 3, 'sc3', 6015, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+gs2 -> gc_group_01 : Enum2NotifyStreamPublished
+(1, 1, 106, 3, 'gs2', 3013, '\n\x050;gs2\x12$8a759b40-b16f-4831-93a4-a521496aa0f2\x1a&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"\x0714313710\x02:\x012')
+{
+  "userId": "1431371",
+  "mediaType": "EnumVideo",
+  "clientId": "0;gs2",
+  "mediaId2": "2",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+gc3 -> gs2 : Enum2NotifyStreamPublishedRsp
+(1, 2, 106, 3, 'gc3', 3014, '\n\x12\x08\x02\x12\x0eUnknown result')
+{
+  "response": {
+    "responseMsg": "Unknown result",
+    "responseCode": "EnumUnknow"
+  }
+}
+###########################################
+gc3 -> gs2 : Enum2GetStreamRsp
+(1, 2, 104, 3, 'gc3', 3012, '\n\x13\x12\x11GetStream succeed\x12T\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x18\x01"\x140be46b9bd4944aec9bc7*\x140c9008d3c09d434da63b')
+{
+  "response": {
+    "responseMsg": "GetStream succeed"
+  },
+  "stream": {
+    "streamPublishToken": "0be46b9bd4944aec9bc7",
+    "streamSubscribeToken": "0c9008d3c09d434da63b",
+    "streamProperty": "EnumUnreliable",
+    "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+  }
+}
+###########################################
+gs2 -> sc_group_01 : Enum2GetStreamServers
+(1, 1, 107, 3, 'gs2', 6008, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12.{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431372\x1a\x0c192.168.6.65"&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}*\x0714313722\x011:\x0541312B\x06107894H\x02')
+{
+  "companyId": "41312",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2",
+  "userId": "1431372",
+  "mediaType": 2,
+  "clientId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431372",
+  "appId": "1",
+  "clientIp": "192.168.6.65",
+  "roomId": "107894",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+sc3 -> rule_group_01 : Enum2GetMediaServer
+(1, 1, 9, 3, 'sc3', 9000, '\n\x0c192.168.6.65\x12\x02ss\x1a&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"\x071431372*\x0112\x0541312:\x06107894@\x02')
+{
+  "companyId": "41312",
+  "serverType": "ss",
+  "userId": "1431372",
+  "mediaType": 2,
+  "appId": "1",
+  "clientIp": "192.168.6.65",
+  "roomId": "107894",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+sc3 -> gs2 : Enum2GetStreamServersRsp
+(1, 2, 107, 3, 'sc3', 6009, '\n\x00\x127\n\x03ss2"0TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;')
+{
+  "response": {},
+  "streamServers": [
+    {
+      "connectStr": "TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;",
+      "id": "ss2"
+    }
+  ]
+}
+###########################################
+ss2 -> sc_group_01 : Enum2ChannelConnected2
+(1, 1, 8, 3, 'ss2', 6039, '\n.{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431372\x12\x03ss2\x1a$8a759b40-b16f-4831-93a4-a521496aa0f2 \x01*\x03\x12\x01F')
+
+###########################################
+sc3 -> ss2 : Enum2ChannelConnected2Rsp
+(1, 2, 8, 3, 'sc3', 6040, '\n\x00\x1aT\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x18\x01"\x140be46b9bd4944aec9bc7*\x140c9008d3c09d434da63b')
+{
+  "response": {},
+  "stream": {
+    "streamPublishToken": "0be46b9bd4944aec9bc7",
+    "streamSubscribeToken": "0c9008d3c09d434da63b",
+    "streamProperty": "EnumUnreliable",
+    "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+  }
+}
+###########################################
+ss2 -> sc_group_01 : Enum2GetSuperiorStreamServer
+(1, 1, 9, 3, 'ss2', 6020, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12\x03ss2\x1a\x03\x12\x01F(\x01')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "F"
+  },
+  "nodeType": 1,
+  "serviceInstanceId": "ss2",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+}
+###########################################
+sc3 -> rule_group_01 : Enum2GetMediaServer
+(1, 1, 10, 3, 'sc3', 9000, '\n\x0c192.168.6.65\x12\x02ss\x1a&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"\x071431371*\x0112\x0541312:\x06107894@\x02')
+{
+  "companyId": "41312",
+  "serverType": "ss",
+  "userId": "1431371",
+  "mediaType": 2,
+  "appId": "1",
+  "clientIp": "192.168.6.65",
+  "roomId": "107894",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+sc3 -> gs2 : Enum2NotifyCleanStreamSourceServer
+(1, 1, 11, 3, 'sc3', 4008, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}\x1a\x071431371 \x02*\x012')
+{
+  "mediaId": "2",
+  "mediaType": "EnumVideo",
+  "userId": "1431371",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+}
+###########################################
+sc3 -> gs2 : Enum2NotifySelectStreamServer
+(1, 1, 12, 3, 'sc3', 4006, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x120TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;\x1a\x140be46b9bd4944aec9bc7"&{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}*\x0714313710\x02:\x012')
+{
+  "mediaId": "2",
+  "connectStr": "TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;",
+  "userId": "1431371",
+  "mediaType": "EnumVideo",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2",
+  "pubToken": "0be46b9bd4944aec9bc7",
+  "groupId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c}"
+}
+###########################################
+ss2 -> sc_group_01 : Enum2CheckStreamPublishToken
+(1, 1, 10, 3, 'ss2', 6027, '\n$8a759b40-b16f-4831-93a4-a521496aa0f2\x12\x140be46b9bd4944aec9bc7')
+{
+  "streamPublishToken": "0be46b9bd4944aec9bc7",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+}
+###########################################
+sc3 -> ss2 : Enum2GetStreamServersRsp
+(1, 2, 10, 3, 'sc3', 6009, '\n\x00\x10\x01')
+{
+  "response": {}
+}
+###########################################
+ss2 -> sc_group_01 : Enum2ChannelConnected
+(1, 1, 11, 3, 'ss2', 6023, '\n.{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431371\x12\x03ss2\x1a$8a759b40-b16f-4831-93a4-a521496aa0f2*\x03\x12\x01F')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "F"
+  },
+  "serviceInstanceId": "ss2",
+  "clientId": "{15cc5fb6-83f9-4c6d-a8ca-60f2de97db1c};1431371",
+  "streamId": "8a759b40-b16f-4831-93a4-a521496aa0f2"
+}
+###########################################
+sc3 -> ss2 : Enum2ChannelConnectedRsp
+(1, 2, 11, 3, 'sc3', 6024, '\n\x00')
+{
+  "response": {}
+}
+###########################################
+sc3 -> ss2 : Enum2GetSuperiorStreamServerRsp
+(1, 2, 9, 3, 'sc3', 6021, '\n\x00\x127\n\x03ss2"0TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;\x1a\x04\x12\x02FD')
+{
+  "commonInvokeInfo": {
+    "invokeOrder": "FD"
+  },
+  "response": {},
+  "streamServer": {
+    "connectStr": "TCP:192.168.7.153:50003;UDP:192.168.7.153:50003;",
+    "id": "ss2"
+  }
+}
+
+
+
+

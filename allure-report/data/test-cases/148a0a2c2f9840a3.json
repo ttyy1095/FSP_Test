@@ -1,0 +1,132 @@
+{
+  "uid" : "148a0a2c2f9840a3",
+  "name" : "test_sharescreen_not_cascade",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_sharescreen_not_cascade",
+  "historyId" : "49e7eb874891e292705c7fbe8dac2653",
+  "time" : {
+    "start" : 1542872483129,
+    "stop" : 1542872541227,
+    "duration" : 58098
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542871615663,
+      "stop" : 1542871616108,
+      "duration" : 445
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "2个OC客户端通过同1个vnc-gs进行屏幕共享",
+      "time" : {
+        "start" : 1542872485136,
+        "stop" : 1542872541227,
+        "duration" : 56091
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "1720b3b4c9f451cc",
+      "name" : "log",
+      "source" : "1720b3b4c9f451cc.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "9a520e4cf4bc37fa",
+      "name" : "stdout",
+      "source" : "9a520e4cf4bc37fa.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "40c43bb75913db74",
+      "name" : "stderr",
+      "source" : "40c43bb75913db74.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542872599563,
+      "stop" : 1542872599565,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1723:同一个vnc-gs"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26684-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "148a0a2c2f9840a3.json",
+  "parameterValues" : [ ]
+}

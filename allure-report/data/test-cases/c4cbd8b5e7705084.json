@@ -1,0 +1,94 @@
+{
+  "uid" : "c4cbd8b5e7705084",
+  "name" : "test_checkVersion",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_checkVersion",
+  "historyId" : "1c5812d29ca21d57a069803baede61eb",
+  "time" : {
+    "start" : 1542854073516,
+    "stop" : 1542854076173,
+    "duration" : 2657
+  },
+  "description" : "\n        对禅道及jenkins构建\n        ",
+  "descriptionHtml" : "<pre><code>    对禅道及jenkins构建\n</code></pre>\n",
+  "status" : "broken",
+  "statusMessage" : "JenkinsException: job[build_platform_fsp_stream] number[629] does not exist",
+  "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x0481F070>\n\n    @allure.story(\"Platform-fsp_sss-1690:服务器版本检查\")\n    def test_checkVersion(self):\n        \"\"\"\n            对禅道及jenkins构建\n            \"\"\"\n        print os.path.realpath(__file__)\n        version = \"2.8.2.0\"\n        zt = zentao(config.zentao_url, config.zentao_user, config.zentao_password,\n                    config.zentao_product, config.zentao_project)\n        filePath = zt.get_build_info(version)\n        assert filePath != \"\"\n        if filePath[-1] == \"/\":\n            build_number = int(re.findall(r\"/(\\d+)/\", filePath)[0])\n        else:\n            build_number = int(re.findall(r\"/(\\d+)$\", filePath)[0])\n    \n        jenkinsObj = jenkins.Jenkins(\n            config.jenkins_url,\n            username=config.jenkins_user,\n            password=config.jenkins_password)\n    \n        job_build_info = jenkinsObj.get_build_info(\"build_platform_fsp_stream\",\n>                                                  build_number)\n\nTestCase\\test_checklist.py:95: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <jenkins.Jenkins object at 0x048676B0>\nname = 'build_platform_fsp_stream', number = 629, depth = 0\n\n    def get_build_info(self, name, number, depth=0):\n        '''Get build information dictionary.\n    \n            :param name: Job name, ``str``\n            :param number: Build number, ``int``\n            :param depth: JSON depth, ``int``\n            :returns: dictionary of build information, ``dict``\n    \n            Example::\n    \n                >>> next_build_number = server.get_job_info('build_name')['nextBuildNumber']\n                >>> output = server.build_job('build_name')\n                >>> from time import sleep; sleep(10)\n                >>> build_info = server.get_build_info('build_name', next_build_number)\n                >>> print(build_info)\n                {u'building': False, u'changeSet': {u'items': [{u'date': u'2011-12-19T18:01:52.540557Z', u'msg': u'test', u'revision': 66, u'user': u'unknown', u'paths': [{u'editType': u'edit', u'file': u'/branches/demo/index.html'}]}], u'kind': u'svn', u'revisions': [{u'module': u'http://eaas-svn01.i3.level3.com/eaas', u'revision': 66}]}, u'builtOn': u'', u'description': None, u'artifacts': [{u'relativePath': u'dist/eaas-87-2011-12-19_18-01-57.war', u'displayPath': u'eaas-87-2011-12-19_18-01-57.war', u'fileName': u'eaas-87-2011-12-19_18-01-57.war'}, {u'relativePath': u'dist/eaas-87-2011-12-19_18-01-57.war.zip', u'displayPath': u'eaas-87-2011-12-19_18-01-57.war.zip', u'fileName': u'eaas-87-2011-12-19_18-01-57.war.zip'}], u'timestamp': 1324317717000, u'number': 87, u'actions': [{u'parameters': [{u'name': u'SERVICE_NAME', u'value': u'eaas'}, {u'name': u'PROJECT_NAME', u'value': u'demo'}]}, {u'causes': [{u'userName': u'anonymous', u'shortDescription': u'Started by user anonymous'}]}, {}, {}, {}], u'id': u'2011-12-19_18-01-57', u'keepLog': False, u'url': u'http://eaas-jenkins01.i3.level3.com:9080/job/build_war/87/', u'culprits': [{u'absoluteUrl': u'http://eaas-jenkins01.i3.level3.com:9080/user/unknown', u'fullName': u'unknown'}], u'result': u'SUCCESS', u'duration': 8826, u'fullDisplayName': u'build_war #87'}\n            '''  # noqa: E501\n        folder_url, short_name = self._get_job_folder(name)\n        try:\n            response = self.jenkins_open(requests.Request(\n                'GET', self._build_url(BUILD_INFO, locals())\n            ))\n            if response:\n                return json.loads(response)\n            else:\n                raise JenkinsException('job[%s] number[%d] does not exist'\n                                       % (name, number))\n        except (req_exc.HTTPError, NotFoundException):\n            raise JenkinsException('job[%s] number[%d] does not exist'\n>                                  % (name, number))\nE           JenkinsException: job[build_platform_fsp_stream] number[629] does not exist\n\nC:\\Python27\\lib\\site-packages\\jenkins\\__init__.py:642: JenkinsException",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "description" : "\n        对禅道及jenkins构建\n        ",
+    "status" : "broken",
+    "statusMessage" : "JenkinsException: job[build_platform_fsp_stream] number[629] does not exist",
+    "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x0481F070>\n\n    @allure.story(\"Platform-fsp_sss-1690:服务器版本检查\")\n    def test_checkVersion(self):\n        \"\"\"\n            对禅道及jenkins构建\n            \"\"\"\n        print os.path.realpath(__file__)\n        version = \"2.8.2.0\"\n        zt = zentao(config.zentao_url, config.zentao_user, config.zentao_password,\n                    config.zentao_product, config.zentao_project)\n        filePath = zt.get_build_info(version)\n        assert filePath != \"\"\n        if filePath[-1] == \"/\":\n            build_number = int(re.findall(r\"/(\\d+)/\", filePath)[0])\n        else:\n            build_number = int(re.findall(r\"/(\\d+)$\", filePath)[0])\n    \n        jenkinsObj = jenkins.Jenkins(\n            config.jenkins_url,\n            username=config.jenkins_user,\n            password=config.jenkins_password)\n    \n        job_build_info = jenkinsObj.get_build_info(\"build_platform_fsp_stream\",\n>                                                  build_number)\n\nTestCase\\test_checklist.py:95: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <jenkins.Jenkins object at 0x048676B0>\nname = 'build_platform_fsp_stream', number = 629, depth = 0\n\n    def get_build_info(self, name, number, depth=0):\n        '''Get build information dictionary.\n    \n            :param name: Job name, ``str``\n            :param number: Build number, ``int``\n            :param depth: JSON depth, ``int``\n            :returns: dictionary of build information, ``dict``\n    \n            Example::\n    \n                >>> next_build_number = server.get_job_info('build_name')['nextBuildNumber']\n                >>> output = server.build_job('build_name')\n                >>> from time import sleep; sleep(10)\n                >>> build_info = server.get_build_info('build_name', next_build_number)\n                >>> print(build_info)\n                {u'building': False, u'changeSet': {u'items': [{u'date': u'2011-12-19T18:01:52.540557Z', u'msg': u'test', u'revision': 66, u'user': u'unknown', u'paths': [{u'editType': u'edit', u'file': u'/branches/demo/index.html'}]}], u'kind': u'svn', u'revisions': [{u'module': u'http://eaas-svn01.i3.level3.com/eaas', u'revision': 66}]}, u'builtOn': u'', u'description': None, u'artifacts': [{u'relativePath': u'dist/eaas-87-2011-12-19_18-01-57.war', u'displayPath': u'eaas-87-2011-12-19_18-01-57.war', u'fileName': u'eaas-87-2011-12-19_18-01-57.war'}, {u'relativePath': u'dist/eaas-87-2011-12-19_18-01-57.war.zip', u'displayPath': u'eaas-87-2011-12-19_18-01-57.war.zip', u'fileName': u'eaas-87-2011-12-19_18-01-57.war.zip'}], u'timestamp': 1324317717000, u'number': 87, u'actions': [{u'parameters': [{u'name': u'SERVICE_NAME', u'value': u'eaas'}, {u'name': u'PROJECT_NAME', u'value': u'demo'}]}, {u'causes': [{u'userName': u'anonymous', u'shortDescription': u'Started by user anonymous'}]}, {}, {}, {}], u'id': u'2011-12-19_18-01-57', u'keepLog': False, u'url': u'http://eaas-jenkins01.i3.level3.com:9080/job/build_war/87/', u'culprits': [{u'absoluteUrl': u'http://eaas-jenkins01.i3.level3.com:9080/user/unknown', u'fullName': u'unknown'}], u'result': u'SUCCESS', u'duration': 8826, u'fullDisplayName': u'build_war #87'}\n            '''  # noqa: E501\n        folder_url, short_name = self._get_job_folder(name)\n        try:\n            response = self.jenkins_open(requests.Request(\n                'GET', self._build_url(BUILD_INFO, locals())\n            ))\n            if response:\n                return json.loads(response)\n            else:\n                raise JenkinsException('job[%s] number[%d] does not exist'\n                                       % (name, number))\n        except (req_exc.HTTPError, NotFoundException):\n            raise JenkinsException('job[%s] number[%d] does not exist'\n>                                  % (name, number))\nE           JenkinsException: job[build_platform_fsp_stream] number[629] does not exist\n\nC:\\Python27\\lib\\site-packages\\jenkins\\__init__.py:642: JenkinsException",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "811981bfd79dabff",
+      "name" : "log",
+      "source" : "811981bfd79dabff.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "b321a07b58e678ba",
+      "name" : "stdout",
+      "source" : "b321a07b58e678ba.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "60db9c9cc5831dec",
+      "name" : "stderr",
+      "source" : "60db9c9cc5831dec.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1690:服务器版本检查"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26176-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "c4cbd8b5e7705084.json",
+  "parameterValues" : [ ]
+}

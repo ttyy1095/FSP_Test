@@ -1,0 +1,150 @@
+{
+  "uid" : "e3aac657ea7d1a57",
+  "name" : "test_sharescreen_time",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_sharescreen_time",
+  "historyId" : "13bad630c2178bce8986c934b8a915be",
+  "time" : {
+    "start" : 1542788259624,
+    "stop" : 1542788378506,
+    "duration" : 118882
+  },
+  "description" : "\n        计算接收端开始加载解码器到解码接收到屏幕共享数据总耗时\n        即接收端创建vncmp日志到VideoDecoder:VIDEO_Decode_StartDecompress success耗时\n        :return:\n        ",
+  "descriptionHtml" : "<pre><code>    计算接收端开始加载解码器到解码接收到屏幕共享数据总耗时\n    即接收端创建vncmp日志到VideoDecoder:VIDEO_Decode_StartDecompress success耗时\n    :return:\n</code></pre>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542788259114,
+      "stop" : 1542788259622,
+      "duration" : 508
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "description" : "\n        计算接收端开始加载解码器到解码接收到屏幕共享数据总耗时\n        即接收端创建vncmp日志到VideoDecoder:VIDEO_Decode_StartDecompress success耗时\n        :return:\n        ",
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "非级联场景耗时测试",
+      "time" : {
+        "start" : 1542788259624,
+        "stop" : 1542788319658,
+        "duration" : 60034
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    }, {
+      "name" : "级联场景耗时测试",
+      "time" : {
+        "start" : 1542788319658,
+        "stop" : 1542788378506,
+        "duration" : 58848
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "12debd5c66dd0a72",
+      "name" : "log",
+      "source" : "12debd5c66dd0a72.txt",
+      "type" : "text/plain",
+      "size" : 440
+    }, {
+      "uid" : "11f2ae896f338b",
+      "name" : "stdout",
+      "source" : "11f2ae896f338b.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "ebc3337a9731221f",
+      "name" : "stderr",
+      "source" : "ebc3337a9731221f.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542788378507,
+      "stop" : 1542788378509,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1718:新入会用户接收耗时测试"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "19912-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e3aac657ea7d1a57.json",
+  "parameterValues" : [ ]
+}

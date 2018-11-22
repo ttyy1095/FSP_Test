@@ -1,0 +1,340 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.smd;
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.smd";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+enum ProtoDictionary {
+    Enum2UnknownInterface = 0;
+    Enum2SsConf = 8001;
+    Enum2SsConfRsp = 8002;
+    Enum2CpConf = 8003;
+    Enum2CpConfRsp = 8004;
+    Enum2StreamAsConf = 8005;
+    Enum2StreamAsConfRsp = 8006;
+    Enum2ScConf = 8007;
+    Enum2ScConfRsp = 8008;
+    Enum2AccessConf = 8009;
+    Enum2AccessConfRsp = 8010;
+    Enum2SpConf = 8011;
+    Enum2SpConfRsp = 8012;
+    Enum2IceConf = 8013;
+    Enum2IceConfRsp = 8014;
+    Enum2GsConf = 8015;
+    Enum2GsConfRsp = 8016;
+    Enum2GcConf = 8017;
+    Enum2GcConfRsp = 8018;
+    Enum2GroupAsConf = 8019;
+    Enum2GroupAsConfRsp = 8020;
+    Enum2ServiceConf = 8021;
+    Enum2ServiceConfRsp = 8022;
+    Enum2ServiceOnline = 8023;
+    Enum2ServiceOnlineRsp = 8024;
+    Enum2ServiceStop = 8025;
+    Enum2ServiceStopRsp = 8026;
+    Enum2SMDHeartbeat = 8027;
+    Enum2SMDHeartbeatRsp = 8028;
+}
+
+message SMDHeartbeat {
+    //
+}
+
+message SMDHeartbeatRsp {
+    //
+}
+
+enum ServiceQueryType
+{
+    EnumAvailableServices = 0;      //查询指定smd节点上还能够启动的服务
+    EnumInstalledServices = 1;      //查询指定smd节点上已经启动的服务
+    EnumServiceDistribution = 2;    //查询指定服务在smd节点的分布
+    EnumAllSmds = 3;                //查询所有的smd节点
+    EnumActiveSmds = 4;             //查询所有当前正在活动的smd节点
+}
+
+message ServiceOnline {
+    string smd_name = 1;
+    string smd_report_addr = 2; // addr = ip:port
+    repeated string available_services = 3;
+}
+
+message ServiceOnlineRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message ServiceStop {
+    string smd_name = 1;
+    string service_name = 2;
+}
+
+message ServiceStopRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+// 表示服务的配置，包括服务的名字和服务的配置项。服务的配置项会表示不同的服务的
+// 配置项，config 字段可能会由 ss/sc/gs/gc 这些服务的配置项序列化而成；换句话说，
+// 具体的服务接收到 ServiceConfig 之后，需要反序列化两次，才能得到最终服务的配置
+// 项。
+message ServiceConf {
+    string smd_name = 1;
+    string service_name = 2;
+    string download_url = 3;
+    bytes config = 4;
+}
+
+message ServiceConfRsp {
+    string service_name = 1;
+    string service_report_addr = 2;
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 3;
+}
+
+message ServiceQuery
+{
+    ServiceQueryType query_type = 1;
+    string query_argument = 2;
+}
+
+message ServiceQueryRsp
+{
+    ServiceQueryType query_type = 1;
+    string query_argument = 2;
+    repeated string query_result = 3;
+}
+
+// 不在这里定义的服务配置项，解析时就需要按照字符串的方式来解析配置项。定义这里
+// 的服务配置项，只是使服务解析配置项变得简单而已。
+
+// ice_addr = "database:default -h ip -p port"
+// kafka_brokers = "ip1:port1, ip2:port2, ip3:port3"
+
+message SsConf {
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string sc_topic = 3;
+
+    string instance_id = 4;
+}
+
+message SsConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message CpConf {
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string sc_topic = 3;
+
+    string instance_id = 4;
+    string session_app_id = 5;
+}
+
+message CpConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message StreamAsConf {
+    string access_url = 1;
+    string session_app_id = 2;
+    string debug_mode = 3;
+}
+
+message StreamAsConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message GroupAsConf {
+    // ServiceConfig.xml
+    string access_url = 1; // ip + port
+    string ice_addr = 2;
+    string dev_id = 3;
+    string dev_verify_code = 4;
+    string app_id = 5;
+    string verification_code = 6;
+
+    // AccessConfig.xml
+    string dev_group = 7;
+}
+
+message GroupAsConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message ScConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string zookeeper_servers = 3;
+
+    string sc_topic = 4;
+    string sc_group_topic = 5;
+    string consumer_client_id = 6;
+    string lock_timeout = 11;
+
+    // 可选项，有默认值
+
+    string topic_partitions = 7;
+    string topic_replication = 8;
+    string router_status_return_size = 9;
+    string protocol_version = 10;
+
+    string retry_policy = 12;
+    string root_path = 13;
+}
+
+message ScConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message AccessConf {
+    string ice_addr = 1;
+}
+
+message AccessConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message SpConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string zookeeper_servers = 3;
+
+    string sp_topic = 4;
+    string sc_group_topic = 5;
+    string gc_group_topic = 6;
+
+    string sp_server_id = 7;
+
+    // 可选项，有默认值
+
+    string topic_partitions = 8;
+    string topic_replication = 9;
+    string protocol_version = 10;
+}
+
+message SpConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message IceConf {
+    string redis_addr = 1;
+}
+
+message IceConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message IpList {
+    repeated string ip = 1;
+}
+
+message GsConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string sc_topic = 3;
+    string gc_topic = 4;
+    string instance_id = 5;
+    string group_id = 6;
+
+    // 可选项，有默认值
+
+    IpList nat_ip_list = 7;
+    string log_save_days = 8;
+
+    string process_name = 9;
+
+    string guid = 10;
+    string service_name = 11;
+    string priority = 12;
+    string session_app_id = 13;
+
+    string debug_mode = 14;
+    string sys_log_interval = 15;
+}
+
+message GsConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message GcConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string zookeeper_servers = 3;
+
+    string gc_topic = 4;
+    string gc_group_topic = 5;
+    string sc_group_topic = 6;
+    string consumer_client_id = 7;
+    string lock_timeout = 11;
+
+    // 可选项，有默认值
+
+    string topic_partitions = 8;
+    string topic_replication = 9;
+    string protocol_version = 10;
+
+    string retry_policy = 12;
+    string root_path = 13;
+}
+
+message GcConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message MaConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string zookeeper_servers = 3;
+
+    string ma_topic = 4;
+    string bandwidth = 5;
+}
+
+message MaConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message MsConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string kafka_brokers = 2;
+    string zookeeper_servers = 3;
+
+    string ms_topic = 4;
+    string poll_time = 5;
+}
+
+message MsConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message RuleConf {
+    // 必填项
+
+    string ice_addr = 1;
+    string zookeeper_servers = 2;
+
+    string iplib_path = 3;
+    string config_path = 4;
+
+    string max_instance_size = 5;
+}
+
+message RuleConfRsp {
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}

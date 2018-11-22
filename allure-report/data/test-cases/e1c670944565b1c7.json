@@ -1,0 +1,90 @@
+{
+  "uid" : "e1c670944565b1c7",
+  "name" : "test_ms_group",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_ms_group",
+  "historyId" : "065b4cea3cd8aa7b7017bca7635d3efe",
+  "time" : {
+    "start" : 1542802768623,
+    "stop" : 1542802830208,
+    "duration" : 61585
+  },
+  "description" : "\n        主MS挂掉时，辅助MS接替处理，向ma\n        :return:\n        ",
+  "descriptionHtml" : "<pre><code>    主MS挂掉时，辅助MS接替处理，向ma\n    :return:\n</code></pre>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "description" : "\n        主MS挂掉时，辅助MS接替处理，向ma\n        :return:\n        ",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "59842c909326926",
+      "name" : "log",
+      "source" : "59842c909326926.txt",
+      "type" : "text/plain",
+      "size" : 1039
+    }, {
+      "uid" : "aeca058eeb2e0c0f",
+      "name" : "stdout",
+      "source" : "aeca058eeb2e0c0f.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "2ece8c69090e7f7c",
+      "name" : "stderr",
+      "source" : "2ece8c69090e7f7c.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1697:主ms崩溃不重启，对其他服务无影响，从ms接替业务处理"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "28496-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "e1c670944565b1c7.json",
+  "parameterValues" : [ ]
+}

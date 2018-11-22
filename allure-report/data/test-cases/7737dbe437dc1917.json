@@ -1,0 +1,87 @@
+{
+  "uid" : "7737dbe437dc1917",
+  "name" : "test_marginss_crash",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_marginss_crash",
+  "historyId" : "f61eb4090810ab6132f4435906be0546",
+  "time" : {
+    "start" : 1542802830231,
+    "stop" : 1542802830231,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "dcbf994385aaf5b8",
+      "name" : "log",
+      "source" : "dcbf994385aaf5b8.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "acd9ad08b64b0e81",
+      "name" : "stdout",
+      "source" : "acd9ad08b64b0e81.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "4a39e3621205849c",
+      "name" : "stderr",
+      "source" : "4a39e3621205849c.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1699:边缘ss崩溃不重启，NC能重连新的边缘ss节点"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "28496-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "7737dbe437dc1917.json",
+  "parameterValues" : [ ]
+}

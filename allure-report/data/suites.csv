@@ -1,0 +1,52 @@
+"Status","Name","Duration in ms","Description"
+"passed","TestCase.test_checklist.Test_CheckList#test_oc_transnational_not_specialline","56689",""
+"passed","TestCase.test_checklist.Test_CheckList#test_sc_group","184966","
+
+        "
+"skipped","TestCase.test_checklist.Test_CheckList#test_sharescreen_audio_close","",""
+"passed","TestCase.test_checklist.Test_CheckList#test_oc_nc_not_cascade","111076",""
+"passed","TestCase.test_checklist.Test_CheckList#test_service_crash","45528",""
+"passed","TestCase.test_checklist.Test_CheckList#test_gc_group","150315","
+        首先关掉一个gc，测试音视频是否正常
+        恢复该gc，关闭其他gc，测试音视频是否正常
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_ncoc_cascade","111349",""
+"passed","TestCase.test_checklist.Test_CheckList#test_sharescreen_not_cascade","57842",""
+"broken","TestCase.test_checklist.Test_CheckList#test_checkVersion","2084","
+        对禅道及jenkins构建
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_ms_group","62025","
+        主MS挂掉时，辅助MS接替处理，向ma
+        :return:
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_oc_cascade","62472",""
+"passed","TestCase.test_checklist.Test_CheckList#test_nc_not_cascade","56849",""
+"skipped","TestCase.test_checklist.Test_CheckList#test_sharescreen_audio_stop","",""
+"passed","TestCase.test_checklist.Test_CheckList#test_nc_transnational_specialline","56565",""
+"passed","TestCase.test_checklist.Test_CheckList#test_ma_report","22955",""
+"passed","TestCase.test_checklist.Test_CheckList#test_nc_cascade","56482",""
+"passed","TestCase.test_checklist.Test_CheckList#test_all_ma_received","903",""
+"passed","TestCase.test_checklist.Test_CheckList#test_sharescreen_cascade","57781",""
+"failed","TestCase.test_checklist.Test_CheckList#test_nc_oc_transnational_specialline","111261",""
+"failed","TestCase.test_checklist.Test_CheckList#test_sharescreen_time","117247","
+        计算接收端开始加载解码器到解码接收到屏幕共享数据总耗时
+        即接收端创建vncmp日志到VideoDecoder:VIDEO_Decode_StartDecompress success耗时
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_oc_transnational_specialline","56714",""
+"passed","TestCase.test_checklist.Test_CheckList#test_marginss_crash","0",""
+"passed","TestCase.test_checklist.Test_CheckList#test_nc_oc_transnational_not_specialline","111328",""
+"passed","TestCase.test_checklist.Test_CheckList#test_kernelss_crash","0",""
+"passed","TestCase.test_checklist.Test_CheckList#test_gs_crash","0",""
+"skipped","TestCase.test_checklist.Test_CheckList#test_paas_cascade_ss","",""
+"failed","TestCase.test_checklist.Test_CheckList#test_rule_group","0",""
+"broken","TestCase.test_checklist.Test_CheckList#test_ice_group","0","
+
+        :return:
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_oc_not_cascade","109264",""
+"skipped","TestCase.test_checklist.Test_CheckList#test_sharescreen_transnational_use_specialline","","
+        屏幕共享跨国专线
+        "
+"passed","TestCase.test_checklist.Test_CheckList#test_restartAllServices","341547",""
+"skipped","TestCase.test_checklist.Test_CheckList#test_paas_single_ss","",""
+"passed","TestCase.test_checklist.Test_CheckList#test_nc_transnational_not_specialline","56569",""

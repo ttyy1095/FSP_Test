@@ -4,7 +4,6 @@ import json
 import os
 import sys
 
-
 import requests
 
 from requests_toolbelt import MultipartEncoder
@@ -14,10 +13,8 @@ sys.setdefaultencoding('utf-8')
 
 
 class zentao(object):
-    def __init__(self, zentao_url, account, password, productName,
-                 projectName):
+    def __init__(self, zentao_url, account, password, productName, projectName):
         """
-
         :param zentao_url: 禅道地址，如：http://192.168.5.68/zentao/
         :param account: 禅道用户名
         :param password: 禅道密码
@@ -26,21 +23,17 @@ class zentao(object):
         """
         self.session = requests.session()
         self.zentao_url = zentao_url
-        self.login(account, password)
-        self.productID = self.getProductID(productName)
-        self.projectID = self.getProjectID(projectName)
+        self._login(account, password)
+        self.productID = self._getProductID(productName)
+        self.projectID = self._getProjectID(projectName)
+        print "当前产品ID：%s,当前项目ID：%s" % (self.productID, self.projectID)
 
-        self.modules = self._getAllModule(self.productID)
-        self.builds = self._getAllBuilds(self.projectID, self.productID)
+        self.modules = self._getAllModule()
+        self.builds = self._getAllBuilds()
 
-    def login(self, account, password):
+    def _login(self, account, password):
         login_url = self.zentao_url + "user-login.json"
-        data = {
-            "account": account,
-            "password": hashlib.md5(password).hexdigest(),
-            "referer": self.zentao_url + "/zentao/my/",
-            "keepLogin[]": "on"
-        }
+        data = {"account": account, "password": hashlib.md5(password).hexdigest(), "referer": self.zentao_url + "my/", "keepLogin[]": "on"}
 
         response = self.session.post(login_url, data)
         if response.status_code != 200:
@@ -52,11 +45,11 @@ class zentao(object):
                 reason = result["reason"]
                 raise Exception("login failed by reason: %s" % str(reason))
 
-    def getProductID(self, productName):
+    def _getProductID(self, productName):
         products = self._getAllProducts()
         return products[productName]
 
-    def getProjectID(self, projectName):
+    def _getProjectID(self, projectName):
         projects = self._getProjects(self.productID)
         return projects[projectName]
 
@@ -65,8 +58,7 @@ class zentao(object):
         products_url = self.zentao_url + "product-all-0--all.json"
         response = self.session.get(products_url)
         if response.status_code == 200:
-            products_info = json.loads(json.loads(
-                response.text)["data"])["products"]
+            products_info = json.loads(json.loads(response.text)["data"])["products"]
             for key, value in products_info.items():
                 products[str(value).strip()] = str(key).strip()
             return products
@@ -85,67 +77,73 @@ class zentao(object):
         else:
             raise Exception("status code is not 200")
 
-    def _getAllModule(self, productID):
+    def _getAllModule(self):
         modules = {}
-        module_url = self.zentao_url + \
-            "tree-ajaxGetOptionMenu-%s-bug-0-0-json--true.json" % productID
+        module_url = self.zentao_url + "tree-ajaxGetOptionMenu-%s-bug-0-0-json--true.json" % self.productID
         response = self.session.get(module_url)
         if response.status_code == 200:
             modules_info = json.loads(response.text)
-            print response.text
             for key, value in modules_info.items():
                 modules[str(value).strip()] = str(key).strip()
             return modules
         else:
             raise Exception("status code is not 200")
+    def get_build_info(self,build_version):
+        builds_url = self.zentao_url + "project-build-%s.json" % (self.projectID)
+        response = self.session.get(builds_url)
+        resp =  response.text
+        builds = json.loads(json.loads(resp)["data"])["builds"]
+        for build in builds:
+            if build["name"] == build_version:
+                return build["filePath"]
+        return ""
 
-    def _getAllBuilds(self, projectID, productID):
+    def _getAllBuilds(self):
         builds = {}
-        builds_url = self.zentao_url + \
-            "build-ajaxGetProjectBuilds-%s-%s-openedBuild-0-0-0-true.json" % (projectID, productID)
+        builds_url = self.zentao_url + "build-ajaxGetProjectBuilds-%s-%s-openedBuild-0-0-0-true.json" % (self.projectID, self.productID)
         response = self.session.get(builds_url)
 
         if response.status_code == 200:
             builds_info = json.loads(response.text)
+
             for key, value in builds_info.items():
                 builds[str(value).strip()] = str(key).strip()
             return builds
         else:
             raise Exception("status code is not 200")
 
-    def _getTeamMembers(self, productID):
-        member_url = self.zentao_url + \
-            "bug-ajaxLoadProjectTeamMembers-%s-.html" % productID
+    def _getTeamMembers(self):
+        member_url = self.zentao_url + "bug-ajaxLoadProjectTeamMembers-%s-.html" % self.productID
+        self.session.get(member_url)
 
     def insertImg(self, filepath):
 
-        return u'<img src="%s" alt="" />' % (self.upload_img(filepath))
+        return u'<img src="%s" alt="" />' % (self._upload_img(filepath))
 
-    def upload_img(self, filepath):
+    def _upload_img(self, filepath):
         url1 = self.zentao_url + "file-ajaxUpload-5a26aca290b59.html?dir=image"
         file = os.path.basename(filepath)
-        fields = {
-            "localUrl": (None, file),
-            "imgFile": (file, open(filepath, "rb"), "image/png")
-        }
+        fields = {"localUrl": (None, file), "imgFile": (file, open(filepath, "rb"), "image/png")}
         m = MultipartEncoder(fields=fields)
         try:
-            r1 = self.session.post(
-                url1, data=m, headers={'Content-Type': m.content_type})
+            r1 = self.session.post(url1, data=m, headers={'Content-Type': m.content_type})
             jpg_url = r1.json()["url"]
             return jpg_url
         except Exception as msg:
             print("上传失败：%s" % str(msg))
             return ""
 
-    def createBug(self,
-                  moduleName,
-                  openedBuild,
-                  assignedTo,
-                  bugtitle,
-                  severity,
-                  steps,
-                  attachments=[]):
+    def _getProjectBug(self):
+        bugs = []
+        projectbug_url = self.zentao_url + "project-bug-%s.json" % self.projectID
+        response = self.session.get(projectbug_url)
+        if response.status_code == 200:
+            bugs_info = json.loads(json.loads(response.text)["data"])["bugs"]
+            for bug_info in bugs_info:
+                bugs.append(bug_info["title"])
+            return bugs
+
+    def createBug(self, moduleName, openedBuild, assignedTo, bugtitle, severity, steps, attachments=[]):
         """
 
         :param moduleName: 所属模块
@@ -161,8 +159,7 @@ class zentao(object):
         moduleID = self.modules[moduleName]
         openedBuildID = self.builds[openedBuild]
 
-        report_url = self.zentao_url + "bug-create-%s-0-moduleID=0.json" % (
-            self.productID)
+        report_url = self.zentao_url + "bug-create-%s-0-moduleID=0.json" % (self.productID)
 
         if len(steps) < 3:
             raise Exception("steps error:len(step)<3")
@@ -212,8 +209,7 @@ class zentao(object):
         m = MultipartEncoder(fields=fields)
 
         try:
-            response = self.session.post(
-                report_url, data=m, headers={'Content-Type': m.content_type})
+            response = self.session.post(report_url, data=m, headers={'Content-Type': m.content_type})
             print response.content
         except Exception as msg:
             print "提交BUG失败：%s" % str(msg)
@@ -221,13 +217,11 @@ class zentao(object):
 
 if __name__ == '__main__':
 
-    # zt = zentao("http://192.168.5.68/zentao/")
-    zt = zentao("http://127.0.0.1/zentao/", "huangjie", "Hj1qaz2w", "测试产品",
-                "测试项目")
+    # zt = zentao("http://127.0.0.1/zentao/", "huangjie", "Hj1qaz2w", "测试产品", "测试项目")
 
-    steps = ["第一步", "第二部", "第三部", "结果嗝屁了" + zt.insertImg("d:\\1.png"), "期望成功啊"]
-    attachments = [
-        "d:\\1.png", "d:\\2.png", u"d:\\待删除.txt", "d:\\1.zip", "d:\\1.log"
-    ]
-    # zt.createBug("基础服务平台","/基础服务平台/服务子系统","基础服务平台服务子系统2.6","2.6.5.0","huangjie","测试bugtitle",3,*steps)
-    zt.createBug("/登录", "主干", "huangjie", "测试bugtitlej", 3, steps, attachments)
+    # steps = ["第一步", "第二部", "第三部", "结果嗝屁了" + zt.insertImg("d:\\1.png"), "期望成功啊"]
+    # attachments = ["d:\\1.png", "d:\\2.png", u"d:\\待删除.txt", "d:\\1.zip", "d:\\1.log"]
+    # zt.createBug("/登录", "主干", "huangjie", "测试bugtitlej", 3, steps, attachments)
+    # bugs = zt._getProjectBug()
+    # print bugs
+    pass

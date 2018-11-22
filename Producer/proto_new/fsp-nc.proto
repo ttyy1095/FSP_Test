@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package com.fsmeeting.fsp.proto.nc;
+
+
+option cc_enable_arenas = true;
+option java_package = "com.fsmeeting.fsp.proto.nc";
+option java_multiple_files = true;
+option objc_class_prefix = "GPB";
+
+import "fsp-common.proto";
+
+
+enum ProtoDictionary{
+    Enum2UnknownInterface = 0;
+
+    //======================cp调用
+    Enum2SelectStreamServer = 5000;
+    Enum2SelectStreamServerRsp = 5001;
+    Enum2NotifyStreamSendingStart = 5002;
+    Enum2NotifyStreamSendingStartRsp = 5003;
+    Enum2NotifyStreamSendingStop = 5004;
+    Enum2NotifyStreamSendingStopRsp = 5005;
+    Enum2NotifyPublishStream = 5006;
+    Enum2NotifyPublishStreamRsp = 5007;
+
+    // 补充的枚举值
+    Enum2StreamSendingStart = 5008;
+    Enum2StreamSendingStartRsp = 5009;
+}
+
+
+
+
+
+
+//====================cp调用
+message SelectStreamServer{
+    string stream_id = 1;
+    repeated com.fsmeeting.fsp.proto.common.StreamServer streamServer = 2;
+}
+
+message SelectStreamServerRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyStreamSendingStart{
+    string stream_id = 1;
+    string  recv_client_id = 2;
+}
+
+
+message NotifyStreamSendingStartRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyStreamSendingStop{
+    string stream_id = 1;
+    string recv_client_id = 2;
+}
+
+message NotifyStreamSendingStopRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+message NotifyPublishStream{
+    string stream_id = 1;
+    string stream_publish_token = 2;
+    string group_id = 3;
+    string user_id = 4;
+    string media_id = 5;
+    com.fsmeeting.fsp.proto.common.MediaType media_type = 6;
+}
+
+
+message NotifyPublishStreamRsp{
+    com.fsmeeting.fsp.proto.common.CommonResponse response = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

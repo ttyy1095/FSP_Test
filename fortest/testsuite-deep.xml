@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite id="324333" name="屏幕共享" >
+<node_order><![CDATA[4]]></node_order>
+<details><![CDATA[]]></details> 
+<testsuite id="324334" name="非级联" >
+<node_order><![CDATA[1]]></node_order>
+<details><![CDATA[]]></details> 
+<testsuite id="324335" name="文档模式" >
+<node_order><![CDATA[1]]></node_order>
+<details><![CDATA[]]></details> 
+
+<testcase internalid="324336" name="弱网用户小于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[332]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户小于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>5.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看清楚画面，但会有卡顿<br/>4.非弱网用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324339" name="弱网用户小于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[333]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户小于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>5.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看到文档，ppt动画有卡顿<br/>4.非弱网用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324342" name="弱网用户大于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[334]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>6.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3.用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324345" name="弱网用户大于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[335]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>7.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324348" name="弱网用户大于阈值，客户端降档后，仍大于阈值，屏幕共享测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[336]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.主讲屏幕共享--&gt;文档/视频模式<br/>2.使用工具，使观看用户中弱网用户大于阈值<br/>3.打开文档/播放视频<br/>4.当客户端降档后，仍大于阈值时，服务器是否会继续通知客户端降档<br/>5.弱网和非弱网用户观看端端画面是否可看清楚，无明显卡顿]]></actions>
+	<expectedresults><![CDATA[1、降档后仍大于阈值，服务器会继续发送降档信息给客户端<br/>2、弱网和非弱网用户观看端端画面可看清楚，无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324351" name="服务器通知间隔时间内，弱网用户由小于阈值变为大于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[337]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>通知时间间隔目前为15秒]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.主讲屏幕共享--&gt;文档/视频模式<br />
+	2.使用工具，使观看用户中弱网用户小于阈值<br />
+	3.打开文档/播放视频<br />
+	4.等待客户端接收到服务器通知消息，提升码率<br />
+	5.在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	6.查看服务器通知客户端信息是否正确<br />
+	7.客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面</p>
+<p>
+	3、弱网观看端在弱网时有卡顿，后面又恢复流畅</p>
+<p>
+	&nbsp;</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324354" name="服务器通知间隔时间内，弱网用户由大于阈值变为小于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[338]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1、主讲屏幕共享--&gt;文档/视频模式<br />
+	2、使用工具，使观看用户中弱网用户小于阈值<br />
+	3、等待客户端接收到服务器通知消息，提升码率<br />
+	4、在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	5、查看服务器通知客户端信息是否正确<br />
+	6、客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无升档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面，略有卡顿</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324357" name="屏幕共享后，新登录用户接收到共享画面的时间测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[339]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式<br/>2、观看端接收到共享画面之后，新登录观看用户<br/>3、查看新登录的观看用户接收到共享画面的时间]]></actions>
+	<expectedresults><![CDATA[1、新登录的观看用户应在5秒左右接收到屏幕共享画面，画面清晰无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324360" name="屏幕共享时，会议总人数变化时，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[340]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、分别查看在线的观看用户退出和新观看用户登录时，服务器是否会通知客户端，以及通知信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、会议总人数发生变化时，服务器会通知客户端且信息正确]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324363" name="主讲端上行网络差测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[341]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>观看端的网络处于优]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2.使用工具使主讲端上行网络变差<br/>3.查看日志，主讲端是否会忽视服务器升档通知，自行降档<br/>]]></actions>
+	<expectedresults><![CDATA[1、当主讲端发送缓冲区数据大于阈值时，客户端会忽略服务器通知，而降低档位<br/>2、观看端画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324369" name="服务器资源使用情况测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[343]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、查看服务器资源使用是否正常]]></actions>
+	<expectedresults><![CDATA[1、服务器资源使用正常（CPU、内存）]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324372" name="多个会议室同事进行屏幕共享，服务器统计的人数">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[344]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.打开多个会议室，每个会议都开启屏幕共享<br/>2.主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>3.查看服务器统计人数是否正确]]></actions>
+	<expectedresults><![CDATA[1.服务器正确统计每个会议室观看端的人数]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324375" name="平均延时大于阈值，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[345]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、使用网络模拟工具，使观看用户中弱网用户小于阈值，非弱网观看用户的平均延时大于阈值<br/>3、查看服务器通知客户端信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、服务器发送保持码率不变的通知给主讲端<br/>2、主讲端保持档位不变<br/>3、非弱网用户观看端的屏幕共享画面清晰、有明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324615" name="无观看端，主讲屏幕共享，服务器返回通知">
+	<node_order><![CDATA[1111034409]]></node_order>
+	<externalid><![CDATA[396]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[<p>
+	主讲端（新）---服务器（新），无任何观看端</p>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.屏幕共享--&gt;文档模式--&gt;播放视频</p>
+<p>
+	2.查看服务器返回消息</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1.服务器统计人数为0</p>
+<p>
+	2.返回码率保持不变的通知</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite><testsuite id="324378" name="视频模式" >
+<node_order><![CDATA[2]]></node_order>
+<details><![CDATA[]]></details> 
+
+<testcase internalid="324619" name="无观看端，主讲屏幕共享，服务器返回通知">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[397]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[<p>
+	主讲端（新）---服务器（新），无任何观看端</p>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.屏幕共享--&gt;视频模式--&gt;播放视频</p>
+<p>
+	2.查看服务器返回消息</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1.服务器统计人数为0</p>
+<p>
+	2.返回码率保持不变的通知</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324379" name="弱网用户小于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1]]></node_order>
+	<externalid><![CDATA[346]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户小于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>5.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看清楚画面，但会有卡顿<br/>4.非弱网用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324382" name="弱网用户小于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[2]]></node_order>
+	<externalid><![CDATA[347]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户小于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>5.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看到文档，ppt动画有卡顿<br/>4.非弱网用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324385" name="弱网用户大于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[3]]></node_order>
+	<externalid><![CDATA[348]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户大于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>6.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3.用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324388" name="弱网用户大于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[4]]></node_order>
+	<externalid><![CDATA[349]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户大于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>7.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324391" name="弱网用户大于阈值，客户端降档后，仍大于阈值，屏幕共享测试">
+	<node_order><![CDATA[5]]></node_order>
+	<externalid><![CDATA[350]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.主讲屏幕共享--&gt;文档/视频模式<br/>2.使用工具，使观看用户中弱网用户大于阈值<br/>3.打开文档/播放视频<br/>4.当客户端降档后，仍大于阈值时，服务器是否会继续通知客户端降档<br/>5.弱网和非弱网用户观看端端画面是否可看清楚，无明显卡顿]]></actions>
+	<expectedresults><![CDATA[1、降档后仍大于阈值，服务器会继续发送降档信息给客户端<br/>2、弱网和非弱网用户观看端端画面可看清楚，无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324394" name="服务器通知间隔时间内，弱网用户由小于阈值变为大于阈值">
+	<node_order><![CDATA[6]]></node_order>
+	<externalid><![CDATA[351]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>通知时间间隔目前为15秒]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.主讲屏幕共享--&gt;文档/视频模式<br />
+	2.使用工具，使观看用户中弱网用户小于阈值<br />
+	3.打开文档/播放视频<br />
+	4.等待客户端接收到服务器通知消息，提升码率<br />
+	5.在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	6.查看服务器通知客户端信息是否正确<br />
+	7.客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面</p>
+<p>
+	3、弱网观看端在弱网时有卡顿，后面又恢复流畅</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324397" name="服务器通知间隔时间内，弱网用户由大于阈值变为小于阈值">
+	<node_order><![CDATA[7]]></node_order>
+	<externalid><![CDATA[352]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1、主讲屏幕共享--&gt;文档/视频模式<br />
+	2、使用工具，使观看用户中弱网用户小于阈值<br />
+	3、等待客户端接收到服务器通知消息，提升码率<br />
+	4、在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	5、查看服务器通知客户端信息是否正确<br />
+	6、客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面，略有卡顿</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324400" name="屏幕共享后，新登录用户接收到共享画面的时间测试">
+	<node_order><![CDATA[8]]></node_order>
+	<externalid><![CDATA[353]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式<br/>2、观看端接收到共享画面之后，新登录观看用户<br/>3、查看新登录的观看用户接收到共享画面的时间]]></actions>
+	<expectedresults><![CDATA[1、新登录的观看用户应在5秒左右接收到屏幕共享画面，画面清晰无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324403" name="屏幕共享时，会议总人数变化时，服务器通知测试">
+	<node_order><![CDATA[9]]></node_order>
+	<externalid><![CDATA[354]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、分别查看在线的观看用户退出和新观看用户登录时，服务器是否会通知客户端，以及通知信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、会议总人数发生变化时，服务器会通知客户端且信息正确]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324406" name="主讲端上行网络差测试">
+	<node_order><![CDATA[10]]></node_order>
+	<externalid><![CDATA[355]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>观看端的网络处于优]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2.使用工具使主讲端上行网络变差<br/>3.查看日志，主讲端是否会忽视服务器升档通知，自行降档<br/>]]></actions>
+	<expectedresults><![CDATA[1、当主讲端发送缓冲区数据大于阈值时，客户端会忽略服务器通知，而降低档位<br/>2、观看端画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324412" name="服务器资源使用情况测试">
+	<node_order><![CDATA[12]]></node_order>
+	<externalid><![CDATA[357]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、查看服务器资源使用是否正常]]></actions>
+	<expectedresults><![CDATA[1、服务器资源使用正常（CPU、内存）]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324415" name="多个会议室同事进行屏幕共享，服务器统计的人数">
+	<node_order><![CDATA[13]]></node_order>
+	<externalid><![CDATA[358]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.打开多个会议室，每个会议都开启屏幕共享<br/>2.主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>3.查看服务器统计人数是否正确]]></actions>
+	<expectedresults><![CDATA[1.服务器正确统计每个会议室观看端的人数]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324418" name="平均延时大于阈值，服务器通知测试">
+	<node_order><![CDATA[14]]></node_order>
+	<externalid><![CDATA[359]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、使用网络模拟工具，使观看用户中弱网用户小于阈值，非弱网观看用户的平均延时大于阈值<br/>3、查看服务器通知客户端信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、服务器发送保持码率不变的通知给主讲端<br/>2、主讲端保持档位不变<br/>3、非弱网用户观看端的屏幕共享画面清晰、有明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite></testsuite><testsuite id="324421" name="级联" >
+<node_order><![CDATA[2]]></node_order>
+<details><![CDATA[]]></details> 
+<testsuite id="324422" name="文档模式" >
+<node_order><![CDATA[1]]></node_order>
+<details><![CDATA[]]></details> 
+
+<testcase internalid="324423" name="弱网用户小于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[360]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户小于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>5.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看清楚画面，但会有卡顿<br/>4.非弱网用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324426" name="弱网用户小于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[361]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户小于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>5.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看到文档，ppt动画有卡顿<br/>4.非弱网用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324429" name="弱网用户大于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[362]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>6.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3.用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324432" name="弱网用户大于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[363]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>7.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324435" name="弱网用户大于阈值，客户端降档后，仍大于阈值，屏幕共享测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[364]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.主讲屏幕共享--&gt;文档/视频模式<br/>2.使用工具，使观看用户中弱网用户大于阈值<br/>3.打开文档/播放视频<br/>4.当客户端降档后，仍大于阈值时，服务器是否会继续通知客户端降档<br/>5.弱网和非弱网用户观看端端画面是否可看清楚，无明显卡顿]]></actions>
+	<expectedresults><![CDATA[1、降档后仍大于阈值，服务器会继续发送降档信息给客户端<br/>2、弱网和非弱网用户观看端端画面可看清楚，无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324438" name="服务器通知间隔时间内，弱网用户由小于阈值变为大于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[365]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>通知时间间隔目前为15秒]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.主讲屏幕共享--&gt;文档/视频模式<br />
+	2.使用工具，使观看用户中弱网用户小于阈值<br />
+	3.打开文档/播放视频<br />
+	4.等待客户端接收到服务器通知消息，提升码率<br />
+	5.在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	6.查看服务器通知客户端信息是否正确<br />
+	7.客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面</p>
+<p>
+	3、弱网观看端在弱网时有卡顿，后面又恢复流畅</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324441" name="服务器通知间隔时间内，弱网用户由大于阈值变为小于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[366]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1、主讲屏幕共享--&gt;文档/视频模式<br />
+	2、使用工具，使观看用户中弱网用户小于阈值<br />
+	3、等待客户端接收到服务器通知消息，提升码率<br />
+	4、在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	5、查看服务器通知客户端信息是否正确<br />
+	6、客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面，略有卡顿</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324444" name="屏幕共享后，新登录用户接收到共享画面的时间测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[367]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式<br/>2、观看端接收到共享画面之后，新登录观看用户<br/>3、查看新登录的观看用户接收到共享画面的时间]]></actions>
+	<expectedresults><![CDATA[1、新登录的观看用户应在5秒左右接收到屏幕共享画面，画面清晰无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324447" name="屏幕共享时，会议总人数变化时，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[368]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、分别查看在线的观看用户退出和新观看用户登录时，服务器是否会通知客户端，以及通知信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、会议总人数发生变化时，服务器会通知客户端且信息正确]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324450" name="主讲端上行网络差测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[369]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>观看端的网络处于优]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2.使用工具使主讲端上行网络变差<br/>3.查看日志，主讲端是否会忽视服务器升档通知，自行降档<br/>]]></actions>
+	<expectedresults><![CDATA[1、当主讲端发送缓冲区数据大于阈值时，客户端会忽略服务器通知，而降低档位<br/>2、观看端画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324456" name="服务器资源使用情况测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[371]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、查看服务器资源使用是否正常]]></actions>
+	<expectedresults><![CDATA[1、服务器资源使用正常（CPU、内存）]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324459" name="多个会议室同事进行屏幕共享，服务器统计的人数">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[372]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.打开多个会议室，每个会议都开启屏幕共享<br/>2.主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>3.查看服务器统计人数是否正确]]></actions>
+	<expectedresults><![CDATA[1.服务器正确统计每个会议室观看端的人数]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324462" name="平均延时大于阈值，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[373]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、使用网络模拟工具，使观看用户中弱网用户小于阈值，非弱网观看用户的平均延时大于阈值<br/>3、查看服务器通知客户端信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、服务器发送保持码率不变的通知给主讲端<br/>2、主讲端保持档位不变<br/>3、非弱网用户观看端的屏幕共享画面清晰、有明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite><testsuite id="324465" name="视频模式" >
+<node_order><![CDATA[2]]></node_order>
+<details><![CDATA[]]></details> 
+
+<testcase internalid="324466" name="弱网用户小于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[374]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户小于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>5.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看清楚画面，但会有卡顿<br/>4.非弱网用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324469" name="弱网用户小于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[375]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户小于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>5.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看到文档，ppt动画有卡顿<br/>4.非弱网用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324472" name="弱网用户大于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[376]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户大于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>6.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3.用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324475" name="弱网用户大于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[377]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;视频模式<br/>2.使用工具使弱网用户大于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>7.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324478" name="弱网用户大于阈值，客户端降档后，仍大于阈值，屏幕共享测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[378]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.主讲屏幕共享--&gt;文档/视频模式<br/>2.使用工具，使观看用户中弱网用户大于阈值<br/>3.打开文档/播放视频<br/>4.当客户端降档后，仍大于阈值时，服务器是否会继续通知客户端降档<br/>5.弱网和非弱网用户观看端端画面是否可看清楚，无明显卡顿]]></actions>
+	<expectedresults><![CDATA[1、降档后仍大于阈值，服务器会继续发送降档信息给客户端<br/>2、弱网和非弱网用户观看端端画面可看清楚，无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324481" name="服务器通知间隔时间内，弱网用户由小于阈值变为大于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[379]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>通知时间间隔目前为15秒]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1.主讲屏幕共享--&gt;文档/视频模式<br />
+	2.使用工具，使观看用户中弱网用户小于阈值<br />
+	3.打开文档/播放视频<br />
+	4.等待客户端接收到服务器通知消息，提升码率<br />
+	5.在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	6.查看服务器通知客户端信息是否正确<br />
+	7.客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面</p>
+<p>
+	3、弱网观看端在弱网时有卡顿，后面又恢复流畅</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324484" name="服务器通知间隔时间内，弱网用户由大于阈值变为小于阈值">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[380]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	1、主讲屏幕共享--&gt;文档/视频模式<br />
+	2、使用工具，使观看用户中弱网用户小于阈值<br />
+	3、等待客户端接收到服务器通知消息，提升码率<br />
+	4、在下一次服务器通知时间间隔内，调整弱网用户比例大于阈值后，再调到小于阈值，并维持<br />
+	5、查看服务器通知客户端信息是否正确<br />
+	6、客户端是否继续提升码率，观看端画质是否有提高</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	1、服务器无视15s内的网络变化，无降档通知<br />
+	2、弱网和非弱网用户观看端屏幕共享可以看清楚画面，略有卡顿</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324487" name="屏幕共享后，新登录用户接收到共享画面的时间测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[381]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式<br/>2、观看端接收到共享画面之后，新登录观看用户<br/>3、查看新登录的观看用户接收到共享画面的时间]]></actions>
+	<expectedresults><![CDATA[1、新登录的观看用户应在5秒左右接收到屏幕共享画面，画面清晰无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324490" name="屏幕共享时，会议总人数变化时，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[382]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、分别查看在线的观看用户退出和新观看用户登录时，服务器是否会通知客户端，以及通知信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、会议总人数发生变化时，服务器会通知客户端且信息正确]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324493" name="主讲端上行网络差测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[383]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）<br/>观看端的网络处于优]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2.使用工具使主讲端上行网络变差<br/>3.查看日志，主讲端是否会忽视服务器升档通知，自行降档<br/>]]></actions>
+	<expectedresults><![CDATA[1、当主讲端发送缓冲区数据大于阈值时，客户端会忽略服务器通知，而降低档位<br/>2、观看端画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324499" name="服务器资源使用情况测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[385]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、查看服务器资源使用是否正常]]></actions>
+	<expectedresults><![CDATA[1、服务器资源使用正常（CPU、内存）]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324502" name="多个会议室同事进行屏幕共享，服务器统计的人数">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[386]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.打开多个会议室，每个会议都开启屏幕共享<br/>2.主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>3.查看服务器统计人数是否正确]]></actions>
+	<expectedresults><![CDATA[1.服务器正确统计每个会议室观看端的人数]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324505" name="平均延时大于阈值，服务器通知测试">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[387]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1、主讲屏幕共享--&gt;文档/视频模式--&gt;播放视频<br/>2、使用网络模拟工具，使观看用户中弱网用户小于阈值，非弱网观看用户的平均延时大于阈值<br/>3、查看服务器通知客户端信息是否正确]]></actions>
+	<expectedresults><![CDATA[1、服务器发送保持码率不变的通知给主讲端<br/>2、主讲端保持档位不变<br/>3、非弱网用户观看端的屏幕共享画面清晰、有明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite></testsuite><testsuite id="324508" name="兼容性测试" >
+<node_order><![CDATA[3]]></node_order>
+<details><![CDATA[]]></details> 
+
+<testcase internalid="324509" name="弱网用户小于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[388]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档/视频模式<br/>2.使用工具使弱网用户小于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>5.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看清楚画面，但会有卡顿<br/>4.非弱网用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324512" name="弱网用户小于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[389]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户小于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>5.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送提升码率的通知，统计用户人数正确<br/>2.主讲端收到提升码率的通知，并升档<br/>3.弱网用户观看端屏幕共享可以看到文档，ppt动画有卡顿<br/>4.非弱网用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324515" name="弱网用户大于阈值，屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[390]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.播放视频<br/>4.查看服务器和客户端的日志<br/>6.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3.用户观看端的屏幕共享画面清晰、无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324518" name="弱网用户大于阈值，屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[391]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（新）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式<br/>2.使用工具使弱网用户大于阈值<br/>3.打开文档.doc或.ppt<br/>4.查看服务器和客户端的日志<br/>7.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.服务器发送降低码率的通知，统计用户人数正确<br/>2.主讲端收到降低码率的通知，并降档<br/>3用户观看端的屏幕共享可以清晰看到文档，ppt动画无明显卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324521" name="非弱网用户屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[392]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（旧）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档/视频模式--&gt;播放视频<br/>2.看观看端的视频画面质量]]></actions>
+	<expectedresults><![CDATA[1.观看端屏幕共享画面看得清楚，无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324524" name="非弱网用户屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[393]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（旧）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式--&gt;打开文档.doc或.ppt<br/>2.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.观看端屏幕共享画面看得清楚，无卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324527" name="弱网用户屏幕共享，播放视频">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[394]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（旧）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式--&gt;播放视频<br/>2.看观看端的视频质量]]></actions>
+	<expectedresults><![CDATA[1.观看端屏幕共享画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+
+<testcase internalid="324530" name="弱网用户屏幕共享，打开文档">
+	<node_order><![CDATA[1111034408]]></node_order>
+	<externalid><![CDATA[395]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[]]></summary>
+	<preconditions><![CDATA[主讲端（旧）、观看端（新/旧）、服务器（新）]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[3]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[1.屏幕共享-&gt;桌面共享-&gt;文档模式--&gt;打开文档.doc或.ppt<br/>2.看观看端的文档质量]]></actions>
+	<expectedresults><![CDATA[1.观看端屏幕共享画面看得清楚，略有卡顿]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testsuite></testsuite>

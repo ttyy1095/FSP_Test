@@ -1,0 +1,167 @@
+{
+  "uid" : "407c21fa86c1d55b",
+  "name" : "test_sharescreen_transnational_use_specialline",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_sharescreen_transnational_use_specialline",
+  "historyId" : "cd707b373729411e040ad5c65ffb081a",
+  "time" : { },
+  "description" : "\n        屏幕共享跨国专线\n        ",
+  "descriptionHtml" : "<pre><code>    屏幕共享跨国专线\n</code></pre>\n",
+  "status" : "skipped",
+  "statusMessage" : "Skipped: 尚未开发实现",
+  "statusTrace" : "('TestCase\\\\test_checklist.py', 654, u'Skipped: \\u5c1a\\u672a\\u5f00\\u53d1\\u5b9e\\u73b0')",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542873922418,
+      "stop" : 1542873922989,
+      "duration" : 571
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "description" : "\n        屏幕共享跨国专线\n        ",
+    "status" : "skipped",
+    "statusMessage" : "Skipped: 尚未开发实现",
+    "statusTrace" : "('TestCase\\\\test_checklist.py', 654, u'Skipped: \\u5c1a\\u672a\\u5f00\\u53d1\\u5b9e\\u73b0')",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "c51e36ffc7552bc5",
+      "name" : "log",
+      "source" : "c51e36ffc7552bc5.txt",
+      "type" : "text/plain",
+      "size" : 69
+    }, {
+      "uid" : "6b4bd7c2fac2bd1b",
+      "name" : "stdout",
+      "source" : "6b4bd7c2fac2bd1b.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "25f62cced1f6376d",
+      "name" : "stderr",
+      "source" : "25f62cced1f6376d.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542875113361,
+      "stop" : 1542875113366,
+      "duration" : 5
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1725:vnc_gs1 -> n-ss1 -> n-ss2 -> vnc_gs2"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.skip(reason='尚未开发实现')"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.skip(reason='尚未开发实现')"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "29072-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "7a5626ebc6ccd43d",
+      "status" : "skipped",
+      "statusDetails" : "Skipped: 尚未开发实现",
+      "time" : { }
+    }, {
+      "uid" : "e4c464edc89ca5de",
+      "status" : "skipped",
+      "statusDetails" : "Skipped: 尚未开发实现",
+      "time" : { }
+    } ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 4,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "2d79899b6275a06c",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure/#testresult/2d79899b6275a06c",
+        "status" : "skipped",
+        "statusDetails" : "Skipped: 尚未开发实现",
+        "time" : { }
+      }, {
+        "uid" : "10c780eaa955d711",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure/#testresult/10c780eaa955d711",
+        "status" : "skipped",
+        "statusDetails" : "Skipped: 尚未开发实现",
+        "time" : { }
+      }, {
+        "uid" : "ea8506442b323258",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure/#testresult/ea8506442b323258",
+        "status" : "skipped",
+        "statusDetails" : "Skipped: 尚未开发实现",
+        "time" : { }
+      } ]
+    },
+    "tags" : [ "@pytest.mark.skip(reason='尚未开发实现')" ]
+  },
+  "source" : "407c21fa86c1d55b.json",
+  "parameterValues" : [ ]
+}

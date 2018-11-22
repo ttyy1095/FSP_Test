@@ -1,0 +1,137 @@
+###########################################
+lizzietest -> gc_group_01 : Enum2CreateGroup
+(1, 1, 102, 10, 'lizzietest', 3000, '\n\x011\x1a\x06107894"\x0541312')
+{
+  "companyId": "41312",
+  "roomId": "107894",
+  "appId": "1"
+}
+###########################################
+gc3 -> lizzietest : Enum2CreateGroupRsp
+(1, 2, 102, 3, 'gc3', 3001, '\n\x15\x12\x13CreateGroup succeed\x12/\n&{0206ab99-c8d2-426b-aa14-42f3e23e5663}\x1a\x03131 \x02')
+{
+  "group": {
+    "groupCheckCode": "131",
+    "serverType": "EnumGroupServer",
+    "groupId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663}"
+  },
+  "response": {
+    "responseMsg": "CreateGroup succeed"
+  }
+}
+###########################################
+gc3 -> lizzietest : Enum2CreateGroupRsp
+(1, 2, 103, 3, 'gc3', 3001, '\n\x15\x12\x13CreateGroup succeed\x12/\n&{cfd998c8-aee8-426c-a89a-24cd51c726dc}\x1a\x03132 \x02')
+{
+  "group": {
+    "groupCheckCode": "132",
+    "serverType": "EnumGroupServer",
+    "groupId": "{cfd998c8-aee8-426c-a89a-24cd51c726dc}"
+  },
+  "response": {
+    "responseMsg": "CreateGroup succeed"
+  }
+}
+###########################################
+lizzietest -> gc_group_01 : Enum2GetGroupServers
+(1, 1, 104, 10, 'lizzietest', 3004, '\n&{0206ab99-c8d2-426b-aa14-42f3e23e5663}\x12\x0c192.168.6.65\x1a\x071431372"\x011*\x05413122\x06107894')
+{
+  "companyId": "41312",
+  "userId": "1431372",
+  "appId": "1",
+  "clientIp": "192.168.6.65",
+  "roomId": "107894",
+  "groupId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663}"
+}
+###########################################
+gc3 -> rule_group_01 : Enum2GetMediaServer
+(1, 1, 218, 3, 'gc3', 9000, '\n\x0c192.168.6.65\x12\x02gs\x1a&{0206ab99-c8d2-426b-aa14-42f3e23e5663}"\x071431372*\x0112\x0541312:\x06107894@\x02')
+{
+  "companyId": "41312",
+  "serverType": "gs",
+  "userId": "1431372",
+  "mediaType": 2,
+  "appId": "1",
+  "clientIp": "192.168.6.65",
+  "roomId": "107894",
+  "groupId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663}"
+}
+###########################################
+rule2 -> gc3 : Enum2GetMediaServerRsp
+(1, 2, 218, 5, 'rule2', 9001, '\n\x00\x12\x03gs2\x1a0TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;')
+{
+  "mediaServers": [
+    "gs2"
+  ],
+  "mediaServerAddrs": [
+    "TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;"
+  ],
+  "response": {}
+}
+###########################################
+gc3 -> lizzietest : Enum2GetGroupServersRsp
+(1, 2, 104, 3, 'gc3', 3005, '\n\x10\x12\x0eUnknown result\x12=\n\x03gs2\x12\x010\x1a\x010"0TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;')
+{
+  "response": {
+    "responseMsg": "Unknown result"
+  },
+  "groupServers": [
+    {
+      "port": "0",
+      "connectStr": "TCP:192.168.7.105:50003;UDP:192.168.7.105:50003;",
+      "id": "gs2",
+      "addr": "0"
+    }
+  ]
+}
+###########################################
+lizzietest -> vncgs2 : Enum2AppPresetBit
+(1, 1, 106, 10, 'lizzietest', 4010, '\n\x06107894\x12\x071431372')
+
+###########################################
+vncgs2 -> lizzietest : Enum2AppPresetBit
+(1, 2, 106, 6, 'vncgs2', 4010, '\x12\x1eset vnc service preset success')
+
+###########################################
+gs2 -> gc_group_01 : Enum2JoinGroup
+(1, 1, 53, 3, 'gs2', 3006, '\n&{0206ab99-c8d2-426b-aa14-42f3e23e5663}\x12\x071431372\x1a\x03131".{0206ab99-c8d2-426b-aa14-42f3e23e5663};1431372*\x03gs22,\n&{11cbbddd-ae3d-077a-0014-0e4be292d3dc}\x12\x02DF')
+{
+  "commonInvokeInfo": {
+    "traceId": "{11cbbddd-ae3d-077a-0014-0e4be292d3dc}",
+    "invokeOrder": "DF"
+  },
+  "groupToken": "131",
+  "userId": "1431372",
+  "clientId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663};1431372",
+  "groupId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663}",
+  "serviceInstanceId": "gs2"
+}
+###########################################
+gs2 -> sc_group_01 : Enum2ClientConnected
+(1, 1, 54, 3, 'gs2', 6004, '\n.{0206ab99-c8d2-426b-aa14-42f3e23e5663};1431372\x12\x03gs2\x1a\x011"\x04isNC*-\n&{11cbbddd-ae3d-077a-0014-0e4be292d3dc}\x12\x03DFD')
+{
+  "clientName": "isNC",
+  "commonInvokeInfo": {
+    "traceId": "{11cbbddd-ae3d-077a-0014-0e4be292d3dc}",
+    "invokeOrder": "DFD"
+  },
+  "serviceInstanceId": "gs2",
+  "clientId": "{0206ab99-c8d2-426b-aa14-42f3e23e5663};1431372",
+  "appId": "1"
+}
+###########################################
+gc3 -> gs2 : Enum2JoinGroupRsp
+(1, 2, 53, 3, 'gc3', 3007, '\n\x13\x12\x11JoinGroup succeed\x12\x06107894\x1a\x0541312')
+{
+  "roomId": "107894",
+  "response": {
+    "responseMsg": "JoinGroup succeed"
+  },
+  "companyId": "41312"
+}
+###########################################
+sc3 -> gs2 : Enum2ClientConnectedRsp
+(1, 2, 54, 3, 'sc3', 6005, '\n\x00')
+{
+  "response": {}
+}

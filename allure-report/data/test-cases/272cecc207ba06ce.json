@@ -1,0 +1,138 @@
+{
+  "uid" : "272cecc207ba06ce",
+  "name" : "test_nc_transnational_specialline",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_nc_transnational_specialline",
+  "historyId" : "0ff08e146b5e4ee406d299ef55b21767",
+  "time" : {
+    "start" : 1542803554648,
+    "stop" : 1542803611572,
+    "duration" : 56924
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert False",
+  "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x05175610>\nsftp = <paramiko.sftp_client.SFTPClient object at 0x05043050>\n\n    @allure.story('Platform-fsp_sss-1714:NC跨国走专线收发音视频，共享媒体文件，共享桌面声音')\n    def test_nc_transnational_specialline(self, sftp):\n    \n        base.use_specialline(True)\n        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')\n        with allure.step('验证音视频功能'):\n            send_flag, recv_flag, result = check_oc_av()\n>           assert result\nE           assert False\n\nTestCase\\test_checklist.py:563: AssertionError",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "sftp",
+    "time" : {
+      "start" : 1542802855419,
+      "stop" : 1542802856290,
+      "duration" : 871
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert False",
+    "statusTrace" : "self = <TestCase.test_checklist.Test_CheckList object at 0x05175610>\nsftp = <paramiko.sftp_client.SFTPClient object at 0x05043050>\n\n    @allure.story('Platform-fsp_sss-1714:NC跨国走专线收发音视频，共享媒体文件，共享桌面声音')\n    def test_nc_transnational_specialline(self, sftp):\n    \n        base.use_specialline(True)\n        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')\n        with allure.step('验证音视频功能'):\n            send_flag, recv_flag, result = check_oc_av()\n>           assert result\nE           assert False\n\nTestCase\\test_checklist.py:563: AssertionError",
+    "steps" : [ {
+      "name" : "验证音视频功能",
+      "time" : {
+        "start" : 1542803556656,
+        "stop" : 1542803611572,
+        "duration" : 54916
+      },
+      "status" : "failed",
+      "statusMessage" : "AssertionError: assert False\n",
+      "statusTrace" : "  File \"D:\\pyprojects\\test_fsp\\TestCase\\test_checklist.py\", line 563, in test_nc_transnational_specialline\n    assert result\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : true,
+      "shouldDisplayMessage" : true,
+      "attachmentsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "73fad6cccf134a32",
+      "name" : "log",
+      "source" : "73fad6cccf134a32.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "165ebe9781db39e6",
+      "name" : "stdout",
+      "source" : "165ebe9781db39e6.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "58db0d485d824053",
+      "name" : "stderr",
+      "source" : "58db0d485d824053.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "hasContent" : true,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ {
+    "name" : "sftp::0",
+    "time" : {
+      "start" : 1542803957050,
+      "stop" : 1542803957052,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1714:NC跨国走专线收发音视频，共享媒体文件，共享桌面声音"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "28496-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "272cecc207ba06ce.json",
+  "parameterValues" : [ ]
+}

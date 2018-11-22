@@ -1,0 +1,143 @@
+{
+  "uid" : "2be940c1b9d96d54",
+  "name" : "test_all_ma_received",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_all_ma_received",
+  "historyId" : "62fe1ac7de5c6dcf200a61223da5d547",
+  "time" : {
+    "start" : 1542873898481,
+    "stop" : 1542873899384,
+    "duration" : 903
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "1134e0f7d5eceafe",
+      "name" : "log",
+      "source" : "1134e0f7d5eceafe.txt",
+      "type" : "text/plain",
+      "size" : 561
+    }, {
+      "uid" : "24f21332b4b99b28",
+      "name" : "stdout",
+      "source" : "24f21332b4b99b28.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "84be5c47aeb9395b",
+      "name" : "stderr",
+      "source" : "84be5c47aeb9395b.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1701:MS给MA下发任务，所有的MA都收到并且执行了任务"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "29072-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "c8f0e47f11ded035",
+      "status" : "passed",
+      "time" : {
+        "start" : 1542871590127,
+        "stop" : 1542871590992,
+        "duration" : 865
+      }
+    }, {
+      "uid" : "9fcf834da4fdfc76",
+      "status" : "passed",
+      "time" : {
+        "start" : 1542802830251,
+        "stop" : 1542802831123,
+        "duration" : 872
+      }
+    } ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 4,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "4ce4e7a5df2c4715",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/16/allure/#testresult/4ce4e7a5df2c4715",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542871590127,
+          "stop" : 1542871590992,
+          "duration" : 865
+        }
+      }, {
+        "uid" : "f83797872543630b",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/15/allure/#testresult/f83797872543630b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542802830251,
+          "stop" : 1542802831123,
+          "duration" : 872
+        }
+      }, {
+        "uid" : "33e74326445d8d56",
+        "reportUrl" : "http://192.168.6.65:8080/jenkins/job/fsp/14/allure/#testresult/33e74326445d8d56",
+        "status" : "passed",
+        "time" : {
+          "start" : 1542802830251,
+          "stop" : 1542802831123,
+          "duration" : 872
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "2be940c1b9d96d54.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,87 @@
+{
+  "uid" : "eab6d62448c89671",
+  "name" : "test_service_crash",
+  "fullName" : "TestCase.test_checklist.Test_CheckList#test_service_crash",
+  "historyId" : "6e3d41a5c689552f8fe503a56cce10f4",
+  "time" : {
+    "start" : 1542871101285,
+    "stop" : 1542871146862,
+    "duration" : 45577
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "616fbd05e8bb031a",
+      "name" : "log",
+      "source" : "616fbd05e8bb031a.txt",
+      "type" : "text/plain",
+      "size" : 1911
+    }, {
+      "uid" : "3bbe40efb4b15b57",
+      "name" : "stdout",
+      "source" : "3bbe40efb4b15b57.txt",
+      "type" : "text/plain",
+      "size" : 0
+    }, {
+      "uid" : "19145af2586b8ac8",
+      "name" : "stderr",
+      "source" : "19145af2586b8ac8.txt",
+      "type" : "text/plain",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 3
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Platform-fsp_sss-1692:服务崩溃后守护进程能够自动拉起"
+  }, {
+    "name" : "feature",
+    "value" : "必测用例"
+  }, {
+    "name" : "parentSuite",
+    "value" : "TestCase"
+  }, {
+    "name" : "suite",
+    "value" : "test_checklist"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_CheckList"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-JPRBBOB"
+  }, {
+    "name" : "thread",
+    "value" : "26684-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython2"
+  }, {
+    "name" : "package",
+    "value" : "TestCase.test_checklist"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "eab6d62448c89671.json",
+  "parameterValues" : [ ]
+}
