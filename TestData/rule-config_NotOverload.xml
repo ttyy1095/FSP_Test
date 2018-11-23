@@ -187,6 +187,7 @@
         专线机房不涉及国内通信, 所以配置在这个中心节点集合中-->
   <KernelStreamServer>
     <InstanceName>vncss1</InstanceName>
+
   </KernelStreamServer>
   <!--服务实例组配置,同一个groupName 下的实例必须是相同的，不能把gs和ss配在一起，否则配置无效 TODO在代码中进行判断-->
   <InstanceGroupSet>
@@ -222,6 +223,7 @@
         <GroupName>ss1</GroupName>
         <GroupName>ss2</GroupName>
         <GroupName>ss3</GroupName>
+        <GroupName>vncss1</GroupName>
       </MediaTypeRule>
       <MediaTypeRule mediaType="video">
         <GroupName>gs1</GroupName>
@@ -230,6 +232,7 @@
         <GroupName>ss1</GroupName>
         <GroupName>ss2</GroupName>
         <GroupName>ss3</GroupName>
+        <GroupName>vncss1</GroupName>
       </MediaTypeRule>
       <MediaTypeRule mediaType="vnc">
         <GroupName>vncgs1</GroupName>

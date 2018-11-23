@@ -134,7 +134,16 @@
       <Region>中国</Region>
     </InstanceInfo>
     <InstanceInfo>
-      <InstanceName>vncss3</InstanceName>
+      <InstanceName>ss4</InstanceName>
+      <ServerType>ss</ServerType>
+      <CPUOverloadPoint>1.8</CPUOverloadPoint>
+      <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
+      <BandWidthPoint>1.8</BandWidthPoint>
+      <ISP>多线</ISP>
+      <Region>中国</Region>
+    </InstanceInfo>
+    <InstanceInfo>
+      <InstanceName>ss5</InstanceName>
       <ServerType>ss</ServerType>
       <CPUOverloadPoint>1.8</CPUOverloadPoint>
       <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
@@ -236,6 +245,8 @@
         <GroupName>ss1</GroupName>
         <GroupName>ss2</GroupName>
         <GroupName>ss3</GroupName>
+        <GroupName>ss4</GroupName>
+        <GroupName>ss5</GroupName>
       </MediaTypeRule>
       <MediaTypeRule mediaType="video">
         <GroupName>gs1</GroupName>
@@ -244,6 +255,8 @@
         <GroupName>ss1</GroupName>
         <GroupName>ss2</GroupName>
         <GroupName>ss3</GroupName>
+        <GroupName>ss4</GroupName>
+        <GroupName>ss5</GroupName>
       </MediaTypeRule>
       <MediaTypeRule mediaType="vnc">
         <GroupName>vncgs1</GroupName>

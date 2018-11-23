@@ -1,7 +1,9 @@
 {
   "demo.py": true, 
+  "test_checklist.py": true, 
   "test_checklist.py::Test_CheckList": true, 
   "test_checklist.py::Test_CheckList::()": true, 
+  "test_checklist.py::Test_CheckList::()::test_nc_oc_transnational_specialline": true, 
   "test_checklist.py::Test_CheckList::()::test_nc_transnational_not_specialline": true, 
   "test_checklist.py::Test_CheckList::()::test_oc_not_cascade": true, 
   "test_demo.py::TestShoppingTrolley::()::test_add_shopping_trolley": true, 

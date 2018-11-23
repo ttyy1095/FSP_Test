@@ -13,6 +13,9 @@ import re
 from lxml import etree
 import _winreg
 import uuid
+import logging
+
+
 key = _winreg.OpenKey(
     _winreg.HKEY_CURRENT_USER,
     r"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders")
@@ -20,7 +23,7 @@ documents_path, type = _winreg.QueryValueEx(key, "Personal")
 print documents_path, type
 import win32process
 
-
+logger = logging.getLogger(__file__)
 def click_keys(hwnd, *args):
     """
     定义组合按键
@@ -81,6 +84,7 @@ class Client(object):
         self.dm.SetPath(os.path.dirname(os.path.realpath(__file__)))
         self.dm.SetDict(0, "dm_soft.txt")
         self.client_flag = client_flag
+        logger.info('client flag is: %s'%client_flag)
         self.client_path = OC_PATH if is_oc else NC_PATH
         self.modificationUserDataDirName(client_flag)
 
@@ -360,11 +364,11 @@ def check_oc_av():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id)
-    send.login(USERA_NAME, '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
     send.publishVideo()
     send.publishAudio()
     time.sleep(30)
@@ -377,11 +381,11 @@ def check_oc_sharescreen():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id)
-    send.login('ptAutoTest00', '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
     send.shareScreen()
 
     time.sleep(30)
@@ -394,11 +398,11 @@ def check_oc_sharemedia():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id)
-    send.login('ptAutoTest00', '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
     send.shareMediaFile()
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
 
     time.sleep(30)
     send.closeClient()
@@ -410,11 +414,11 @@ def check_nc_av():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id, False)
-    send.login('ptAutoTest00', '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id, False)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
 
     send.publishVideo()
     send.publishAudio()
@@ -428,11 +432,11 @@ def check_nc2oc_av():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id, False)
-    send.login('ptAutoTest00', '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
 
     send.publishVideo()
     send.publishAudio()
@@ -446,11 +450,11 @@ def check_oc2nc_av():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id)
-    send.login('ptAutoTest00', '000000', '107926')
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id, False)
-    recv.login('ptAutoTest01', '000000', '107926')
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
 
     send.publishVideo()
     send.publishAudio()
@@ -464,12 +468,12 @@ def check_sharescreen_time():
     Client.close_all_client()
     send_id = str(uuid.uuid4())
     send = Client(send_id)
-    send.login(USERA_NAME, USERA_PWD, ROOM1_ID)
+    send.login(USERA_NAME, USER_PWD, ROOM1_ID)
     send.shareScreen()
 
     recv_id = str(uuid.uuid4())
     recv = Client(recv_id, False)
-    recv.login(USERB_NAME, USERB_PWD, ROOM1_ID)
+    recv.login(USERB_NAME, USER_PWD, ROOM1_ID)
     time.sleep(30)
     send.closeClient()
     recv.closeClient()
@@ -480,8 +484,3 @@ def check_sharescreen_time():
     else:
         return -1
 
-
-if __name__ == '__main__':
-    # win32process.GetWindowThreadProcessId()
-    # print check_oc_video()
-    print check_oc_sharescreen()

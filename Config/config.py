@@ -32,12 +32,10 @@ zentao_project = "基础服务平台服务子系统2.8"
 OC_PATH = r"D:\Client\3.15.5.33"
 NC_PATH = r"D:\Client\NC2"
 
-
+USER_PWD = '000000'
 USERA_NAME = 'ptAutoTest00'
-USERA_PWD = '000000'
 USERA_USERID = '1438593'
 USERB_NAME = 'ptAutoTest01'
-USERB_PWD = '000000'
 USERB_USERID = '1438594'
 ROOM1_ID = '107926'
 
@@ -46,7 +44,7 @@ ROOM1_ID = '107926'
 
 services = {"gc":{"process_name":"group_controller","servers":{"gc1":"192.168.7.73","gc2":"192.168.7.160","gc3":"192.168.7.63"}},
             "gs":{"process_name":"group_server","servers":{"gs1":"192.168.7.72","gs2":"192.168.7.105","gs3":"192.168.7.106"}},
-            "icegrid":{"process_name":"ice_server","servers":{"node1":"192.168.7.105"}},
+            "icegrid":{"process_name":"ice_server","servers":{"node1":"192.168.7.63","node2":"192.168.7.64"}},
             "km":{"process_name":"moniter_agent","servers":{}},
             "ma":{"process_name":"moniter_agent","servers":{"ma_gs1":"192.168.7.72","ma_gs2":"192.168.7.105","ma_gs3":"192.168.7.106","ma_ss1":"192.168.7.104","ma_ss2":"192.168.7.153","ma_ss3":"192.168.7.144"}},
             "ms":{"process_name":"moniter_server","servers":{"ms1":"192.168.7.73","ms2":"192.168.7.160"}},

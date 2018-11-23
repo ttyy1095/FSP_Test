@@ -1,7 +1,7 @@
 #-*-coding:utf-8-*-
 
 import os
-import time
+import time,json
 # rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 # report_path = os.path.join(os.getcwd(), "report", rq)
 # print report_path
@@ -10,10 +10,12 @@ import time
 
 from kazoo.client import KazooClient
 
-# zk = KazooClient(hosts="192.168.7.114:2181")
-# zk.start()
-# print zk.get_children("/fsp/msaaa")
+zk = KazooClient(hosts="192.168.7.111:2181")
+zk.start()
+print zk.get_children("/fsp/ms")
 
+print json.loads(zk.get("/fsp/rule/rule1")[0])
+quit()
 # import pytest
 #
 # @pytest.fixture(scope="session")

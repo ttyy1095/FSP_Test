@@ -1,0 +1,3 @@
+*.pyc
+*.idea
+TestCase/__pycache__/

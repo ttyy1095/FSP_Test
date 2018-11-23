@@ -38,16 +38,36 @@ logging.basicConfig(level=logging.INFO)
 #     "%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
 # fh.setFormatter(formatter)
 # logger.addHandler(fh)
-def setup_module():
-    logger = logging.getLogger('setup_module')
-    logger.info('execute setup_module')
+
+zk = KazooClient(hosts=config.zookeeperAddr)
+
+
+@pytest.fixture(scope='module')
+def module_fixture():
+    zk.start()
+    yield
+    zk.stop()
+
+def get_all_server_ip(service_type):
+    server_list = []
+    for instance_id in zk.get_children('/fsp/%s'%service_type):
+        ip = json.loads(zk.get('/fsp/%s/%s'%(service_type,instance_id))[0])['ip']
+        server_list.append(ip)
+    return server_list
 
 @allure.feature("必测用例")
 class Test_CheckList(object):
-    def changeRuleConf_step(self, sftp, fileName):
-        testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'TestData')
+    def changeRuleConf_step(self, fileName):
+        testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'TestData')
         filepath = os.path.join(testdata_path, fileName)
-        sftp.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
+        for rule in zk.get_children('/fsp/rule'):
+            ip = json.loads(zk.get('/fsp/rule/%s'%rule)[0])['ip']
+
+            transport = paramiko.Transport(ip)
+            transport.connect(username="root", password="123456")
+            sftp_client = paramiko.SFTPClient.from_transport(transport)
+            sftp_client.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
+            sftp_client.close()
         time.sleep(2)
 
     def get_ssh_connect(self, host):
@@ -253,32 +273,34 @@ class Test_CheckList(object):
         check_video_result = self.check_video()
         assert check_video_result == True
 
+    @pytest.fixture(scope='function')
+    def keep_all_rule_running(self):
+        self.ssh_exec_command(config.AUTO_TEST_SERVER,
+                              "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
+        yield
+        self.ssh_exec_command(config.AUTO_TEST_SERVER,
+                              "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
+
 
     @allure.story("Platform-fsp_sss-1695:两台rule有一台处理业务时崩溃不重启，对其他服务无影响")
-    @pytest.mark.skip(reason='no way of currently testing this')
-    def test_rule_group(self):
+    def test_rule_group(self,keep_all_rule_running):
         """
         必须部署2个rule，2个rule均采用可用的配置文件（保证oc，nc均能正常广播音视频）
         为保证每次环境一致，不因存在2个rule导致接入优化结果不一致，除了本用例外，其他用例均只会启动rule1
         """
         logger = logging.getLogger('Platform-fsp_sss-1695')
-        ids = config.services["rule"]["servers"].keys()
-        if len(ids) < 2:
+        ips = get_all_server_ip('rule')
+        if len(ips) < 2:
             logger.error("must have more than 2 rule")
-            assert 1 != 1
-        rule1_host = config.services["rule"]["servers"][ids[1]]
+            assert len(ips) >= 2
 
-        self.ssh_exec_command(rule1_host,"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
+        self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
         time.sleep(2)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(rule1_host,
-            "cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
+        self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
+        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
 
-        for rest in range(1, len(ids)):
-            other_rule = config.services["rule"]["servers"][ids[rest]]
-            self.ssh_exec_command(other_rule,
-                "cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -290,7 +312,7 @@ class Test_CheckList(object):
 
 
     @allure.story("Platform-fsp_sss-1696:node1的ice_server崩溃不重启，node2的ice_server接替业务处理")
-    @pytest.mark.skip(reason='only deploy one ice')
+
     def test_ice_group(self,keep_all_ice_running):
         """
 
@@ -332,11 +354,10 @@ class Test_CheckList(object):
         """
         # 通过zookeeper获取主备ms
         logger = logging.getLogger('Platform-fsp_sss-1697')
-        zk = KazooClient(hosts=config.zookeeperAddr, timeout=10.0)
-        zk.start()
+
         main = zk.get_children("/fsp/ms")[0]
         standby = zk.get_children("/fsp/ms_replca")[0]
-        zk.stop()
+
         main_ms_host = config.services["ms"]["servers"][main]
 
         self.ssh_exec_command(main_ms_host,"pkill MSMonitor.sh && pkill moniter_server")
@@ -400,7 +421,7 @@ class Test_CheckList(object):
                 break
         assert isPass == True
         _, stdout, stderr = ssh.exec_command(
-            "cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 20"
+            "cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 200"
             % rq)
         task_str = stdout.read()
 
@@ -475,9 +496,9 @@ class Test_CheckList(object):
             assert abs(float(upload_speed) - upload_speed_calc) < 100
 
     @allure.story("Platform-fsp_sss-1704:OC单个gs收发音视频，共享媒体文件，共享桌面声音")
-    def test_oc_not_cascade(self, sftp):
+    def test_oc_not_cascade(self):
         logger = logging.getLogger('Platform-fsp_sss-1704')
-        self.changeRuleConf_step(sftp, 'rule-config_NotOverload.xml')
+        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_oc_av()
             if not result:
@@ -487,9 +508,9 @@ class Test_CheckList(object):
             send_flag, recv_flag, result = check_oc_sharemedia()
 
     @allure.story("Platform-fsp_sss-1705:NC单个ss收发音视频，共享媒体文件，共享桌面声音")
-    def test_nc_not_cascade(self, sftp):
+    def test_nc_not_cascade(self):
         logger = logging.getLogger('Platform-fsp_sss-1705')
-        self.changeRuleConf_step(sftp, 'rule-config_NotOverload.xml')
+        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_nc_av()
             if not result:
@@ -497,8 +518,8 @@ class Test_CheckList(object):
             assert result
 
     @allure.story("Platform-fsp_sss-1706:NC&OC单个gs收发音视频，共享媒体文件，共享桌面声音")
-    def test_oc_nc_not_cascade(self, sftp):
-        self.changeRuleConf_step(sftp, 'rule-config_NotOverload.xml')
+    def test_oc_nc_not_cascade(self):
+        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能,NC->OC"):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -508,22 +529,22 @@ class Test_CheckList(object):
             assert result
 
     @allure.story("Platform-fsp_sss-1707:OC级联gs收发音视频，共享媒体文件，共享桌面声音")
-    def test_oc_cascade(self, sftp):
-        self.changeRuleConf_step(sftp, 'rule-config_cascade.xml')
+    def test_oc_cascade(self):
+        self.changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_oc_av()
             assert result
 
     @allure.story("Platform-fsp_sss-1708:NC级联ss收发音视频，共享媒体文件，共享桌面声音")
-    def test_nc_cascade(self, sftp):
-        self.changeRuleConf_step(sftp, 'rule-config_cascade.xml')
+    def test_nc_cascade(self):
+        self.changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_nc_av()
             assert result
 
     @allure.story("Platform-fsp_sss-1709:NC&OC级联gs收发音视频，共享媒体文件，共享桌面声音")
-    def test_ncoc_cascade(self, sftp):
-        self.changeRuleConf_step(sftp, 'rule-config_cascade.xml')
+    def test_ncoc_cascade(self):
+        self.changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能:NC->OC"):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -532,28 +553,28 @@ class Test_CheckList(object):
             assert result
 
     @allure.story('Platform-fsp_sss-1710:OC跨国不走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_oc_transnational_not_specialline(self, sftp):
+    def test_oc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step('rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
 
     @allure.story('Platform-fsp_sss-1711:NC跨国不走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_nc_transnational_not_specialline(self, sftp):
+    def test_nc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_nc_av()
             assert result
 
     @allure.story('Platform-fsp_sss-1712:OC&NC跨国不走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_nc_oc_transnational_not_specialline(self, sftp):
+    def test_nc_oc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能:NC->OC'):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -562,28 +583,28 @@ class Test_CheckList(object):
             assert result
 
     @allure.story('Platform-fsp_sss-1713:OC跨国走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_oc_transnational_specialline(self, sftp):
+    def test_oc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
 
     @allure.story('Platform-fsp_sss-1714:NC跨国走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_nc_transnational_specialline(self, sftp):
+    def test_nc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
 
     @allure.story('Platform-fsp_sss-1715:OC&NC跨国走专线收发音视频，共享媒体文件，共享桌面声音')
-    def test_nc_oc_transnational_specialline(self, sftp):
+    def test_nc_oc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step(sftp, 'rule-config_Transnational.xml')
+        self.changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能:NC->OC'):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -602,38 +623,29 @@ class Test_CheckList(object):
         pass
 
     @allure.story('Platform-fsp_sss-1718:新入会用户接收耗时测试')
-    def test_sharescreen_time(self,sftp):
+    def test_sharescreen_time(self):
         """
         计算接收端开始加载解码器到解码接收到屏幕共享数据总耗时
         即接收端创建vncmp日志到VideoDecoder:VIDEO_Decode_StartDecompress success耗时
         """
         logger = logging.getLogger('Platform-fsp_sss-1718')
         with allure.step('非级联场景耗时测试'):
-            self.changeRuleConf_step(sftp,'rule-config_NotOverload.xml')
+            self.changeRuleConf_step('rule-config_NotOverload.xml')
             time_uesd = check_sharescreen_time()
             allure.attach('耗时:%f秒'%time_uesd,'time',allure.attachment_type.TEXT)
             assert time_uesd >=0 and time_uesd <= 5
 
         with allure.step('级联场景耗时测试'):
-            self.changeRuleConf_step(sftp, 'rule-config_cascade.xml')
+            self.changeRuleConf_step( 'rule-config_cascade.xml')
             time_uesd = check_sharescreen_time()
 
             allure.attach('耗时:%f秒'%time_uesd,'time',allure.attachment_type.TEXT)
             assert time_uesd >= 0 and time_uesd <= 5
 
-    @allure.story('Platform-fsp_sss-1719:屏幕共享打开音视频，播放-暂停-播放')
-    @pytest.mark.skip(reason="no way of currently testing this")
-    def test_sharescreen_audio_stop(self):
-        pass
-
-    @allure.story('Platform-fsp_sss-1720:关闭屏幕共享时，关闭音频广播')
-    @pytest.mark.skip(reason="no way of currently testing this")
-    def test_sharescreen_audio_close(self):
-        pass
 
     @allure.story('Platform-fsp_sss-1723:同一个vnc-gs')
-    def test_sharescreen_not_cascade(self,sftp):
-        self.changeRuleConf_step(sftp,'rule-config_NotOverload.xml')
+    def test_sharescreen_not_cascade(self):
+        self.changeRuleConf_step('rule-config_NotOverload.xml')
         with allure.step('2个OC客户端通过同1个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:
@@ -642,9 +654,9 @@ class Test_CheckList(object):
             assert result
 
     @allure.story('Platform-fsp_sss-1724:vnc_gs1 -> n-ss -> vnc_gs2')
-    def test_sharescreen_cascade(self,sftp):
+    def test_sharescreen_cascade(self):
 
-        self.changeRuleConf_step(sftp,'rule-config_cascade.xml')
+        self.changeRuleConf_step('rule-config_cascade.xml')
         with allure.step('2个OC客户端通过同2个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:
@@ -654,11 +666,11 @@ class Test_CheckList(object):
 
     @allure.story('Platform-fsp_sss-1725:vnc_gs1 -> n-ss1 -> n-ss2 -> vnc_gs2')
     @pytest.mark.skip(reason="尚未开发实现")
-    def test_sharescreen_transnational_use_specialline(self,sftp):
+    def test_sharescreen_transnational_use_specialline(self):
         """
         屏幕共享跨国专线
         """
-        self.changeRuleConf_step(sftp,'rule-config_Tran.xml')
+        self.changeRuleConf_step('rule-config_Tran.xml')
         with allure.step('2个OC客户端通过同2个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:
