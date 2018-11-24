@@ -109,13 +109,14 @@ class Test_CheckList(object):
     # @pytest.mark.parametrize()
 
     @allure.story("Platform-fsp_sss-1690:服务器版本检查")
+
     def test_checkVersion(self):
         """
         对禅道及jenkins构建
         """
         pytest.mark.skip()
         print os.path.realpath(__file__)
-        version = "2.8.2.0"
+        version = "2.8.2.13"
         zt = zentao(config.zentao_url, config.zentao_user, config.zentao_password,
                     config.zentao_product, config.zentao_project)
         filePath = zt.get_build_info(version)

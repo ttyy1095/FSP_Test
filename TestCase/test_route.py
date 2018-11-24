@@ -7,16 +7,21 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Config import config
 from Producer import fsp_common_pb2 as pb_common
+import paramiko
+def changeRuleConf_step(fileName):
+    testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'TestData')
+    filepath = os.path.join(testdata_path, fileName)
+    for rule_ip in config.RULE_SERVERS:
 
+        transport = paramiko.Transport(rule_ip)
+        transport.connect(username="root", password="123456")
+        sftp_client = paramiko.SFTPClient.from_transport(transport)
+        sftp_client.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
+        sftp_client.close()
+    time.sleep(5)
 
 @allure.feature("路由")
 class Test_BusinessInsulate(object):
-
-    def changeRuleConf_step(self, sftp, fileName):
-        filepath = os.path.join(os.path.abspath("../TestData"), fileName)
-        sftp.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
-        time.sleep(2)
-
 
 
     def get_group_server(self, producer, service_type, client_ip, user_id, app_id,
@@ -49,11 +54,11 @@ class Test_BusinessInsulate(object):
          ("","192.168.6.65", "1000001", "1", "41001", "100001", "gs2", "vncgs2")],
         ids=["匹配userId", "匹配roomId", "匹配compnayId", "匹配appId"])
 
-    def test_business_insulate_by_in(self, sftp, producer,rule_conf, client_ip, user_id, app_id,
+    def test_business_insulate_by_in(self,  producer,rule_conf, client_ip, user_id, app_id,
                                      company_id, room_id, av_expected, vnc_expected):
         if rule_conf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, "business_net.xml")
+                changeRuleConf_step( "business_net.xml")
         with allure.step('获取AV服务器'):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip,
                                          user_id, app_id, company_id, room_id,
@@ -75,12 +80,12 @@ class Test_BusinessInsulate(object):
          ("","192.168.6.65", "1000001", "1", "41001", "100001", "EnumError")],
         ids=["匹配userId", "匹配roomId", "匹配compnayId", "匹配appId"])
     @allure.story("业务路由与网络路由无交集")
-    def test_business_insulate_by_out(self, sftp, producer,rule_conf, client_ip, user_id, app_id,
+    def test_business_insulate_by_out(self,  producer,rule_conf, client_ip, user_id, app_id,
                                       company_id, room_id, expected):
         # 仅匹配业务路由，此处会报异常
         if rule_conf !="":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, rule_conf)
+                changeRuleConf_step( rule_conf)
 
         with allure.step('获取AV服务器'):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip,
@@ -104,11 +109,11 @@ class Test_BusinessInsulate(object):
          ("", "1.2.8.5", "gs3", "vncgs3")])
     # ("rule-config_SuperiorOverload_internal.xml", "1.1.8.5", "gs3","vncgs")
 
-    def test_getGroupServers_internal(self, producer, sftp, ruleConf, client_ip,
+    def test_getGroupServers_internal(self, producer,  ruleConf, client_ip,
                                       av_expected, vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -130,11 +135,11 @@ class Test_BusinessInsulate(object):
          ("", "206.164.224.5", "gs1", "vncgs1"),
          ("", "185.117.115.5", "gs2", "vncgs2")])
 
-    def test_getGroupServers(self, producer, sftp, ruleConf, client_ip, av_expected,
+    def test_getGroupServers(self, producer,  ruleConf, client_ip, av_expected,
                              vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -151,10 +156,10 @@ class Test_BusinessInsulate(object):
     @pytest.mark.parametrize("ruleConf,client_ip,av_expected,vnc_expected", [
         ("rule-config_Overload.xml", "1.1.8.5", "gs3", "vncgs3"),
     ])
-    def test_getGroupServers_overload_internal(self, producer, sftp, ruleConf, client_ip,
+    def test_getGroupServers_overload_internal(self, producer,  ruleConf, client_ip,
                                                av_expected, vnc_expected):
         with allure.step("替换rule配置文件"):
-            self.changeRuleConf_step(sftp, ruleConf)
+            changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -171,10 +176,10 @@ class Test_BusinessInsulate(object):
     @pytest.mark.parametrize(
         "ruleConf,client_ip,av_expected,vnc_expected",
         [("rule-config_Overload.xml", "23.33.184.5", "gs3", "vncgs3")])
-    def test_getGroupServers_overload(self, producer, sftp, ruleConf, client_ip,
+    def test_getGroupServers_overload(self, producer,  ruleConf, client_ip,
                                       av_expected, vnc_expected):
         with allure.step("替换rule配置文件"):
-            self.changeRuleConf_step(sftp, ruleConf)
+            changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -193,10 +198,10 @@ class Test_BusinessInsulate(object):
         ("", "1.1.8.6", "gs3", "vncgs3"),
     ])
     def test_getGroupServers_partialOverload_internal(
-            self, producer, sftp, ruleConf, client_ip, av_expected, vnc_expected):
+            self, producer,  ruleConf, client_ip, av_expected, vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -214,11 +219,11 @@ class Test_BusinessInsulate(object):
         ("rule-config_PartialOverload.xml", "23.33.184.5", "gs1", "vncgs1"),
         ("", "23.33.184.6", "gs3", "vncgs3"),
     ])
-    def test_getGroupServers_partialOverload(self, producer, sftp, ruleConf, client_ip,
+    def test_getGroupServers_partialOverload(self, producer,  ruleConf, client_ip,
                                              av_expected, vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -236,11 +241,11 @@ class Test_BusinessInsulate(object):
         ("rule-config_SuperiorOverload.xml", "1.1.8.5", "gs2", "vncgs2"),
         ("", "23.33.184.5", "gs2", "vncgs2"),
     ])
-    def test_getGroupServers_superiorOverload(self, producer, sftp, ruleConf, client_ip,
+    def test_getGroupServers_superiorOverload(self, producer,  ruleConf, client_ip,
                                               av_expected, vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
@@ -258,10 +263,10 @@ class Test_BusinessInsulate(object):
         ("rule-config_NotOverload.xml", "266.1.8.5", "EnumError", "vncgs2"),
         ("rule-config_Null.xml", "192.168.6.65", "EnumError", "vncgs2"),
     ],ids=["错误的IP地址","默认组为空"] )
-    def test_route_abnormal(self,producer,sftp,ruleConf,client_ip,av_expected,vnc_expected):
+    def test_route_abnormal(self,producer,ruleConf,client_ip,av_expected,vnc_expected):
         if ruleConf != "":
             with allure.step("替换rule配置文件"):
-                self.changeRuleConf_step(sftp, ruleConf)
+                changeRuleConf_step( ruleConf)
         with allure.step("获取GS服务器"):
             resp = self.get_group_server(producer, pb_common.EnumAVService, client_ip, "",
                                          "", "", "", pb_common.EnumAVService)
