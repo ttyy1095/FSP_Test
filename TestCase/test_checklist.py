@@ -40,10 +40,6 @@ logging.basicConfig(level=logging.INFO)
 # logger.addHandler(fh)
 
 zk = KazooClient(hosts=config.zookeeperAddr)
-zk.start()
-
-def teardown_module():
-    zk.stop()
 
 def get_all_server_ip(service_type):
     server_list = []
@@ -52,40 +48,49 @@ def get_all_server_ip(service_type):
         server_list.append(ip)
     return server_list
 
+def changeRuleConf_step(fileName):
+    testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'TestData')
+    filepath = os.path.join(testdata_path, fileName)
+    for rule_ip in config.RULE_SERVERS:
+
+        transport = paramiko.Transport(rule_ip)
+        transport.connect(username="root", password="123456")
+        sftp_client = paramiko.SFTPClient.from_transport(transport)
+        sftp_client.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
+        sftp_client.close()
+    time.sleep(2)
+
+def get_ssh_connect( host):
+    connects = {}
+    if not connects.has_key(host):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname=host, port=22, username="root", password="123456")
+        connects[host] = ssh
+    return connects[host]
+
+def ssh_exec_command(host,command):
+    logger = logging.getLogger('ssh')
+    ssh = get_ssh_connect(host)
+    stdin,stdout,stderr = ssh.exec_command(command,timeout=600)
+    # 必须要清除buffer，否则会立即往下执行
+    result = stdout.read()
+    if not result:
+        result = stderr.read()
+        logger.error('ssh exec command error:%s'%result)
+    return result
+
 @allure.feature("必测用例")
 class Test_CheckList(object):
-    def changeRuleConf_step(self, fileName):
-        testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'TestData')
-        filepath = os.path.join(testdata_path, fileName)
-        for rule in zk.get_children('/fsp/rule'):
-            ip = json.loads(zk.get('/fsp/rule/%s'%rule)[0])['ip']
 
-            transport = paramiko.Transport(ip)
-            transport.connect(username="root", password="123456")
-            sftp_client = paramiko.SFTPClient.from_transport(transport)
-            sftp_client.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
-            sftp_client.close()
-        time.sleep(2)
 
-    def get_ssh_connect(self, host):
-        connects = {}
-        if not connects.has_key(host):
-            ssh = paramiko.SSHClient()
-            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(hostname=host, port=22, username="root", password="123456")
-            connects[host] = ssh
-        return connects[host]
 
-    def ssh_exec_command(self,host,command):
-        logger = logging.getLogger('ssh')
-        ssh = self.get_ssh_connect(host)
-        stdin,stdout,stderr = ssh.exec_command(command,timeout=600)
-        # 必须要清除buffer，否则会立即往下执行
-        result = stdout.read()
-        if not result:
-            result = stderr.read()
-            logger.error('ssh exec command error:%s'%result)
-        return result
+    def setup_class(self):
+        zk.start()
+        changeRuleConf_step('rule-config_default.xml')
+
+    def treadown_class(self):
+        zk.close()
 
     def check_video(self):
         _,_,result = check_oc_av()
@@ -157,7 +162,7 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1691:服务器重启后能够正常运行和处理业务")
     def test_restartAllServices(self):
         logger = logging.getLogger('Platform-fsp_sss-1691')
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts restart_all.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts restart_all.yml")
         result = self.check_video()
         assert result
 
@@ -174,19 +179,19 @@ class Test_CheckList(object):
             if len(ips) < 1:
                 logger.error('%s must have more than 1 isntance'%service_type)
 
-            self.ssh_exec_command(ips[0]," ps -ef|grep %s|grep -v grep|awk '{print $2}'|xargs kill" % process_name)
+            ssh_exec_command(ips[0]," ps -ef|grep %s|grep -v grep|awk '{print $2}'|xargs kill" % process_name)
             time.sleep(5)
-            count = self.ssh_exec_command(ips[0],"ps -ef|grep %s|grep -v grep|wc -l" % process_name)
+            count = ssh_exec_command(ips[0],"ps -ef|grep %s|grep -v grep|wc -l" % process_name)
 
             assert int(count) == 1
 
 
     @pytest.fixture(scope='function')
     def keep_all_gc_running(self):
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
         print '初始化gc'
         yield
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
         print '恢复gc'
 
     @allure.story("Platform-fsp_sss-1693:三台gc有一台处理业务时崩溃不重启，对其他服务无影响")
@@ -203,21 +208,21 @@ class Test_CheckList(object):
             logger.error("must have more than 2 gc")
             raise Exception("must have more than 2 gc")
 
-        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
+        ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
         time.sleep(2)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh start ")
-        self.ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
+        ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh start ")
+        ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
         time.sleep(2)
         check_video_result = self.check_video()
         assert check_video_result == True
 
     @pytest.fixture(scope='function')
     def keep_all_sc_running(self):
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
         yield
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
 
     @allure.story("Platform-fsp_sss-1694:三台sc有一台处理业务时崩溃不重启，对其他服务无影响")
     def test_sc_group(self,keep_all_sc_running):
@@ -230,22 +235,22 @@ class Test_CheckList(object):
             logger.error("must have more than 2 sc")
             raise Exception("must have more than 2 sc")
 
-        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
+        ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(ips[0], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh start")
-        self.ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
+        ssh_exec_command(ips[0], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh start")
+        ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
     @pytest.fixture(scope='function')
     def keep_all_rule_running(self):
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,
+        ssh_exec_command(config.AUTO_TEST_SERVER,
                               "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
         yield
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,
+        ssh_exec_command(config.AUTO_TEST_SERVER,
                               "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
 
 
@@ -261,21 +266,21 @@ class Test_CheckList(object):
             logger.error("must have more than 2 rule")
             assert len(ips) >= 2
 
-        self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
+        ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
-        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
+        ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
+        ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
     @pytest.fixture(scope='function')
     def keep_all_ice_running(self):
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
         yield
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
 
 
     @allure.story("Platform-fsp_sss-1696:node1的ice_server崩溃不重启，node2的ice_server接替业务处理")
@@ -292,26 +297,26 @@ class Test_CheckList(object):
             raise Exception("must have 2 ice node")
         ice1_host = config.services["icegrid"]["servers"][ids[0]]
 
-        self.ssh_exec_command(ice1_host,"pkill icegridnode")
+        ssh_exec_command(ice1_host,"pkill icegridnode")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
         # 重新启动node1
-        self.ssh_exec_command(ice1_host,"cd /fsmeeting/fsp_sss_stream/icegrid/%s && icegridnode --Ice.Config=config.server --Ice.IPv6=0 --daemon --nochdir"
+        ssh_exec_command(ice1_host,"cd /fsmeeting/fsp_sss_stream/icegrid/%s && icegridnode --Ice.Config=config.server --Ice.IPv6=0 --daemon --nochdir"
             % ids[0])
         #关闭node2
         other_ice = config.services["icegrid"]["servers"][ids[1]]
 
-        self.ssh_exec_command(other_ice,"pkill icegridnode")
+        ssh_exec_command(other_ice,"pkill icegridnode")
         time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
     @pytest.fixture(scope='function')
     def keep_all_ms_running(self):
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
         yield
-        self.ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
 
     @allure.story("Platform-fsp_sss-1697:主ms崩溃不重启，对其他服务无影响，从ms接替业务处理")
     def test_ms_group(self,keep_all_ms_running):
@@ -328,13 +333,13 @@ class Test_CheckList(object):
         main_ms_host = json.loads(zk.get('/fsp/ms/%s'%main)[0])['ip']
         standby_ms_host = json.loads(zk.get('/fsp/ms_replca/%s' % standby)[0])['ip']
 
-        self.ssh_exec_command(main_ms_host,"pkill MSMonitor.sh && pkill moniter_server")
+        ssh_exec_command(main_ms_host,"pkill MSMonitor.sh && pkill moniter_server")
 
 
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
         # 获取当天最后一个moniter_server日志中含有“Invoke TimeTask”的行数
-        task_count1 = self.ssh_exec_command(standby_ms_host,"grep -c 'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
+        task_count1 = ssh_exec_command(standby_ms_host,"grep -c 'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
             % rq)
         if not task_count1:
             logger.error("get task_count from mslog error")
@@ -342,7 +347,7 @@ class Test_CheckList(object):
         time.sleep(60)
 
         # 再次获取，这里需要注意的是为了方便测试，ms下发任务的时间由60s改为30s
-        task_count2 = self.ssh_exec_command(standby_ms_host,
+        task_count2 = ssh_exec_command(standby_ms_host,
                                             "grep -c 'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
                                             % rq)
         assert task_count1 != task_count2
@@ -375,7 +380,7 @@ class Test_CheckList(object):
 
         # 获取当天最后一个moniter_server日志中含有“Invoke TimeTask”的行数
 
-        task_str = self.ssh_exec_command(main_ms_host,"grep  'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
+        task_str = ssh_exec_command(main_ms_host,"grep  'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
             % rq)
         tasks = re.findall(r'\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\.\d{9}\]', task_str)
 
@@ -388,7 +393,7 @@ class Test_CheckList(object):
                 break
         assert isPass == True
 
-        task_str = self.ssh_exec_command(main_ms_host,"cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 200"
+        task_str = ssh_exec_command(main_ms_host,"cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 200"
             % rq)
 
         ma_list = re.findall(r"recv kafka msg\(from: (.+)\)", task_str)
@@ -405,7 +410,7 @@ class Test_CheckList(object):
         ice_master_ip = config.services['icegrid']['servers']['node1']
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
-        stdout_str = self.ssh_exec_command(ice_master_ip,"cat `ls -l /fsmeeting/fsp_sss_stream/icegrid/node1/log/%s/TimedTask_*|sed -n '$p'|awk '{print $NF}'` |grep band_usage|tail -n %d"
+        stdout_str = ssh_exec_command(ice_master_ip,"cat `ls -l /fsmeeting/fsp_sss_stream/icegrid/node1/log/%s/TimedTask_*|sed -n '$p'|awk '{print $NF}'` |grep band_usage|tail -n %d"
             % (rq, len(ma_all)))
         resources_info = re.findall(
             r'ip\((\d+.\d+.\d+.\d+)\), cpu_usage\((\d.\d+)\), mem_usage\((\d.\d+)\), band_usage\((\d.\d+)\)',
@@ -461,7 +466,7 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1704:OC单个gs收发音视频，共享媒体文件，共享桌面声音")
     def test_oc_not_cascade(self):
         logger = logging.getLogger('Platform-fsp_sss-1704')
-        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
+        changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_oc_av()
             if not result:
@@ -473,7 +478,7 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1705:NC单个ss收发音视频，共享媒体文件，共享桌面声音")
     def test_nc_not_cascade(self):
         logger = logging.getLogger('Platform-fsp_sss-1705')
-        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
+        changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_nc_av()
             if not result:
@@ -482,7 +487,7 @@ class Test_CheckList(object):
 
     @allure.story("Platform-fsp_sss-1706:NC&OC单个gs收发音视频，共享媒体文件，共享桌面声音")
     def test_oc_nc_not_cascade(self):
-        self.changeRuleConf_step( 'rule-config_NotOverload.xml')
+        changeRuleConf_step( 'rule-config_NotOverload.xml')
         with allure.step("验证音视频功能,NC->OC"):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -493,21 +498,21 @@ class Test_CheckList(object):
 
     @allure.story("Platform-fsp_sss-1707:OC级联gs收发音视频，共享媒体文件，共享桌面声音")
     def test_oc_cascade(self):
-        self.changeRuleConf_step( 'rule-config_cascade.xml')
+        changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_oc_av()
             assert result
 
     @allure.story("Platform-fsp_sss-1708:NC级联ss收发音视频，共享媒体文件，共享桌面声音")
     def test_nc_cascade(self):
-        self.changeRuleConf_step( 'rule-config_cascade.xml')
+        changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能"):
             send_flag, recv_flag, result = check_nc_av()
             assert result
 
     @allure.story("Platform-fsp_sss-1709:NC&OC级联gs收发音视频，共享媒体文件，共享桌面声音")
     def test_ncoc_cascade(self):
-        self.changeRuleConf_step( 'rule-config_cascade.xml')
+        changeRuleConf_step( 'rule-config_cascade.xml')
         with allure.step("验证音视频功能:NC->OC"):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -519,7 +524,7 @@ class Test_CheckList(object):
     def test_oc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step('rule-config_Transnational.xml')
+        changeRuleConf_step('rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
@@ -528,7 +533,7 @@ class Test_CheckList(object):
     def test_nc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step( 'rule-config_Transnational.xml')
+        changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_nc_av()
             assert result
@@ -537,7 +542,7 @@ class Test_CheckList(object):
     def test_nc_oc_transnational_not_specialline(self):
 
         base.use_specialline(False)
-        self.changeRuleConf_step( 'rule-config_Transnational.xml')
+        changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能:NC->OC'):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -549,7 +554,7 @@ class Test_CheckList(object):
     def test_oc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step( 'rule-config_Transnational.xml')
+        changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
@@ -558,7 +563,7 @@ class Test_CheckList(object):
     def test_nc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step( 'rule-config_Transnational.xml')
+        changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能'):
             send_flag, recv_flag, result = check_oc_av()
             assert result
@@ -567,7 +572,7 @@ class Test_CheckList(object):
     def test_nc_oc_transnational_specialline(self):
 
         base.use_specialline(True)
-        self.changeRuleConf_step( 'rule-config_Transnational.xml')
+        changeRuleConf_step( 'rule-config_Transnational.xml')
         with allure.step('验证音视频功能:NC->OC'):
             send_flag, recv_flag, result = check_nc2oc_av()
             assert result
@@ -593,13 +598,13 @@ class Test_CheckList(object):
         """
         logger = logging.getLogger('Platform-fsp_sss-1718')
         with allure.step('非级联场景耗时测试'):
-            self.changeRuleConf_step('rule-config_NotOverload.xml')
+            changeRuleConf_step('rule-config_NotOverload.xml')
             time_uesd = check_sharescreen_time()
             allure.attach('耗时:%f秒'%time_uesd,'time',allure.attachment_type.TEXT)
             assert time_uesd >=0 and time_uesd <= 5
 
         with allure.step('级联场景耗时测试'):
-            self.changeRuleConf_step( 'rule-config_cascade.xml')
+            changeRuleConf_step( 'rule-config_cascade.xml')
             time_uesd = check_sharescreen_time()
 
             allure.attach('耗时:%f秒'%time_uesd,'time',allure.attachment_type.TEXT)
@@ -608,7 +613,7 @@ class Test_CheckList(object):
 
     @allure.story('Platform-fsp_sss-1723:同一个vnc-gs')
     def test_sharescreen_not_cascade(self):
-        self.changeRuleConf_step('rule-config_NotOverload.xml')
+        changeRuleConf_step('rule-config_NotOverload.xml')
         with allure.step('2个OC客户端通过同1个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:
@@ -619,7 +624,7 @@ class Test_CheckList(object):
     @allure.story('Platform-fsp_sss-1724:vnc_gs1 -> n-ss -> vnc_gs2')
     def test_sharescreen_cascade(self):
 
-        self.changeRuleConf_step('rule-config_cascade.xml')
+        changeRuleConf_step('rule-config_cascade.xml')
         with allure.step('2个OC客户端通过同2个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:
@@ -633,7 +638,7 @@ class Test_CheckList(object):
         """
         屏幕共享跨国专线
         """
-        self.changeRuleConf_step('rule-config_Tran.xml')
+        changeRuleConf_step('rule-config_Tran.xml')
         with allure.step('2个OC客户端通过同2个vnc-gs进行屏幕共享'):
             send_id,recv_id,result = check_oc_sharescreen()
             if not result:

@@ -9,7 +9,7 @@ SC_GROUP_TOPIC = "sc_group_01"
 app_id = "app_test"
 room_id = "1234567"
 AS_TOPIC = "lizzietest"
-rule_server = "192.168.7.71:22"
+RULE_SERVERS = ["192.168.7.71","192.168.7.65"]
 AUTO_TEST_SERVER = "192.168.7.70"
 REDIS={'host':'192.168.7.111','port':'6379'}
 
