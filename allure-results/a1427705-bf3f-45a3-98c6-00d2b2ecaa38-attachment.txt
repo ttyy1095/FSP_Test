@@ -1,1 +1,0 @@
-test_checklist.py          248 ERROR    must have more than 2 rule

@@ -1,1 +1,0 @@
-{"uuid": "26461e94-b484-4f50-934d-de7ed831dd46", "stop": 1542801122438, "start": 1542801117788, "afters": [{"status": "passed", "start": 1542801122434, "stop": 1542801122438, "name": "sftp::0"}], "children": ["3e9edf4a-6d28-4a65-8b6e-613bc710bd1f"], "befores": [{"status": "passed", "start": 1542801117788, "stop": 1542801118597, "name": "sftp"}]}
