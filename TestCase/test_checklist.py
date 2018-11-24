@@ -74,9 +74,9 @@ def ssh_exec_command(host,command):
     ssh = get_ssh_connect(host)
     stdin,stdout,stderr = ssh.exec_command(command,timeout=600)
     # 必须要清除buffer，否则会立即往下执行
-    status = stdout.channel.recv_exit_status()
-    if status != 0:
-        err = stderr.read()
+    err = stderr.read()
+
+    if err:
         logger.error('ssh exec command error(host:%s,command:%s,err:%s' % (host, command, err))
         raise Exception('ssh exec command error')
     else:
@@ -320,9 +320,10 @@ class Test_CheckList(object):
     @pytest.fixture(scope='function')
     def keep_all_ms_running(self):
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ms.yml")
+        time.sleep(5)
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ms.yml")
-
+        time.sleep(5)
     @allure.story("Platform-fsp_sss-1697:主ms崩溃不重启，对其他服务无影响，从ms接替业务处理")
     def test_ms_group(self,keep_all_ms_running):
         """
@@ -408,7 +409,7 @@ class Test_CheckList(object):
         assert len(ma_list) == len(ma_in_zk) - 1
 
     @allure.story("Platform-fsp_sss-1702:ma上报的资源使用信息正确")
-    def test_ma_report(self):
+    def test_ma_report_resource(self):
 
         ma_all = zk.get_children("/fsp/ma")
 
@@ -430,7 +431,7 @@ class Test_CheckList(object):
             assert abs(band_usage_real - float(band_usage)) < 0.1
 
     @allure.story("Platform-fsp_sss-1703 : ma上报的负载信息正确")
-    def test_ma_report(self):
+    def test_ma_report_load(self):
         db = redis.StrictRedis(host=config.REDIS['host'], port=config.REDIS['port'], db=0)
 
 

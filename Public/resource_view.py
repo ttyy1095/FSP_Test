@@ -72,7 +72,7 @@ def _get_dev(host):
             break
         ipaddr = execCommand(host,"cat /etc/sysconfig/network-scripts/%s|grep IPADDR|cut -d '=' -f 2"%i).strip()
         if ipaddr == host:
-            dev = i[6:]
+            dev = execCommand(host, "cat /etc/sysconfig/network-scripts/%s|grep DEVICE|cut -d '=' -f 2" % i).strip()
     if dev == "":
         raise Exception('can not get net dev by ip')
     return dev
