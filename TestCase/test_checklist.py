@@ -74,19 +74,17 @@ def ssh_exec_command(host,command):
     ssh = get_ssh_connect(host)
     stdin,stdout,stderr = ssh.exec_command(command,timeout=600)
     # 必须要清除buffer，否则会立即往下执行
+    result = stdout.read()
     err = stderr.read()
-
-    if err:
+    if result:
+       return result
+    elif stdout.channel.recv_exit_status()!=0 and err:
         logger.error('ssh exec command error(host:%s,command:%s,err:%s' % (host, command, err))
         raise Exception('ssh exec command error')
-    else:
-        result = stdout.read()
-    return result
+
 
 @allure.feature("必测用例")
 class Test_CheckList(object):
-
-
 
     def setup_class(self):
         zk.start()
@@ -98,15 +96,6 @@ class Test_CheckList(object):
     def check_video(self):
         _,_,result = check_oc_av()
         return result
-
-    def check_video_nc2nc(self):
-        """
-        NC广播视频，NC接收视频
-        :return:
-        """
-        return True
-
-    # @pytest.mark.parametrize()
 
     @allure.story("Platform-fsp_sss-1690:服务器版本检查")
 
@@ -153,7 +142,7 @@ class Test_CheckList(object):
         t = tarfile.open(gz_file)
         t.extractall(path=".")
         services = [
-            "gc", "gs", "icegrid", "km", "ma", "ms", "new_ss", "rule", "sc", "ss",
+            "gc", "gs", "icegrid", "km", "ma", "ms", "rule", "sc", "ss",
             "vnc_gs"
         ]
         for service in services:
@@ -468,7 +457,7 @@ class Test_CheckList(object):
             _, _, _, upload_speed_calc = get_sever_res_rate(ip)
 
             # 因为upload_speed获取的不是同一时间，允许波动范围可以稍微给大点
-            assert abs(float(upload_speed) - upload_speed_calc) < 100
+            assert abs(float(upload_speed) - upload_speed_calc)/upload_speed_calc < 0.5
 
     @allure.story("Platform-fsp_sss-1704:OC单个gs收发音视频，共享媒体文件，共享桌面声音")
     def test_oc_not_cascade(self):

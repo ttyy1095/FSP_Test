@@ -51,12 +51,14 @@ import paramiko
 
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(hostname='192.168.7.104', port=22, username="root", password="123456")
-stdin,stdout,stderr = ssh.exec_command("ps -ef|grep moniter_agents|grep -v grep|awk '{print $2}'|xargs kill")
+ssh.connect(hostname='192.168.7.70', port=22, username="root", password="123456")
+stdin,stdout,stderr = ssh.exec_command("cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
 # stdin,stdout,stderr = ssh.exec_command("ls /femeeting/jax")
 # stdin,stdout,stderr = ssh.exec_command("grep -c 'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/2018-11-23/moniter_server_*|sed -n '$p'|awk '{print $NF}'`",get_pty=True)
+print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 print stdout.read()
 # print stdin.read()
 # print stdout.read()
+print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 print stderr.read()
 print stdout.channel.recv_exit_status()
