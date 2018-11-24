@@ -76,8 +76,9 @@ def ssh_exec_command(host,command):
     # 必须要清除buffer，否则会立即往下执行
     result = stdout.read()
     if not result:
-        result = stderr.read()
-        logger.error('ssh exec command error:%s'%result)
+        err = stderr.read()
+        logger.error('ssh exec command error(host:%s,command:%s,err:%s'%(host,command,err))
+        raise Exception('ssh exec command error')
     return result
 
 @allure.feature("必测用例")
@@ -110,6 +111,7 @@ class Test_CheckList(object):
         """
         对禅道及jenkins构建
         """
+        pytest.mark.skip()
         print os.path.realpath(__file__)
         version = "2.8.2.0"
         zt = zentao(config.zentao_url, config.zentao_user, config.zentao_password,
