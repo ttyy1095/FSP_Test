@@ -40,12 +40,9 @@ logging.basicConfig(level=logging.INFO)
 # logger.addHandler(fh)
 
 zk = KazooClient(hosts=config.zookeeperAddr)
+zk.start()
 
-
-@pytest.fixture(scope='module')
-def module_fixture():
-    zk.start()
-    yield
+def teardown_module():
     zk.stop()
 
 def get_all_server_ip(service_type):
@@ -167,47 +164,22 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1692:服务崩溃后守护进程能够自动拉起")
     def test_service_crash(self):
         logger = logging.getLogger('Platform-fsp_sss-1692')
-        logger.debug("Platform-fsp_sss-1692:服务崩溃后守护进程能够自动拉起")
-        for service_type in config.services.keys():
-            process_name = config.services[service_type]["process_name"]
-            instance_ids = config.services[service_type]["servers"].keys()
-            if len(instance_ids) > 0:
-                instance_id = instance_ids[0]
+        logger.info("Platform-fsp_sss-1692:服务崩溃后守护进程能够自动拉起")
 
-                ip = config.services[service_type]["servers"][instance_id]
-                if ip == "":
-                    logger.error(
-                        "ip is empty ,check in service_type: %s where instance_id: %s" %
-                        (service_type, instance_id))
-                    continue
-                ssh = paramiko.SSHClient()
-                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                logger.debug("ssh connect to ip:%s" % ip)
-                try:
-                    ssh.connect(ip, port=22, username="root", password="123456")
-                except:
-                    logger.error(
-                        "can't connect to ip: %s,check in service_type: %s where instance_id: %s"
-                        % (ip, service_type, instance_id))
-                    assert 1 != 1
-                ssh.exec_command("pkill %s" % process_name)
-                time.sleep(5)
-                command = "ps -ef|grep %s|grep -v grep|wc -l" % process_name
-                _, stdout, stderr = ssh.exec_command(command)
-                result = stdout.read()
-                if not result:
-                    # 执行命令失败
-                    logger.error("exec_command error:(ip:%s command:%s err:%s)" %
-                                 (ip, command, stderr.read()))
-                    assert 1 != 1
-                else:
-                    count = int(result.strip())
-                    if count != 1:
-                        logger.error(
-                            "service don't restart when crash:(ip:%s process_name:%s)" %
-                            (ip, process_name))
-                    assert count == 1
-                ssh.close()
+        service_dict = {'gc':'group_controller','sc':'stream_controller','rule':'rule_server','ms':'moniter_server',
+                        'ma':'moniter_agent','gs':'group_server','ss':'stream_server'}
+        for service_type in service_dict.keys():
+            process_name = service_dict[service_type]
+            ips = get_all_server_ip(service_type)
+            if len(ips) < 1:
+                logger.error('%s must have more than 1 isntance'%service_type)
+
+            self.ssh_exec_command(ips[0]," ps -ef|grep %s|grep -v grep|awk '{print $2}'|xargs kill" % process_name)
+            time.sleep(5)
+            count = self.ssh_exec_command(ips[0],"ps -ef|grep %s|grep -v grep|wc -l" % process_name)
+
+            assert int(count) == 1
+
 
     @pytest.fixture(scope='function')
     def keep_all_gc_running(self):
@@ -225,21 +197,19 @@ class Test_CheckList(object):
         """
         logger = logging.getLogger('Platform-fsp_sss-1693')
         logger.info('Platform-fsp_sss-1693')
+        ips = get_all_server_ip('gc')
 
-        ids = config.services["gc"]["servers"].keys()
-        if len(ids) < 2:
+        if len(ips) < 2:
             logger.error("must have more than 2 gc")
-            assert 1 != 1
-        gc1_host = config.services["gc"]["servers"][ids[0]]
-        logger.info(gc1_host)
-        self.ssh_exec_command(gc1_host,"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
+            raise Exception("must have more than 2 gc")
+
+        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
+        time.sleep(2)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(gc1_host,"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh start ")
-        for rest in range(1, len(ids)):
-            othergc_host = config.services["gc"]["servers"][ids[rest]]
-            self.ssh_exec_command(othergc_host,"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
-
+        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh start ")
+        self.ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/gc && ./GCMonitorCtrl.sh stop")
+        time.sleep(2)
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -255,21 +225,18 @@ class Test_CheckList(object):
 
         """
         logger = logging.getLogger('Platform-fsp_sss-1694')
-
-        ids = config.services["sc"]["servers"].keys()
-        if len(ids) < 2:
+        ips = get_all_server_ip('sc')
+        if len(ips) < 2:
             logger.error("must have more than 2 sc")
-            assert 1 != 1
-        sc1_host = config.services["sc"]["servers"][ids[0]]
+            raise Exception("must have more than 2 sc")
 
-        self.ssh_exec_command(sc1_host,"cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
-        time.sleep(2)
+        self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
-        self.ssh_exec_command(sc1_host, "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh start")
-        for rest in range(1, len(ids)):
-            othersc_host = config.services["sc"]["servers"][ids[rest]]
-            self.ssh_exec_command(othersc_host,"cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
+        self.ssh_exec_command(ips[0], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh start")
+        self.ssh_exec_command(ips[1], "cd /fsmeeting/fsp_sss_stream/sc && ./SCMonitorCtrl.sh stop")
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -295,12 +262,12 @@ class Test_CheckList(object):
             assert len(ips) >= 2
 
         self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
-        time.sleep(2)
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
         self.ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
         self.ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
-
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -322,21 +289,21 @@ class Test_CheckList(object):
         ids = config.services["icegrid"]["servers"].keys()
         if len(ids) == 2:
             logger.error("must have 2 ice node")
-            assert 1 != 1
-        ice1_host = config.services["ice"]["servers"][ids[0]]
+            raise Exception("must have 2 ice node")
+        ice1_host = config.services["icegrid"]["servers"][ids[0]]
 
         self.ssh_exec_command(ice1_host,"pkill icegridnode")
-        time.sleep(2)
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
         # 重新启动node1
         self.ssh_exec_command(ice1_host,"cd /fsmeeting/fsp_sss_stream/icegrid/%s && icegridnode --Ice.Config=config.server --Ice.IPv6=0 --daemon --nochdir"
             % ids[0])
         #关闭node2
-        other_ice = config.services["rule"]["servers"][ids[1]]
+        other_ice = config.services["icegrid"]["servers"][ids[1]]
 
         self.ssh_exec_command(other_ice,"pkill icegridnode")
-
+        time.sleep(5)
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -358,10 +325,10 @@ class Test_CheckList(object):
         main = zk.get_children("/fsp/ms")[0]
         standby = zk.get_children("/fsp/ms_replca")[0]
 
-        main_ms_host = config.services["ms"]["servers"][main]
+        main_ms_host = json.loads(zk.get('/fsp/ms/%s'%main)[0])['ip']
 
         self.ssh_exec_command(main_ms_host,"pkill MSMonitor.sh && pkill moniter_server")
-        standby_ms_host = config.services["ms"]["servers"][standby]
+        standby_ms_host = json.loads(zk.get('/fsp/ms_replca/%s'%standby)[0])['ip']
 
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
@@ -397,19 +364,18 @@ class Test_CheckList(object):
 
     @allure.story("Platform-fsp_sss-1701:MS给MA下发任务，所有的MA都收到并且执行了任务")
     def test_all_ma_received(self):
-        zk = KazooClient(hosts=config.zookeeperAddr, timeout=10.0)
-        zk.start()
-        main = zk.get_children("/fsp/ms")[0]
 
-        ssh = self.get_ssh_connect(config.services["ms"]["servers"][main])
+        main = zk.get_children("/fsp/ms")[0]
+        main_ms_host = json.loads(zk.get('/fsp/ms/%s' % main)[0])['ip']
+
+
 
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
         # 获取当天最后一个moniter_server日志中含有“Invoke TimeTask”的行数
-        _, stdout, stderr = ssh.exec_command(
-            "grep  'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
+
+        task_str = self.ssh_exec_command(main_ms_host,"grep  'Invoke TimeTask' `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'`"
             % rq)
-        task_str = stdout.read()
         tasks = re.findall(r'\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\.\d{9}\]', task_str)
 
         isPass = True
@@ -420,29 +386,26 @@ class Test_CheckList(object):
                 isPass = False
                 break
         assert isPass == True
-        _, stdout, stderr = ssh.exec_command(
-            "cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 200"
+
+        task_str = self.ssh_exec_command(main_ms_host,"cat `ls -l /fsmeeting/fsp_sss_stream/ms/log/%s/moniter_server_*|sed -n '$p'|awk '{print $NF}'` |tail -n 200"
             % rq)
-        task_str = stdout.read()
 
         ma_list = re.findall(r"recv kafka msg\(from: (.+)\)", task_str)
         ma_list = list(set(ma_list))
         ma_in_zk = zk.get_children('/fsp/ma')
-        zk.stop()
+
         assert len(ma_list) == len(ma_in_zk) - 1
 
     @allure.story("Platform-fsp_sss-1702:ma上报的资源使用信息正确")
     def test_ma_report(self):
-        zk = KazooClient(hosts=config.zookeeperAddr, timeout=10.0)
-        zk.start()
+
         ma_all = zk.get_children("/fsp/ma")
-        zk.stop()
-        ssh = self.get_ssh_connect(config.services['icegrid']['servers']['node1'])
+
+        ice_master_ip = config.services['icegrid']['servers']['node1']
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-        _, stdout, stderr = ssh.exec_command(
-            "cat `ls -l /fsmeeting/fsp_sss_stream/icegrid/node1/log/%s/TimedTask_*|sed -n '$p'|awk '{print $NF}'` |grep band_usage|tail -n %d"
+
+        stdout_str = self.ssh_exec_command(ice_master_ip,"cat `ls -l /fsmeeting/fsp_sss_stream/icegrid/node1/log/%s/TimedTask_*|sed -n '$p'|awk '{print $NF}'` |grep band_usage|tail -n %d"
             % (rq, len(ma_all)))
-        stdout_str = stdout.read()
         resources_info = re.findall(
             r'ip\((\d+.\d+.\d+.\d+)\), cpu_usage\((\d.\d+)\), mem_usage\((\d.\d+)\), band_usage\((\d.\d+)\)',
             stdout_str)
@@ -459,8 +422,7 @@ class Test_CheckList(object):
     def test_ma_report(self):
         db = redis.StrictRedis(host=config.REDIS['host'], port=config.REDIS['port'], db=0)
 
-        zk = KazooClient(hosts=config.zookeeperAddr, timeout=10.0)
-        zk.start()
+
         gs_all = zk.get_children("/fsp/gs")
         ss_all = zk.get_children("/fsp/ss")
         media_severs = gs_all + ss_all
