@@ -653,6 +653,5 @@ class Test_CheckList(object):
                 allure.attach("send_id:%s,recv_id:%s,time:%s"%(send_id,recv_id,now_time),'错误信息',allure.attachment_type.TEXT)
             assert result
 
-if __name__ == '__main__':
 
-    pytest.main("py.test -q test_checklist.py:test_sc_group test_checklist.py:test_rule_group --alluredir ./allure-result")
+
