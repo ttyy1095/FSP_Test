@@ -15,7 +15,7 @@ zk.start()
 print zk.get_children("/fsp/ms")
 
 print json.loads(zk.get("/fsp/rule/rule1")[0])
-quit()
+
 # import pytest
 #
 # @pytest.fixture(scope="session")
@@ -47,64 +47,15 @@ from ctypes import *
 # print rsp
 
 import psutil
-def get_host_ip():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('114.114.114.114', 80))
-        ip = s.getsockname()[0]
-    finally:
-        s.close()
+import paramiko
 
-    return ip
-
-from lxml import etree
-
-def choose_server(service_type,group_name,use_specialline=False):
-    """
-    修改配置文件，使客户端能登录到指定服务器上
-    :param service_type:
-    :param group_name:
-    :param use_specialline:
-    :return:
-    """
-    testdata_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'TestData')
-    default_conf = os.path.join(testdata_path,'rule-config_Transnational.xml')
-    tree = etree.parse(default_conf)
-
-    r = tree.xpath('//IPRuleSet')[0]
-    r.clear()
-    iprule = etree.Element('IPRule', {"serverType": service_type})
-    ip = etree.Element('IP')
-    ip.text = get_host_ip()
-    groupname = etree.Element("GroupName")
-    groupname.text = group_name
-    iprule.append(ip)
-    iprule.append(groupname)
-    r.append(iprule)
-    if use_specialline:
-        ValueOfUseSpecialLineConfig = tree.find('//TransnationalConfig/ValueOfUseSpecialLineConfig')
-        ValueOfUseSpecialLineConfig.text = '0.01'
-    xml_str =  etree.tostring(tree,encoding="utf-8",pretty_print=True)
-    xml_path = os.path.join(testdata_path,'rule_config_temp.xml')
-    with open(xml_path,'w') as f:
-        f.write(xml_str)
-    return xml_path
-# print etree.tostring(tree,encoding="utf-8",pretty_print=True)
-
-# choose_server('gs','gs_group1',True)
-# print etree.tostring(r[0])
-import re,datetime
-
-print time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
-
-# with open(r'C:\Users\huangjie\Documents\Inpor\FMClient\log\new\vncmp-DESKTOP-JPRBBOB-10-54-18.log.text','r') as f:
-#     lines = f.read()
-#
-#     start_time = re.findall(r'(\d{2}:\d{2}:\d{2})\.\d{6}',lines)[0]
-#     start_time = time.mktime(time.strptime('2018-01-01 %s'%start_time,'%Y-%m-%d %H:%M:%S'))
-#     recv_time = re.findall(r'(\d{2}:\d{2}:\d{2})\.\d{6}.*?VideoDecoder:VIDEO_Decode_StartDecompress success',lines)[0]
-#     recv_time = time.mktime(time.strptime('2018-01-01 %s'%recv_time,'%Y-%m-%d %H:%M:%S'))
-#
-#     recv_time-start_time
-    # for line in  lines:
-    #     print line
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(hostname='192.168.7.72', port=22, username="root", password="123456")
+# stdin,stdout,stderr = ssh.exec_command("ps -ef|grep moniter_agent|grep -v grep|awk '{print $2}'|xargs kill")
+stdin,stdout,stderr = ssh.exec_command("ls /fsmeeting/fsp_sss_streams")
+print stdout.read()
+# print stdin.read()
+# print stdout.read()
+print stderr.read()
+print stdout.channel.recv_exit_status()

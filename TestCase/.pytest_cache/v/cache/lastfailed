@@ -6,6 +6,7 @@
   "test_checklist.py::Test_CheckList::()::test_nc_oc_transnational_specialline": true, 
   "test_checklist.py::Test_CheckList::()::test_nc_transnational_not_specialline": true, 
   "test_checklist.py::Test_CheckList::()::test_oc_not_cascade": true, 
+  "test_checklist.py::Test_CheckList::test_rule_group": true, 
   "test_demo.py::TestShoppingTrolley::()::test_add_shopping_trolley": true, 
   "test_demo.py::test_2": true, 
   "test_gc.py::TestParametrize::()::test_eval": true, 

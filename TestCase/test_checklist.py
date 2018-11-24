@@ -58,7 +58,7 @@ def changeRuleConf_step(fileName):
         sftp_client = paramiko.SFTPClient.from_transport(transport)
         sftp_client.put(filepath, "/fsmeeting/fsp_sss_stream/rule/rule-config.xml")
         sftp_client.close()
-    time.sleep(2)
+    time.sleep(5)
 
 def get_ssh_connect( host):
     connects = {}
@@ -74,11 +74,13 @@ def ssh_exec_command(host,command):
     ssh = get_ssh_connect(host)
     stdin,stdout,stderr = ssh.exec_command(command,timeout=600)
     # 必须要清除buffer，否则会立即往下执行
-    result = stdout.read()
-    if not result:
+    status = stdout.channel.recv_exit_status()
+    if status != 0:
         err = stderr.read()
-        logger.error('ssh exec command error(host:%s,command:%s,err:%s'%(host,command,err))
+        logger.error('ssh exec command error(host:%s,command:%s,err:%s' % (host, command, err))
         raise Exception('ssh exec command error')
+    else:
+        result = stdout.read()
     return result
 
 @allure.feature("必测用例")
@@ -162,6 +164,7 @@ class Test_CheckList(object):
         assert file_version in version
 
     @allure.story("Platform-fsp_sss-1691:服务器重启后能够正常运行和处理业务")
+    @pytest.mark.skip(reason='take long time')
     def test_restartAllServices(self):
         logger = logging.getLogger('Platform-fsp_sss-1691')
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts restart_all.yml")
@@ -269,12 +272,12 @@ class Test_CheckList(object):
             assert len(ips) >= 2
 
         ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
-        time.sleep(5)
+        time.sleep(10)
         check_video_result = self.check_video()
         assert check_video_result == True
         ssh_exec_command(ips[1],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh start")
         ssh_exec_command(ips[0],"cd /fsmeeting/fsp_sss_stream/rule && ./RULEMonitorCtrl.sh stop")
-        time.sleep(5)
+        time.sleep(10)
         check_video_result = self.check_video()
         assert check_video_result == True
 
@@ -294,7 +297,7 @@ class Test_CheckList(object):
         """
         logger = logging.getLogger('Platform-fsp_sss-1696')
         ids = config.services["icegrid"]["servers"].keys()
-        if len(ids) == 2:
+        if len(ids) != 2:
             logger.error("must have 2 ice node")
             raise Exception("must have 2 ice node")
         ice1_host = config.services["icegrid"]["servers"][ids[0]]
@@ -316,9 +319,9 @@ class Test_CheckList(object):
 
     @pytest.fixture(scope='function')
     def keep_all_ms_running(self):
-        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ms.yml")
         yield
-        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ms.yml")
 
     @allure.story("Platform-fsp_sss-1697:主ms崩溃不重启，对其他服务无影响，从ms接替业务处理")
     def test_ms_group(self,keep_all_ms_running):
@@ -649,9 +652,5 @@ class Test_CheckList(object):
             assert result
 
 if __name__ == '__main__':
-    rq = time.strftime('%Y%m%d', time.localtime(time.time()))
-    report_path = os.path.join(os.getcwd(), "report", rq)
-    print report_path
-    if not os.path.exists(report_path):
-        os.mkdir(report_path)
-    pytest.main("py.test -q test_checklist.py --alluredir %s" % report_path)
+
+    pytest.main("py.test -q test_checklist.py:test_sc_group test_checklist.py:test_rule_group --alluredir ./allure-result")
