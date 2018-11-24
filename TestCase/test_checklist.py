@@ -326,9 +326,10 @@ class Test_CheckList(object):
         standby = zk.get_children("/fsp/ms_replca")[0]
 
         main_ms_host = json.loads(zk.get('/fsp/ms/%s'%main)[0])['ip']
+        standby_ms_host = json.loads(zk.get('/fsp/ms_replca/%s' % standby)[0])['ip']
 
         self.ssh_exec_command(main_ms_host,"pkill MSMonitor.sh && pkill moniter_server")
-        standby_ms_host = json.loads(zk.get('/fsp/ms_replca/%s'%standby)[0])['ip']
+
 
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
