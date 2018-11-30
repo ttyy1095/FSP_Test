@@ -97,7 +97,6 @@ class Client(object):
         def callback(h, extra):
 
             try:
-
                 if win32gui.IsWindowVisible(h) and win32gui.GetClassName(h) == "MENUEX":
                     if "开始菜单" == win32gui.GetWindowText(h).decode("gbk").encode("utf-8"):
                         extra.append(h)
@@ -146,10 +145,13 @@ class Client(object):
         print self.hwnd
         win32gui.SetWindowText(self.hwnd, self.client_flag)
         rect = (0, 0, 0, 0)
+        i = 0
         while rect[2] - rect[0] <= 929:
+            if i > 60:
+                raise Exception('login outtime')
             time.sleep(1)
             rect = win32gui.GetWindowRect(self.hwnd)
-
+            i += 1
         win32gui.MoveWindow(self.hwnd, 0, 0, 929, 694, 0)
         time.sleep(1)
 
