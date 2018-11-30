@@ -57,8 +57,8 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
-            <Region>欧洲</Region>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
             <InstanceName>ss1</InstanceName>
@@ -66,7 +66,7 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>多线</ISP>
+            <ISP>移动</ISP>
             <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
@@ -75,7 +75,7 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
+            <ISP>多线</ISP>
             <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
@@ -84,8 +84,8 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
-            <Region>欧洲</Region>
+            <ISP>联通</ISP>
+            <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
             <InstanceName>ss4</InstanceName>
@@ -93,7 +93,7 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
+            <ISP>多线</ISP>
             <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
@@ -102,8 +102,8 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
-            <Region>欧洲</Region>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
             <InstanceName>vncgs1</InstanceName>
@@ -129,8 +129,8 @@
             <CPUOverloadPoint>1.8</CPUOverloadPoint>
             <MemoryOverloadPoint>1.8</MemoryOverloadPoint>
             <BandWidthPoint>1.8</BandWidthPoint>
-            <ISP>其他</ISP>
-            <Region>欧洲</Region>
+            <ISP>多线</ISP>
+            <Region>中国</Region>
         </InstanceInfo>
         <InstanceInfo>
             <InstanceName>vncss1</InstanceName>
@@ -173,7 +173,7 @@
     <!-- 针对含有专线的跨国通信方案配置 -->
     <TransnationalConfig>
         <!-- ping距离的阈值, 如果超过, 则使用专线的跨国通信方案 -->
-        <ValueOfUseSpecialLineConfig>0.01</ValueOfUseSpecialLineConfig>
+        <ValueOfUseSpecialLineConfig>500</ValueOfUseSpecialLineConfig>
         <!-- 专线组集合 -->
         <SpecialLine>
             <LineInfo>
@@ -185,11 +185,11 @@
         <SpecialLineGroup>
             <InstanceGroup GroupName="ss_Shanghai">
                 <Region>中国</Region>
-                <InstanceName>ss4</InstanceName>
+                <InstanceName>ss10</InstanceName>
             </InstanceGroup>
             <InstanceGroup GroupName="ss_Europe">
                 <Region>欧洲</Region>
-                <InstanceName>ss5</InstanceName>
+                <InstanceName>ss11</InstanceName>
             </InstanceGroup>
         </SpecialLineGroup>
     </TransnationalConfig>
@@ -197,7 +197,7 @@
         请勿将下面所配置的节点再配置到后面的InstanceGroupSet分组中, 这些节点禁止nc登录
         专线机房不涉及国内通信, 所以配置在这个中心节点集合中-->
     <KernelStreamServer>
-         <InstanceName>ss2</InstanceName>
+         <InstanceName>ss5</InstanceName>
     </KernelStreamServer>
     <!--服务实例组配置,同一个groupName 下的实例必须是相同的，不能把gs和ss配在一起，否则配置无效 TODO在代码中进行判断-->
     <InstanceGroupSet>
@@ -280,115 +280,37 @@
                 <GroupName>vncgs3</GroupName>
                 <GroupName>vncss1</GroupName>
                 <GroupName>vncss2</GroupName>
-                <GroupName>ss2</GroupName>
+                <GroupName>ss5</GroupName>
             </MediaTypeRule>
         </MediaTypeRuleSet>
         <!--IP规则，可同时配置多个IP地址到一个实例组-->
         <IPRuleSet>
-            <IPRule serverType="ss">
-                <IP>192.168.8.68</IP>
-                <GroupName>ss_group3</GroupName>
-            </IPRule>
-            <IPRule serverType="gs">
-                <IP>192.168.8.68</IP>
-                <GroupName>gs_group3</GroupName>
-            </IPRule>
         </IPRuleSet>
         <!--IP段规则-->
         <IPRangeRuleSet>
-            <IPRule serverType="gs">
-                <StartIP>23.33.184.1</StartIP>
-                <EndIP>23.33.184.100</EndIP>
-                <GroupName>gs_group2</GroupName>
-            </IPRule>
-            <IPRule serverType="ss">
-                <StartIP>23.33.184.1</StartIP>
-                <EndIP>23.33.184.100</EndIP>
-                <GroupName>ss_group2</GroupName>
-            </IPRule>
-            <IPRule serverType="gs">
-                <StartIP>1.1.8.2</StartIP>
-                <EndIP>1.1.8.8</EndIP>
-                <GroupName>gs_group2</GroupName>
-            </IPRule>
-            <IPRule serverType="ss">
-                <StartIP>1.1.8.2</StartIP>
-                <EndIP>1.1.8.8</EndIP>
-                <GroupName>ss_group2</GroupName>
-            </IPRule>
         </IPRangeRuleSet>
         <!--9.省份+运营商规则-->
         <ProvinceAndISPRuleSet>
-            <ProvinceAndISPRule serverType="gs">
-                <ProvinceName>广东</ProvinceName>
-                <ISPName>电信</ISPName>
-                <GroupName>gs_group3</GroupName>
-            </ProvinceAndISPRule>
-            <ProvinceAndISPRule serverType="ss">
-                <ProvinceName>广东</ProvinceName>
-                <ISPName>电信</ISPName>
-                <GroupName>ss_group3</GroupName>
-            </ProvinceAndISPRule>
+
         </ProvinceAndISPRuleSet>
         <!--7.省份则，可同时配置多个省份到一个实例组-->
         <ProvinceRuleSet>
-            <ProvinceRule serverType="gs">
-                <ProvinceName>广东</ProvinceName>
-                <GroupName>gs_group1</GroupName>
-            </ProvinceRule>
-            <ProvinceRule serverType="ss">
-                <ProvinceName>广东</ProvinceName>
-                <GroupName>ss_group1</GroupName>
-            </ProvinceRule>
+
         </ProvinceRuleSet>
         <!--3.运营商规则 serverType 代表是ss服务还是gs服务 -->
         <ISPRuleSet>
-            <ISPRule serverType="gs">
-                <ISPName>电信</ISPName>
-                <GroupName>gs_group2</GroupName>
-            </ISPRule>
-            <ISPRule serverType="ss">
-                <ISPName>电信</ISPName>
-                <GroupName>ss_group2</GroupName>
-            </ISPRule>
-            <!--4.配置默认运营商规则-->
-            <ISPRule serverType="gs">
-                <ISPName/>
-                <GroupName>group3</GroupName>
-            </ISPRule>
+
         </ISPRuleSet>
         <!--国家规则 -->
         <CountryRuleSet>
-            <CountryRule serverType="gs">
-                <CountryName>美国</CountryName>
-                <GroupName>gs_group3</GroupName>
-            </CountryRule>
-            <CountryRule serverType="ss">
-                <CountryName>美国</CountryName>
-                <GroupName>ss_group3</GroupName>
-            </CountryRule>
+
         </CountryRuleSet>
         <!--大洲规则，可同时配置多个大洲到一个实例组-->
         <ContinentRuleSet>
-            <ContinentRule serverType="gs">
-                <ContinentName>北美洲</ContinentName>
-                <GroupName>gs_group1</GroupName>
-            </ContinentRule>
-            <ContinentRule serverType="ss">
-                <ContinentName>北美洲</ContinentName>
-                <GroupName>ss_group1</GroupName>
-            </ContinentRule>
         </ContinentRuleSet>
         <!--地域规则（国外），配置默认地域规则-->
         <RegionRuleSet>
-            <RegionRule serverType="gs">
-                <RegionName/>
-                <GroupName>gs_default</GroupName>
-            </RegionRule>
-            <RegionRule serverType="ss">
-                <RegionName/>
-                <GroupName>ss_default</GroupName>
-            </RegionRule>
+
         </RegionRuleSet>
         <!--默认规则-->
         <DefaultRuleSet>

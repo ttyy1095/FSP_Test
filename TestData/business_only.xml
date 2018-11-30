@@ -211,8 +211,7 @@
         请勿将下面所配置的节点再配置到后面的InstanceGroupSet分组中, 这些节点禁止nc登录
         专线机房不涉及国内通信, 所以配置在这个中心节点集合中-->
     <KernelStreamServer>
-        <InstanceName>ss1</InstanceName>
-        <InstanceName>ss2</InstanceName>
+        <InstanceName>ss5</InstanceName>
     </KernelStreamServer>
     <!--服务实例组配置,同一个groupName 下的实例必须是相同的，不能把gs和ss配在一起，否则配置无效 TODO在代码中进行判断
         专线节点专门用于转发跨国数据, 不能登录client, 所以也不能配置在这个节后里面-->

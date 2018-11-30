@@ -92,6 +92,7 @@ class Test_CheckList(object):
 
     def treadown_class(self):
         zk.close()
+        changeRuleConf_step('rule-config_default.xml')
 
     def check_video(self):
         _,_,result = check_oc_av()
@@ -184,10 +185,10 @@ class Test_CheckList(object):
     @pytest.fixture(scope='function')
     def keep_all_gc_running(self):
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
-        print '初始化gc'
+        time.sleep(5)
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_gc.yml")
-        print '恢复gc'
+        time.sleep(5)
 
     @allure.story("Platform-fsp_sss-1693:三台gc有一台处理业务时崩溃不重启，对其他服务无影响")
     def test_gc_group(self,keep_all_gc_running):
@@ -216,8 +217,10 @@ class Test_CheckList(object):
     @pytest.fixture(scope='function')
     def keep_all_sc_running(self):
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
+        time.sleep(5)
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_sc.yml")
+        time.sleep(5)
 
     @allure.story("Platform-fsp_sss-1694:三台sc有一台处理业务时崩溃不重启，对其他服务无影响")
     def test_sc_group(self,keep_all_sc_running):
@@ -244,9 +247,11 @@ class Test_CheckList(object):
     def keep_all_rule_running(self):
         ssh_exec_command(config.AUTO_TEST_SERVER,
                               "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
+        time.sleep(5)
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,
                               "cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_rule.yml")
+        time.sleep(5)
 
 
     @allure.story("Platform-fsp_sss-1695:两台rule有一台处理业务时崩溃不重启，对其他服务无影响")
@@ -274,9 +279,10 @@ class Test_CheckList(object):
     @pytest.fixture(scope='function')
     def keep_all_ice_running(self):
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
+        time.sleep(5)
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ice.yml")
-
+        time.sleep(5)
 
     @allure.story("Platform-fsp_sss-1696:node1的ice_server崩溃不重启，node2的ice_server接替业务处理")
 
@@ -314,6 +320,7 @@ class Test_CheckList(object):
         yield
         ssh_exec_command(config.AUTO_TEST_SERVER,"cd /etc/ansible/jenkins_deploy/autotest && ansible-playbook -i inventories/hosts start_ms.yml")
         time.sleep(5)
+
     @allure.story("Platform-fsp_sss-1697:主ms崩溃不重启，对其他服务无影响，从ms接替业务处理")
     def test_ms_group(self,keep_all_ms_running):
         """
@@ -353,24 +360,109 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1698:gs崩溃后重启，NC能够重连原来的gs，OC需重新登录")
     def test_gs_crash(self):
         logger = logging.getLogger('Platform-fsp_sss-1698')
-        with allure.step(""):
-            pass
+        changeRuleConf_step('rule-config_assignbyuserid.xml')
+        send_id = str(uuid.uuid4())
+        send = Client(send_id,False)
+        send.login(USERA_NAME,USER_PWD,ROOM1_ID)
+        recv_id = str(uuid.uuid4())
+        recv = Client(recv_id,False)
+        recv.login(USERB_NAME,USER_PWD,ROOM1_ID)
+        send_login_cp = json.loads(zk.get('/fsp/gs/gs1')[0])['ip']
+        ssh_exec_command(send_login_cp,'pkill group_server')
+        time.sleep(5)
+        send.publishAudio()
+        send.publishVideo()
+        time.sleep(30)
+        assert recv.has_recv_audio_video()
+
+
 
     @allure.story("Platform-fsp_sss-1699:边缘ss崩溃不重启，NC能重连新的边缘ss节点")
     def test_marginss_crash(self):
-        pass
+
+        changeRuleConf_step('rule-config_assignbyuserid.xml')
+        send_id = str(uuid.uuid4())
+        send = Client(send_id,False)
+        send.login(USERA_NAME,USER_PWD,ROOM1_ID)
+        recv_id = str(uuid.uuid4())
+        recv = Client(recv_id,False)
+        recv.login(USERB_NAME,USER_PWD,ROOM1_ID)
+        send.publishAudio()
+        send.publishVideo()
+        time.sleep(30)
+        assert recv.has_recv_audio_video()
+        send_login_ss = json.loads(zk.get('/fsp/ss/ss1')[0])['ip']
+        ssh_exec_command(send_login_ss,'pkill stream_server')
+        recv_login_ss = json.loads(zk.get('/fsp/ss/ss3')[0])['ip']
+        ssh_exec_command(recv_login_ss,'pkill stream_server')
+
+        time.sleep(60)
+        audio_count, video_count = recv.count_av_log()
+        time.sleep(60)
+        audio_count1, video_count1 = recv.count_av_log()
+        assert audio_count1 > audio_count and video_count1 > video_count
 
     @allure.story("Platform-fsp_sss-1700:中转ss崩溃不重启，NC会连接新上级ss，OC会重连其他topo值最小的中转ss")
     def test_kernelss_crash(self):
-        pass
+        """
+        实际上NC、OC均由rule重新分配中转SS,这里NC的中转SS采用配置不同运营商的边缘SS，中转SS为多线，保证NC广播时存在中转SS
+        多个中转SS，rule在分配时存在随机性，如果当时rule获取刚崩溃SS的状态为离线，就会选择当前可用中转SS中topo值最小的SS
+        此处存在一个bug，rule获取SS的状态存在滞后，当SS已经离线了仍存在分配到该SS的可能性
+        """
+
+        changeRuleConf_step('rule-config_assignbyuserid.xml')
+        with allure.step('NC广播，中转SS崩溃'):
+            Client.close_all_client()
+            send_id = str(uuid.uuid4())
+            send = Client(send_id,False)
+            send.login(USERA_NAME,USER_PWD,ROOM1_ID)
+            recv_id = str(uuid.uuid4())
+            recv = Client(recv_id,False)
+            recv.login(USERB_NAME,USER_PWD,ROOM1_ID)
+            send.publishAudio()
+            send.publishVideo()
+            time.sleep(30)
+            assert recv.has_recv_audio_video()
+            kernel_ss = json.loads(zk.get('/fsp/ss/ss4')[0])['ip']
+            ssh_exec_command(kernel_ss,'pkill stream_server')
+            kernel_ss = json.loads(zk.get('/fsp/ss/ss5')[0])['ip']
+            ssh_exec_command(kernel_ss,'pkill stream_server')
+            time.sleep(60)
+            audio_count, video_count = recv.count_av_log()
+            time.sleep(60)
+            audio_count1, video_count1 = recv.count_av_log()
+            send.closeClient()
+            recv.closeClient()
+            assert audio_count1 > audio_count and video_count1 > video_count
+        with allure.step('OC广播，中转SS崩溃'):
+            Client.close_all_client()
+            send_id = str(uuid.uuid4())
+            send = Client(send_id)
+            send.login(USERA_NAME,USER_PWD,ROOM1_ID)
+            recv_id = str(uuid.uuid4())
+            recv = Client(recv_id)
+            recv.login(USERB_NAME,USER_PWD,ROOM1_ID)
+            send.publishAudio()
+            send.publishVideo()
+            time.sleep(30)
+            assert recv.has_recv_audio_video()
+            kernel_ss = json.loads(zk.get('/fsp/ss/ss4')[0])['ip']
+            ssh_exec_command(kernel_ss,'pkill stream_server')
+            kernel_ss = json.loads(zk.get('/fsp/ss/ss5')[0])['ip']
+            ssh_exec_command(kernel_ss,'pkill stream_server')
+            time.sleep(60)
+            audio_count, video_count = recv.count_av_log()
+            time.sleep(60)
+            audio_count1, video_count1 = recv.count_av_log()
+            send.closeClient()
+            recv.closeClient()
+            assert audio_count1 > audio_count and video_count1 > video_count
 
     @allure.story("Platform-fsp_sss-1701:MS给MA下发任务，所有的MA都收到并且执行了任务")
     def test_all_ma_received(self):
 
         main = zk.get_children("/fsp/ms")[0]
         main_ms_host = json.loads(zk.get('/fsp/ms/%s' % main)[0])['ip']
-
-
 
         rq = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 

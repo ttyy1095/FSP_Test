@@ -32,6 +32,8 @@ zentao_project = "基础服务平台服务子系统2.8"
 OC_PATH = r"D:\Client\3.15.5.33"
 NC_PATH = r"D:\Client\NC2"
 
+SIMULATOR_PATH = r'D:\AutoTest\ClientSimulator'
+
 USER_PWD = '000000'
 USERA_NAME = 'ptAutoTest00'
 USERA_USERID = '1438593'

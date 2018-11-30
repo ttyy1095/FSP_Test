@@ -22,7 +22,8 @@ def changeRuleConf_step(fileName):
 
 @allure.feature("路由")
 class Test_BusinessInsulate(object):
-
+    def teardown_class(self):
+        changeRuleConf_step('rule-config_default.xml')
 
     def get_group_server(self, producer, service_type, client_ip, user_id, app_id,
                          company_id, room_id, service_type1):

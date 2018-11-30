@@ -244,6 +244,7 @@
         <GroupName>vncgs3</GroupName>
         <GroupName>vncss1</GroupName>
         <GroupName>vncss2</GroupName>
+        <GroupName>ss5</GroupName>
       </MediaTypeRule>
     </MediaTypeRuleSet>
     <!--IP规则，可同时配置多个IP地址到一个实例组-->

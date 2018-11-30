@@ -307,7 +307,24 @@ class Client(object):
             return False
         return True
 
+    def count_av_log(self):
+        """
+        返回当前音视频日志中接收到音视频相关日志的条数
+        :return:
+        """
+        log_file = self.decodeLog("AVQuality-")
+
+        with open(log_file, 'r') as f:
+            logStr = f.read()
+
+        vidrcvs = re.findall(r'{"title":"clividrcv",.+}', logStr)
+        audrcvs = re.findall(r'{"title":"cliaudrcv",.+}', logStr)
+        return len(audrcvs),len(vidrcvs)
+
     def has_recv_audio_video(self):
+        """
+        这里接收音频需要保证有持续的音视频流，最好在禁用掉其他音视频设备，保证音视频源设备只有vcam和立体声混音
+        """
         log_file = self.decodeLog("AVQuality-")
 
         with open(log_file, 'r') as f:

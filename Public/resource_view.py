@@ -57,6 +57,7 @@ def _calc_cpu_rate(host):
 
     cpu_usage = round(1 - (float(cpu_idle2) - float(cpu_idle1)) / (total_cpu_time2 - total_cpu_time1), 6)
     return cpu_usage
+
 def _calc_mem_rate(host):
     str_out = execCommand(host,"cat /proc/meminfo")
 
