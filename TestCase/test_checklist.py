@@ -360,6 +360,7 @@ class Test_CheckList(object):
     @allure.story("Platform-fsp_sss-1698:gs崩溃后重启，NC能够重连原来的gs，OC需重新登录")
     def test_gs_crash(self):
         logger = logging.getLogger('Platform-fsp_sss-1698')
+        Client.close_all_client()
         changeRuleConf_step('rule-config_assignbyuserid.xml')
         send_id = str(uuid.uuid4())
         send = Client(send_id,False)
@@ -379,7 +380,7 @@ class Test_CheckList(object):
 
     @allure.story("Platform-fsp_sss-1699:边缘ss崩溃不重启，NC能重连新的边缘ss节点")
     def test_marginss_crash(self):
-
+        Client.close_all_client()
         changeRuleConf_step('rule-config_assignbyuserid.xml')
         send_id = str(uuid.uuid4())
         send = Client(send_id,False)

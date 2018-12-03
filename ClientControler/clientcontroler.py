@@ -267,7 +267,7 @@ class Client(object):
     def decodeLog(self, log_file_header):
         tm = time.localtime(time.time())
         log_path = os.path.join(documents_path, "Inpor", self.client_flag, "log",
-                                "%s-%s-%s" % (tm.tm_year, tm.tm_mon, tm.tm_mday))
+                                "%s-%s-%s" % (tm.tm_year, str(tm.tm_mon).zfill(2), str(tm.tm_mday).zfill(2)))
         # shutil.copyfile(file_abs, copy_name)
         log_files = os.listdir(log_path)
         log_file = ""
