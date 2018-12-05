@@ -49,52 +49,31 @@ def kill_all_client():
     os.system('taskkill /im /f FastMeeting.exe')
     os.system('taskkill /im /f ClientSimulatorUI.exe')
 
-def open_realclient(prefix,num,room_id,pwd):
-    for i in range(0,num):
-        if 1 < 10:
-            username = '%s0%s'%(prefix,i)
-        else:
-            username = '%s%s'%(prefix,i)
-        client_flag = uuid.uuid4()
-        client = Client(client_flag)
-        client.login(username,pwd,room_id)
-        client.publishVideo()
-        client.publishAudio()
-
-def exec_command(data):
-    if data['command_id'] == OPEN_REALCLIENT:
-        room_id = data['room_id']
-        start_username = data['start_username']
-        end_username = data['end_username']
-        pwd = data['pwd']
-        print('open real client')
-    elif data['command_id'] == OPEN_SIMULATOR:
-        room_list = data['room_list']
-        username_prefix = data['username_prefix']
-        start_index = data['start_index']
-        end_index = data['end_index']
-        userlist = []
-        for i in range(int(start_index),int(end_index)+1):
-            userindex = str(i).zfill(2) if i<10 else str(i)
-            userlist = userlist.append(username_prefix+userindex)
-        pwd = data['pwd']
-        cs = ClientSimulator(room_list,userlist,pwd)
-        cs.start()
-        print('open simulator client')
-    elif data['command_id'] == UPLOAD_LOG:
-        print('upload log')
-
-
 
 if __name__ == '__main__':
-    # s.send('{"command_id":1001,"room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"000000" }')
+    # s.send('{"command_id":1002,"ip":"192.168.8.203","room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"000000" }')
 
     # uplaod_log()
     while True:
 
         data = s.recv(1024).decode(encoding='utf8')
         try:
-            json_data = json.loads(data)
-            print json_data
+            msg = json.loads(data)
+            print msg
+            if msg['command_id'] == OPEN_SIMULATOR:
+                room_list = msg['room_list']
+                username_prefix = msg['username_prefix']
+                start_index = msg['start_index']
+                end_index = msg['end_index']
+                userlist = []
+                for i in range(int(start_index), int(end_index) + 1):
+                    userindex = str(i).zfill(2) if i < 10 else str(i)
+                    userlist = userlist.append(username_prefix + userindex)
+                pwd = msg['pwd']
+                cs = ClientSimulator(room_list, userlist, pwd)
+                cs.start()
+                print('open simulator client')
+            elif msg['command_id'] == UPLOAD_LOG:
+                print('upload log')
         except Exception as e:
             print("error data")
