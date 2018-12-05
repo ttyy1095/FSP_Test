@@ -1,0 +1,3 @@
+以下dll文件需放置到python安装的根目录下
+FMNet32.dll
+FrameCore32.dll

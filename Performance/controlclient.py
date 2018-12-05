@@ -4,15 +4,47 @@ import socket  # 导入 socket 模块
 import json
 import sys
 import uuid
+import time
+import paramiko
+
 from protocol import *
 _path = ".."
 sys.path.append(_path)
-
+from Config.config import *
 from ClientControler.clientcontroler import Client
-
+from ClientControler.simulatorcontroler import ClientSimulator
 
 s = socket.socket()  # 创建 socket 对象
 s.connect(('192.168.6.65', 5566))
+myip = s.getsockname()[0]
+
+def uplaod_log():
+    def sftp_upload(host, port, username, password, local, remote):
+        sf = paramiko.Transport((host, port))
+        sf.connect(username=username, password=password)
+        sftp = paramiko.SFTPClient.from_transport(sf)
+        remote_path = remote + '/' + os.path.basename(local)+'/'
+        try:
+            try:
+                sftp.mkdir(remote)
+                sftp.mkdir(remote_path)
+            except Exception as e:
+                print("path exist",e)
+            if os.path.isdir(local):  # 判断本地参数是目录还是文件
+                for f in os.listdir(local):  # 遍历本地目录
+                    sftp.put(os.path.join(local,f), remote_path + f)  # 上传目录中的文件
+            else:
+                sftp.put(local, remote)  # 上传文件
+        except Exception, e:
+            print('upload exception:', e)
+        sf.close()
+
+    date = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+    window_path = os.path.join(SIMULATOR_PATH, 'log', date)
+    remote = '/AutoTest/Performance/log/%s/'%(myip)
+    sftp_upload('192.168.7.70',22,'root','123456',window_path,remote)
+
+
 
 def kill_all_client():
     os.system('taskkill /im /f FastMeeting.exe')
@@ -30,8 +62,6 @@ def open_realclient(prefix,num,room_id,pwd):
         client.publishVideo()
         client.publishAudio()
 
-
-
 def exec_command(data):
     if data['command_id'] == OPEN_REALCLIENT:
         room_id = data['room_id']
@@ -40,11 +70,24 @@ def exec_command(data):
         pwd = data['pwd']
         print('open real client')
     elif data['command_id'] == OPEN_SIMULATOR:
+        room_list = data['room_list']
+        username_prefix = data['username_prefix']
+        start_index = data['start_index']
+        end_index = data['end_index']
+        userlist = []
+        for i in range(int(start_index),int(end_index)+1):
+            userindex = str(i).zfill(2) if i<10 else str(i)
+            userlist = userlist.append(username_prefix+userindex)
+        pwd = data['pwd']
+        cs = ClientSimulator(room_list,userlist,pwd)
+        cs.start()
         print('open simulator client')
     elif data['command_id'] == UPLOAD_LOG:
         print('upload log')
 
+uplaod_log()
 while True:
+
     data = s.recv(1024).decode(encoding='utf8')
     try:
         json_data = json.loads(data)
