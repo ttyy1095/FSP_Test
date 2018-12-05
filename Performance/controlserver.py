@@ -20,7 +20,7 @@ def hand_client_con(client):
         while isNormar:
             data = client.skt.recv(1024)
             msg = json.loads(data)
-
+            print data
             if msg['command_id'] == OPEN_SIMULATOR:
                 get_conn(msg['ip']).send(data)
     except:
@@ -43,7 +43,8 @@ def main():
         print("(%s,%s connected...)" % (ip, cport))
         client = ControlClient(cli,ip)
         controlclient_list.append(client)
-        t=threading.Thread(target=hand_client_con,arg=(client,))
+        t=threading.Thread(target=hand_client_con,args=(client,))
+        t.setDaemon(True)
         t.start()
     s.close()
 

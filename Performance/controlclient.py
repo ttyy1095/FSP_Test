@@ -14,10 +14,9 @@ from Config.config import *
 from ClientControler.clientcontroler import Client
 from ClientControler.simulatorcontroler import ClientSimulator
 
-s = socket.socket()  # 创建 socket 对象
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)  # 创建 socket 对象
 s.connect(('192.168.6.65', 5566))
 myip = s.getsockname()[0]
-
 def uplaod_log():
     def sftp_upload(host, port, username, password, local, remote):
         sf = paramiko.Transport((host, port))
@@ -85,12 +84,17 @@ def exec_command(data):
     elif data['command_id'] == UPLOAD_LOG:
         print('upload log')
 
-uplaod_log()
-while True:
 
-    data = s.recv(1024).decode(encoding='utf8')
-    try:
-        json_data = json.loads(data)
-        print json_data
-    except Exception as e:
-        print("error data")
+
+if __name__ == '__main__':
+    # s.send('{"command_id":1001,"room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"000000" }')
+
+    # uplaod_log()
+    while True:
+
+        data = s.recv(1024).decode(encoding='utf8')
+        try:
+            json_data = json.loads(data)
+            print json_data
+        except Exception as e:
+            print("error data")
