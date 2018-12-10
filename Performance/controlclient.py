@@ -47,8 +47,8 @@ def uplaod_log():
 
 
 def kill_all_client():
-    os.system('taskkill /im /f FastMeeting.exe')
-    os.system('taskkill /im /f ClientSimulatorUI.exe')
+    os.system('taskkill /F /IM FastMeeting.exe')
+    os.system('taskkill /F /IM ClientSimulatorUI.exe')
 
 def get_res_rate():
 
