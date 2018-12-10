@@ -61,7 +61,7 @@ class ClientSimulator():
         subprocess.Popen(prog)
         time.sleep(3)
         self.hwnd = win32gui.FindWindow("#32770", u"仿真测试客户端")
-        print(self.hwnd)
+        print("start simulator hwnd:%s"%self.hwnd)
         if self.hwnd > 0:
             startBtn = win32gui.FindWindowEx(self.hwnd, 0, "Button", u"启动")
             win32gui.SendMessage(self.hwnd, win32con.WM_COMMAND,
@@ -77,6 +77,7 @@ class ClientSimulator():
 
 
     def stop(self):
+        print('stop simulator hwnd:%s'%self.hwnd)
         stopBtn = win32gui.FindWindowEx(self.hwnd, 0, "Button", u"停止")
         win32gui.SendMessage(self.hwnd, win32con.WM_COMMAND,
                                  win32api.MAKELONG(1003, win32con.BN_CLICKED), stopBtn)

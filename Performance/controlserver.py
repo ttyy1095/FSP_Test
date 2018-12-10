@@ -27,7 +27,7 @@ def hand_client_con(client):
             if not data:
                 time.sleep(1.5)
                 continue
-            print data
+            print('recv data from:%s data:%s'%(client.ip,data))
             try:
                 msg = json.loads(data)
                 if msg['command_id'] == OPEN_SIMULATOR:

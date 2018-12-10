@@ -65,8 +65,6 @@ def get_res_rate():
     upload_speed = (io_sent2-io_sent1)/1024
     download_speed = (io_recv2-io_recv1)/1024
 
-    print(cpu_rate,mem_rate,upload_speed,download_speed)
-
     data = {"command_id": REPORT_RES_RATE, "cpu_rate": cpu_rate, "mem_rate": mem_rate, "upload_speed": upload_speed,"download_speed":download_speed}
     return json.dumps(data)
 
