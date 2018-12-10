@@ -87,6 +87,7 @@ if __name__ == '__main__':
             msg = json.loads(data)
             print msg
             if msg['command_id'] == OPEN_SIMULATOR:
+                print('open simulator client')
                 room_list = msg['room_list'].split(',')
                 username_prefix = msg['username_prefix']
                 start_index = msg['start_index']
@@ -100,7 +101,7 @@ if __name__ == '__main__':
                 cs = ClientSimulator(simulator_index,room_list, userlist, pwd)
                 cs_list.append(cs)
                 cs.start()
-                print('open simulator client')
+
             elif msg['command_id'] == CLOSE_SIMULATOR:
                 print('close simulator')
                 simulator_index = msg['simulator_index']
@@ -108,6 +109,7 @@ if __name__ == '__main__':
                     if cs.simulator_index == simulator_index:
                         cs.stop()
                         time.sleep(1)
+                        cs_list.remove(cs)
 
             elif msg['command_id'] == UPLOAD_LOG:
                 print('upload log')
