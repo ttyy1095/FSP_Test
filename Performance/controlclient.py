@@ -110,6 +110,7 @@ if __name__ == '__main__':
                         cs.stop()
                         time.sleep(1)
                         cs_list.remove(cs)
+                        break
 
             elif msg['command_id'] == UPLOAD_LOG:
                 print('upload log')
