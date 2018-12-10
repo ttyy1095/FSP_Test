@@ -80,7 +80,7 @@ if __name__ == '__main__':
             msg = json.loads(data)
             print msg
             if msg['command_id'] == OPEN_SIMULATOR:
-                room_list = msg['room_list']
+                room_list = msg['room_list'].split(',')
                 username_prefix = msg['username_prefix']
                 start_index = msg['start_index']
                 end_index = msg['end_index']

@@ -26,12 +26,15 @@ print('%s'%ll)
 i = 10
 print str(i).zfill(2) if i<10 else str(i)
 
-import pika
-credentials = pika.PlainCredentials('root','root')
-conn = pika.BlockingConnection(pika.ConnectionParameters('192.168.7.111',5672,'fsp',credentials))
-channel = conn.channel()
-channel.queue_declare(queue='testqueue')
-channel.basic_publish(exchange='',
-                      routing_key='testqueue',
-                      body='Hello World!')
-conn.close()
+# import pika
+# credentials = pika.PlainCredentials('root','root')
+# conn = pika.BlockingConnection(pika.ConnectionParameters('192.168.7.111',5672,'fsp',credentials))
+# channel = conn.channel()
+# channel.queue_declare(queue='testqueue')
+# channel.basic_publish(exchange='',
+#                       routing_key='testqueue',
+#                       body='Hello World!')
+# conn.close()
+
+room_list='107894'
+print(room_list.split(','))
