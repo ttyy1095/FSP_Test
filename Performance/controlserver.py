@@ -32,6 +32,8 @@ def hand_client_con(client):
                 msg = json.loads(data)
                 if msg['command_id'] == OPEN_SIMULATOR:
                     get_conn(msg['ip']).send(data)
+                elif msg['command_id'] == CLOSE_SIMULATOR:
+                    get_conn(msg['ip']).send(data)
                 elif msg['command_id'] == REPORT_RES_RATE:
                     cpu_rate = msg['cpu_rate']
                     mem_rate = msg['mem_rate']

@@ -66,14 +66,14 @@ class ClientSimulator():
             startBtn = win32gui.FindWindowEx(self.hwnd, 0, "Button", u"启动")
             win32gui.SendMessage(self.hwnd, win32con.WM_COMMAND,
                                  win32api.MAKELONG(1003, win32con.BN_CLICKED), startBtn)
-        loginuser_count = 0
-        timeout = 0
-        while loginuser_count != self.total_user:
-            if timeout>120:return False
-            loginuser_count = int(win32gui.GetDlgItemText(self.hwnd, 1009))
-            time.sleep(1)
-            timeout += 1
-        return True
+        # loginuser_count = 0
+        # timeout = 0
+        # while loginuser_count != self.total_user:
+        #     if timeout>120:return False
+        #     loginuser_count = int(win32gui.GetDlgItemText(self.hwnd, 1009))
+        #     time.sleep(1)
+        #     timeout += 1
+        # return True
 
 
     def stop(self):

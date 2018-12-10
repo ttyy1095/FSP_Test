@@ -7,6 +7,7 @@ import uuid
 import time
 import paramiko
 import psutil
+import threading
 
 from protocol import *
 _path = ".."
@@ -68,9 +69,17 @@ def get_res_rate():
 
     data = {"command_id": REPORT_RES_RATE, "cpu_rate": cpu_rate, "mem_rate": mem_rate, "upload_speed": upload_speed,"download_speed":download_speed}
     return json.dumps(data)
+
+def fun_timer(s):
+    s.send(get_res_rate())
+    global timer
+    timer = threading.Timer(30.0,fun_timer,args=[s])
+    timer.start()
 if __name__ == '__main__':
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # 创建 socket 对象
     s.connect(('192.168.6.65', 5566))
+    timer = threading.Timer(30.0,fun_timer,args=[s])
+    timer.start()
     myip = s.getsockname()[0]
     kill_all_client()
     while True:
