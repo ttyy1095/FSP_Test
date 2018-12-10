@@ -3,8 +3,11 @@ from enum import Enum
 LOGIN = 1000
 
 OPEN_SIMULATOR = 1001
-UPLOAD_LOG = 1003
-
+CLOSE_SIMULATOR = 1003
+UPLOAD_LOG = 1005
+REPORT_RES_RATE = 1007
+MYSQL_HOST = "192.168.8.203"
+MYSQL_DBNAME = ""
 class ClientType(Enum):
     controler = 0
     performer = 1
@@ -16,11 +19,15 @@ class ClientType(Enum):
 {"comamnd_id":1002,"result":0}
 
 # 通知控制客户端关闭压测工具
-# {"command_id":1002}
+# {"command_id":1003}
 
 
 # 通知控制客户端上传日志
-{"command_id":1003}
+{"command_id":1005}
 # 控制客户端上传日志回复
-{"comamnd_id":1004,"result":0}
+{"comamnd_id":1006,"result":0}
+
+
+# 上报执行机资源占用
+{"command_id":1007,"cpu":75,"mem":60,"band":10}
 

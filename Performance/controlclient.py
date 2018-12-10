@@ -6,17 +6,19 @@ import sys
 import uuid
 import time
 import paramiko
+import psutil
 
 from protocol import *
 _path = ".."
 sys.path.append(_path)
 from Config.config import *
-from ClientControler.clientcontroler import Client
 from ClientControler.simulatorcontroler import ClientSimulator
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)  # 创建 socket 对象
 s.connect(('192.168.6.65', 5566))
 myip = s.getsockname()[0]
+cs_list = []
+
 def uplaod_log():
     def sftp_upload(host, port, username, password, local, remote):
         sf = paramiko.Transport((host, port))
@@ -44,18 +46,34 @@ def uplaod_log():
     sftp_upload('192.168.7.70',22,'root','123456',window_path,remote)
 
 
-
 def kill_all_client():
     os.system('taskkill /im /f FastMeeting.exe')
     os.system('taskkill /im /f ClientSimulatorUI.exe')
 
+def get_res_rate():
 
+    cpu_rate = psutil.cpu_percent(interval=1)
+    mem_rate = psutil.virtual_memory().percent
+    internet = psutil.net_io_counters()
+    io_sent1 = internet.bytes_sent
+    io_recv1 = internet.bytes_recv
+    time.sleep(1)
+    internet = psutil.net_io_counters()
+    io_sent2 = internet.bytes_sent
+    io_recv2 = internet.bytes_recv
+    upload_speed = (io_sent2-io_sent1)/1024
+    download_speed = (io_recv2-io_recv1)/1024
+
+    print(cpu_rate,mem_rate,upload_speed,download_speed)
+
+    data = {"command_id": REPORT_RES_RATE, "cpu": cpu_rate, "mem": mem_rate, "upload_speed": upload_speed,"download_speed":download_speed}
+    return json.dumps(data)
 if __name__ == '__main__':
-    # s.send('{"command_id":1002,"ip":"192.168.8.203","room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"000000" }')
 
-    # uplaod_log()
+    s.send('{"command_id":1001,"ip":"192.168.8.203","room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"1234" }')
+    #
     while True:
-
+        s.send(get_res_rate())
         data = s.recv(1024).decode(encoding='utf8')
         try:
             msg = json.loads(data)
@@ -68,12 +86,20 @@ if __name__ == '__main__':
                 userlist = []
                 for i in range(int(start_index), int(end_index) + 1):
                     userindex = str(i).zfill(2) if i < 10 else str(i)
-                    userlist = userlist.append(username_prefix + userindex)
-                pwd = msg['pwd']
+                    userlist.append(username_prefix + userindex)
+                pwd = msg['userpwd']
                 cs = ClientSimulator(room_list, userlist, pwd)
+                cs_list.append(cs)
                 cs.start()
                 print('open simulator client')
+            elif msg['command_id'] == CLOSE_SIMULATOR:
+                print('close simulator')
+                for cs in cs_list:
+                    cs.stop()
+                    time.sleep(1)
+
             elif msg['command_id'] == UPLOAD_LOG:
                 print('upload log')
+                uplaod_log()
         except Exception as e:
-            print("error data")
+            print("error data",e)

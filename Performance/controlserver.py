@@ -7,6 +7,9 @@ import gevent
 from collections import OrderedDict
 from gevent import socket,monkey
 import threading
+import MySQLdb
+
+
 
 controlclient_list = []
 class ControlClient(object):
@@ -19,18 +22,30 @@ def hand_client_con(client):
         isNormar=True
         while isNormar:
             data = client.skt.recv(1024)
-            msg = json.loads(data)
             print data
+            try:
+                msg = json.loads(data)
+            except:
+                print("error json data")
             if msg['command_id'] == OPEN_SIMULATOR:
                 get_conn(msg['ip']).send(data)
-    except:
+            elif msg['command_id'] == REPORT_RES_RATE:
+                pass
+    except Exception as e:
         isNormar = False
+        print("except Exception:%s"%e)
+        print("lost connectting from:%s"%client.ip)
+        controlclient_list.remove(client)
 
 def get_conn(ip):
     for client in controlclient_list:
         if client.ip == ip:
             return client.skt
-    raise Exception("%s not connected"%ip)
+    print("%s not connected"%ip)
+
+def update_res_rate(ip,cpu,mem,upload_speed,download_speed):
+
+    pass
 
 def main():
 
@@ -76,6 +91,9 @@ def handle_request(conn):
                 json_data = json.loads(data,object_pairs_hook=OrderedDict)
                 if json_data['command_id'] == OPEN_SIMULATOR:
                     conn_dict[json_data['host']].send(data)
+                elif json_data['command_id'] == REPORT_RES_RATE:
+                    conn_dict[json_data['host']].send(data)
+
             except Exception as ex:
                 print (ex)
     except Exception as ex:

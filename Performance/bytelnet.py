@@ -21,6 +21,17 @@ import logging,time
 # time.sleep(2)
 # command_result = tn.read_very_eager().decode('GBK')
 # print command_result
-
+ll = ["1",'2','3']
+print('%s'%ll)
 i = 10
 print str(i).zfill(2) if i<10 else str(i)
+
+import pika
+credentials = pika.PlainCredentials('root','root')
+conn = pika.BlockingConnection(pika.ConnectionParameters('192.168.7.111',5672,'fsp',credentials))
+channel = conn.channel()
+channel.queue_declare(queue='testqueue')
+channel.basic_publish(exchange='',
+                      routing_key='testqueue',
+                      body='Hello World!')
+conn.close()

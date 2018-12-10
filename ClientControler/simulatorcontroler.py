@@ -47,6 +47,8 @@ def _deploy_simulator_config(roomlist,
     # 保存到xml文件
     etree.ElementTree(root).write(
         xmlfile_path, pretty_print=True, encoding='utf-8', xml_declaration=True)
+
+
 class ClientSimulator():
     def __init__(self, roomlist, userlist, userpwd):
         _deploy_simulator_config(roomlist, userlist, userpwd)
