@@ -14,10 +14,10 @@ sys.path.append(_path)
 from Config.config import *
 from ClientControler.simulatorcontroler import ClientSimulator
 
-s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)  # 创建 socket 对象
-s.connect(('192.168.6.65', 5566))
-myip = s.getsockname()[0]
+
 cs_list = []
+
+
 
 def uplaod_log():
     def sftp_upload(host, port, username, password, local, remote):
@@ -66,12 +66,13 @@ def get_res_rate():
 
     print(cpu_rate,mem_rate,upload_speed,download_speed)
 
-    data = {"command_id": REPORT_RES_RATE, "cpu": cpu_rate, "mem": mem_rate, "upload_speed": upload_speed,"download_speed":download_speed}
+    data = {"command_id": REPORT_RES_RATE, "cpu_rate": cpu_rate, "mem_rate": mem_rate, "upload_speed": upload_speed,"download_speed":download_speed}
     return json.dumps(data)
 if __name__ == '__main__':
-
-    s.send('{"command_id":1001,"ip":"192.168.8.203","room_list":["107894"], "username_prefix":"jaxa", "start_index":0,"end_index":10,"userpwd":"1234" }')
-    #
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # 创建 socket 对象
+    s.connect(('192.168.6.65', 5566))
+    myip = s.getsockname()[0]
+    kill_all_client()
     while True:
         s.send(get_res_rate())
         data = s.recv(1024).decode(encoding='utf8')
@@ -83,20 +84,23 @@ if __name__ == '__main__':
                 username_prefix = msg['username_prefix']
                 start_index = msg['start_index']
                 end_index = msg['end_index']
+                simulator_index = msg['simulator_index']
                 userlist = []
                 for i in range(int(start_index), int(end_index) + 1):
                     userindex = str(i).zfill(2) if i < 10 else str(i)
                     userlist.append(username_prefix + userindex)
                 pwd = msg['userpwd']
-                cs = ClientSimulator(room_list, userlist, pwd)
+                cs = ClientSimulator(simulator_index,room_list, userlist, pwd)
                 cs_list.append(cs)
                 cs.start()
                 print('open simulator client')
             elif msg['command_id'] == CLOSE_SIMULATOR:
                 print('close simulator')
+                simulator_index = msg['simulator_index']
                 for cs in cs_list:
-                    cs.stop()
-                    time.sleep(1)
+                    if cs.simulator_index == simulator_index:
+                        cs.stop()
+                        time.sleep(1)
 
             elif msg['command_id'] == UPLOAD_LOG:
                 print('upload log')

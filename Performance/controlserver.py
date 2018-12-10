@@ -9,7 +9,8 @@ from gevent import socket,monkey
 import threading
 import MySQLdb
 
-
+db = MySQLdb.connect("192.168.7.108",'root','123456','fsp_preformance',charset='utf8')
+cursor = db.cursor()
 
 controlclient_list = []
 class ControlClient(object):
@@ -22,20 +23,43 @@ def hand_client_con(client):
         isNormar=True
         while isNormar:
             data = client.skt.recv(1024)
+
+            if not data:
+                time.sleep(1.5)
+                continue
             print data
             try:
                 msg = json.loads(data)
-            except:
+                if msg['command_id'] == OPEN_SIMULATOR:
+                    get_conn(msg['ip']).send(data)
+                elif msg['command_id'] == REPORT_RES_RATE:
+                    cpu_rate = msg['cpu_rate']
+                    mem_rate = msg['mem_rate']
+                    upload_speed = msg['upload_speed']
+                    download_speed = msg['download_speed']
+                    sql = "SELECT * FROM fsp_preformance_serverstate WHERE ip='%s'"%client.ip
+                    cursor.execute(sql)
+                    if len(cursor.fetchall())==0:
+                        sql = """INSERT INTO fsp_preformance_serverstate 
+                              (ip,cpu_rate,mem_rate,upload_speed,download_speed) VALUES ('%s','%s','%s','%s','%s')"""%\
+                              (client.ip,cpu_rate,mem_rate,upload_speed,download_speed)
+                    else:
+                        sql = """UPDATE fsp_preformance_serverstate SET cpu_rate='%s',mem_rate='%s',upload_speed='%s',
+                                download_speed='%s' WHERE ip='%s'"""%(cpu_rate,mem_rate,upload_speed,download_speed,client.ip)
+                    cursor.execute(sql)
+                    db.commit()
+            except Exception as e:
+                print(e)
                 print("error json data")
-            if msg['command_id'] == OPEN_SIMULATOR:
-                get_conn(msg['ip']).send(data)
-            elif msg['command_id'] == REPORT_RES_RATE:
-                pass
+
     except Exception as e:
         isNormar = False
         print("except Exception:%s"%e)
         print("lost connectting from:%s"%client.ip)
         controlclient_list.remove(client)
+        sql = "UPDATE fsp_preformance_slaveserver SET state=0 WHERE ip='%s';"%client.ip
+        cursor.execute(sql)
+        db.commit()
 
 def get_conn(ip):
     for client in controlclient_list:
@@ -56,13 +80,16 @@ def main():
     while True:
         cli,(ip,cport) = s.accept()
         print("(%s,%s connected...)" % (ip, cport))
+        sql = "UPDATE fsp_preformance_slaveserver SET state=1 WHERE ip='%s';"%ip
+        cursor.execute(sql)
+        db.commit()
         client = ControlClient(cli,ip)
         controlclient_list.append(client)
         t=threading.Thread(target=hand_client_con,args=(client,))
         t.setDaemon(True)
         t.start()
     s.close()
-
+    db.close()
 
 
 monkey.patch_all()

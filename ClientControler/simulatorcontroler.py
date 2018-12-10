@@ -50,8 +50,9 @@ def _deploy_simulator_config(roomlist,
 
 
 class ClientSimulator():
-    def __init__(self, roomlist, userlist, userpwd):
+    def __init__(self,simulator_index, roomlist, userlist, userpwd):
         _deploy_simulator_config(roomlist, userlist, userpwd)
+        self.simulator_index = simulator_index
         self.hwnd = 0
         self.total_user = len(roomlist)*len(userlist)
 
