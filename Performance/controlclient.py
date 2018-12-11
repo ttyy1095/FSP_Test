@@ -71,12 +71,12 @@ def get_res_rate():
 def fun_timer(s):
     s.send(get_res_rate())
     global timer
-    timer = threading.Timer(30.0,fun_timer,args=[s])
+    timer = threading.Timer(5.0,fun_timer,args=[s])
     timer.start()
 if __name__ == '__main__':
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # 创建 socket 对象
     s.connect(('192.168.6.65', 5566))
-    timer = threading.Timer(30.0,fun_timer,args=[s])
+    timer = threading.Timer(5.0,fun_timer,args=[s])
     timer.start()
     myip = s.getsockname()[0]
     kill_all_client()

@@ -197,6 +197,7 @@ class UserBehavior(object):
             get_room_cmd = """<cmd id="30002"><IsGetAllList var="1" /><IsGetRoomDesc val="0" /></cmd>"""
             sendData(channel, get_room_cmd)
             room_list = recvData(channel)
+            print(room_list)
             tree = etree.fromstring(room_list)
             roomnodeid = tree.xpath('/cmd[@id="30003"]/RoomNodeID')[0].attrib['val']
             roomid = tree.xpath(

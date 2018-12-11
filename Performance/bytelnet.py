@@ -36,5 +36,7 @@ print str(i).zfill(2) if i<10 else str(i)
 #                       body='Hello World!')
 # conn.close()
 
-room_list='107894'
-print(room_list.split(','))
+
+
+l = ""
+print(l.split(','))
