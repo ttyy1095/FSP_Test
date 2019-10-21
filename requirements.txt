@@ -8,5 +8,5 @@ psutil==5.4.8
 allure_python_commons==2.5.4
 requests==2.18.4
 paramiko==2.4.2
-urllib3==1.22
+urllib3==1.24.2
 python_jenkins==1.2.1
